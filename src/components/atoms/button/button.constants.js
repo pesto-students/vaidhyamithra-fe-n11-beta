@@ -1,5 +1,6 @@
-export const BUTTON_COLORS = {
-  PRIMARY: "primary",
-  SECONDARY: "secondary",
-  SUCCESS: "success",
+export const BUTTON_VARIANTS = {
+  CONTAINED: "contained",
+  OUTLINED: "outlined",
+  TEXT: "text",
+  STRING: "string",
 };
