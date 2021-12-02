@@ -1,18 +1,21 @@
-import { Typography } from "@mui/material";
 import React from "react";
-import Button from "../../components/atoms/button";
-import InputField, { INPUT_TYPES } from "../../components/atoms/input";
-import { FormContainer } from "./signup.styled";
+import { Button as MuiButton } from "@mui/material";
+import Modal from "../../components/molecules/modal";
+import SigunpForm from "./signUpForm";
 
 export default function SignUp() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
-    <FormContainer>
-      <Typography variant="h2">Sign up</Typography>
-      <InputField type={INPUT_TYPES.TEXT} label="Name" />
-      <InputField type={INPUT_TYPES.EMAIL} label="Email" />
-      <InputField type={INPUT_TYPES.PASSWORD} label="Password" />
-      <InputField type={INPUT_TYPES.PASSWORD} label="Confirm Password" />
-      <Button>Sign Up</Button>
-    </FormContainer>
+    <>
+      <MuiButton onClick={handleOpen} variant="outlined">
+        Click me
+      </MuiButton>
+      <Modal open={open} onClose={handleClose}>
+        <SigunpForm />
+      </Modal>
+    </>
   );
 }

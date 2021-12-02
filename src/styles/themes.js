@@ -28,6 +28,7 @@ export const theme = createTheme({
     },
     h2: {
       fontFamily: "Amiko",
+      fontSize: 24
     },
   },
   spacing: 8,
