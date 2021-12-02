@@ -5,14 +5,6 @@ export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 340px;
-  padding: 20px;
-  margin-right: auto;
-  background: white;
-  top: 10%;
-  position: absolute;
-  left: 42%;
-  border: 1px solid gray;
-  border-radius: 10px;
 `;
 
 export const NoteText = styled.b`

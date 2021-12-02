@@ -13,7 +13,7 @@ export default function SignUp() {
       <MuiButton onClick={handleOpen} variant="outlined">
         Click me
       </MuiButton>
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={open} onClose={handleClose} title="Sign Up">
         <SigunpForm />
       </Modal>
     </>

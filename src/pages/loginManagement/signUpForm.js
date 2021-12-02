@@ -8,7 +8,6 @@ import { NoteSpanText, NoteText, CustomDiv, BottomDiv, FormContainer } from "./s
 export default function SigunpForm() {
   return (
     <FormContainer>
-      <Typography variant="h2">Sign Up</Typography>
       <InputField type={INPUT_TYPES.TEXT} label="Name" />
       <InputField
         type={INPUT_TYPES.EMAIL}
