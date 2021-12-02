@@ -50,7 +50,7 @@ const Modal = ({ open, onClose, children, title }) => {
         {/* <Typography variant="h2">{title}</Typography> */}
         {title}
       </BootstrapDialogTitle>
-      <DialogContent dividers>
+      <DialogContent>
         {children}
       </DialogContent>
     </BootstrapDialog>
