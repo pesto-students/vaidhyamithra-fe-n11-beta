@@ -1,3 +1,4 @@
+import { withTheme } from "@emotion/react";
 import styled from "styled-components";
 
 export const FormContainer = styled.div`
@@ -7,22 +8,12 @@ export const FormContainer = styled.div`
   width: 340px;
 `;
 
-export const NoteText = styled.b`
+export const NoteText = withTheme(styled("div")`
+  color: ${(props) => props.theme.palette.text.secondary};
   font-size: 12px;
-`;
+`);
 
-export const NoteSpanText = styled.span`
-  margin-left: 5px;
-  font-size: 12px;
-`;
-
-export const CustomDiv = styled.div`
-  color: #718797;
-  font-size: 12px;
-  padding-bottom: 1rem;
-`;
-
-export const BottomDiv = styled.div`
+export const ModalActions = styled.div`
   color: #718797;
   margin-top: 20px;
   font-size: 12px;

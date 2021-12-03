@@ -1,20 +1,26 @@
 import React from "react";
-import InputField, { INPUT_TYPES } from "../../../components/atoms/input";
-import Button, { BUTTON_VARIANTS } from "../../../components/atoms/button";
-import { BottomDiv, FormContainer, LeftStart } from "../signup.styled";
+import InputField, { INPUT_TYPES } from "../../atoms/input";
+import Button, { BUTTON_VARIANTS } from "../../atoms/button";
+import {
+  ModalActions,
+  FormContainer,
+  LeftStart,
+} from "../signUp/signUp.styled";
 
-export default function LoginForm() {
+const LoginForm = () => {
   return (
     <FormContainer>
       <InputField type={INPUT_TYPES.EMAIL} label="Email" />
       <InputField type={INPUT_TYPES.PASSWORD} label="Password" />
-      <BottomDiv>
+      <ModalActions>
         <LeftStart>
           Don't have an account?
           <Button variant={BUTTON_VARIANTS.TEXT}>Sign Up</Button>
         </LeftStart>
         <Button>Login</Button>
-      </BottomDiv>
+      </ModalActions>
     </FormContainer>
   );
-}
+};
+
+export default LoginForm;

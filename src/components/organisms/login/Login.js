@@ -1,9 +1,9 @@
 import React from "react";
 import { Button as MuiButton } from "@mui/material";
-import Modal from "../../../components/molecules/modal";
-import LoginForm from "./loginForm";
+import Modal from "../../molecules/modal";
+import LoginForm from "./LoginForm";
 
-export default function Login() {
+const Login = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -18,4 +18,6 @@ export default function Login() {
       </Modal>
     </>
   );
-}
+};
+
+export default Login;

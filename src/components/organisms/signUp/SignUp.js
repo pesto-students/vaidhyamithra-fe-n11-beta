@@ -1,9 +1,9 @@
 import React from "react";
 import { Button as MuiButton } from "@mui/material";
-import Modal from "../../components/molecules/modal";
-import SigunpForm from "./signUpForm";
+import Modal from "../../molecules/modal";
+import SigunpForm from "./SignUpForm";
 
-export default function SignUp() {
+const SignUp = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -18,4 +18,6 @@ export default function SignUp() {
       </Modal>
     </>
   );
-}
+};
+
+export default SignUp;

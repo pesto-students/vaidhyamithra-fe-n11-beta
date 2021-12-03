@@ -8,9 +8,9 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
-const BootstrapDialogTitle = ({ children, onClose, ...otherProps }) => {
+const CustomDialogTitle = ({ children, onClose, ...otherProps }) => {
   return (
-    <DialogTitle sx={{ m: 0, p: 2, pb: 0 }} {...otherProps}>
+    <DialogTitle sx={{ m: 0, p: 2, pb: 0 }} variant="h2" {...otherProps}>
       {children}
       {onClose ? (
         <IconButton
@@ -29,7 +29,7 @@ const BootstrapDialogTitle = ({ children, onClose, ...otherProps }) => {
   );
 };
 
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+const CustomDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
   },
@@ -40,16 +40,10 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 const Modal = ({ open, onClose, children, title }) => {
   return (
-    <BootstrapDialog open={open} onClose={onClose}>
-      <BootstrapDialogTitle
-        variant="h2"
-        id="customized-dialog-title"
-        onClose={onClose}
-      >
-        {title}
-      </BootstrapDialogTitle>
+    <CustomDialog open={open} onClose={onClose}>
+      <CustomDialogTitle onClose={onClose}>{title}</CustomDialogTitle>
       <DialogContent>{children}</DialogContent>
-    </BootstrapDialog>
+    </CustomDialog>
   );
 };
 
