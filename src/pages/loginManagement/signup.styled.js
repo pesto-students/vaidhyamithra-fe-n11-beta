@@ -24,8 +24,13 @@ export const CustomDiv = styled.div`
 
 export const BottomDiv = styled.div`
   color: #718797;
+  margin-top: 20px;
   font-size: 12px;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
+`;
+
+export const LeftStart = styled.div`
+  margin-right: auto;
 `;

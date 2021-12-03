@@ -1,9 +1,16 @@
 import React from "react";
 import InputField, { INPUT_TYPES } from "../../components/atoms/input";
 import Button, { BUTTON_VARIANTS } from "../../components/atoms/button";
-import { FormGroup, FormControlLabel, Typography } from "@mui/material";
+import { FormGroup, FormControlLabel } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
-import { NoteSpanText, NoteText, CustomDiv, BottomDiv, FormContainer } from "./signup.styled";
+import {
+  NoteSpanText,
+  NoteText,
+  CustomDiv,
+  BottomDiv,
+  FormContainer,
+  LeftStart,
+} from "./signup.styled";
 
 export default function SigunpForm() {
   return (
@@ -39,9 +46,11 @@ export default function SigunpForm() {
       </FormGroup>
 
       <BottomDiv>
-        Already have an account ?{" "}
-        <Button variant={BUTTON_VARIANTS.TEXT}>Login</Button>
-        <Button>Sign Up</Button>
+        <LeftStart>
+          Already have an account?
+          <Button variant={BUTTON_VARIANTS.TEXT}>Login</Button>
+        </LeftStart>
+        <Button sx={{ ml: "auto" }}>Sign Up</Button>
       </BottomDiv>
     </FormContainer>
   );
