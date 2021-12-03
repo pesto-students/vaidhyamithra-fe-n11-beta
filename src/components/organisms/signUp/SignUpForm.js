@@ -2,7 +2,12 @@ import React from "react";
 import InputField, { INPUT_TYPES } from "../../atoms/input";
 import Button, { BUTTON_VARIANTS } from "../../atoms/button";
 import Checkbox from "../../atoms/checkbox";
-import { NoteText, BottomDiv, FormContainer, LeftStart } from "./signUp.styled";
+import {
+  NoteText,
+  ModalActions,
+  FormContainer,
+  LeftStart,
+} from "./signUp.styled";
 
 const SignUpForm = () => {
   return (
@@ -28,13 +33,13 @@ const SignUpForm = () => {
         after verification by our team
       </NoteText>
 
-      <BottomDiv>
+      <ModalActions>
         <LeftStart>
           Already have an account?
           <Button variant={BUTTON_VARIANTS.TEXT}>Login</Button>
         </LeftStart>
         <Button sx={{ ml: "auto" }}>Sign Up</Button>
-      </BottomDiv>
+      </ModalActions>
     </FormContainer>
   );
 };
