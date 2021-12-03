@@ -25,10 +25,11 @@ export const theme = createTheme({
     fontFamily: "Inter",
     h1: {
       fontFamily: "Amiko",
+      fontSize: 36,
     },
     h2: {
       fontFamily: "Amiko",
-      fontSize: 24
+      fontSize: 24,
     },
   },
   spacing: 8,
