@@ -1,12 +1,7 @@
 import React from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-  styled,
-} from "@mui/material";
+import { DialogContent, DialogTitle, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { CustomDialog } from "./modal.styled";
 
 const CustomDialogTitle = ({ children, onClose, ...otherProps }) => {
   return (
@@ -28,15 +23,6 @@ const CustomDialogTitle = ({ children, onClose, ...otherProps }) => {
     </DialogTitle>
   );
 };
-
-const CustomDialog = styled(Dialog)(({ theme }) => ({
-  "& .MuiDialogContent-root": {
-    padding: theme.spacing(2),
-  },
-  "& .MuiDialogActions-root": {
-    padding: theme.spacing(1),
-  },
-}));
 
 const Modal = ({ open, onClose, children, title }) => {
   return (
