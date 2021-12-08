@@ -23,7 +23,7 @@ ReactDOM.render(
             <Route path={ROUTES.HOME} element={<App />}>
               <Route path={ROUTES.LOGIN} element={<Login />} />
               <Route path={ROUTES.SIGNUP} element={<SignUP />} />
-              <Route path={ROUTES.NOT_FOUND} element={<PageNotFound />} />
+              <Route path="*" exact={true} element={<PageNotFound />} />
             </Route>
           </Routes>
         </BrowserRouter>
