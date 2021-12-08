@@ -5,6 +5,7 @@ export const NavBarContainer = withTheme(styled("div") `
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-bottom: 1px solid #e1e2e2;
     color: ${(props) => props.theme.palette.primary.main};
 `);
 
