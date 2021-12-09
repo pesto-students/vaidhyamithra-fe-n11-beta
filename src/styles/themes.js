@@ -31,6 +31,10 @@ export const theme = createTheme({
       fontFamily: "Amiko",
       fontSize: 24,
     },
+    p:{
+      fontFamily: "Inter",
+      fontSize: 16
+    },
     mainTitle: {
       fontFamily: "Lora",
       fontSize: 30,
