@@ -6,8 +6,20 @@ import {
   FormContainer,
   LeftStart,
 } from "../signUp/signUp.styled";
+import { useLoginUserMutation } from "../../../redux/features/user/user.service";
+
+const TempStatus = ({ data, isLoading, isError }) => {
+  return (
+    <>
+      {isError && <div>Oops! Error!</div>}
+      {isLoading && <div>Loading...</div>}
+    </>
+  );
+};
 
 const LoginForm = () => {
+  const [loginUser, { isLoading, isError }] = useLoginUserMutation();
+
   return (
     <FormContainer>
       <InputField type={INPUT_TYPES.EMAIL} label="Email" />
@@ -17,7 +29,8 @@ const LoginForm = () => {
           Don't have an account?
           <Button variant={BUTTON_VARIANTS.TEXT}>Sign Up</Button>
         </LeftStart>
-        <Button>Login</Button>
+        <TempStatus isLoading={isLoading} isError={isError} />
+        <Button onClick={loginUser}>Login</Button>
       </ModalActions>
     </FormContainer>
   );
