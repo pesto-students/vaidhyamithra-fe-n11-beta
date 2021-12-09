@@ -21,18 +21,18 @@ export const TabMenu = ({ value, setValue, orientation, menuItems }) => {
   );
 };
 
-const valueType = PropTypes.oneOfType([
+export const tabValueType = PropTypes.oneOfType([
   PropTypes.number,
   PropTypes.string,
 ]).isRequired;
 
 TabMenu.propTypes = {
-  value: valueType,
+  value: tabValueType,
   setValue: PropTypes.func.isRequired,
-  orientation: PropTypes.oneOf(TAB_ORIENTATION),
+  orientation: PropTypes.oneOf(Object.values(TAB_ORIENTATION)),
   menuItems: PropTypes.arrayOf(
     PropTypes.shape({
-      value: valueType,
+      value: tabValueType,
       label: PropTypes.string.isRequired,
     })
   ),
