@@ -11,6 +11,7 @@ const BlogCard = ({isRequiredColumnCard}) => {
         width="400px"
         height="320px"
         style={{ borderRadius: "10px" }}
+        alt="blog-preview"
       />
       <CardContainer>
         <BlogTag>NEUROSCIENCE</BlogTag>

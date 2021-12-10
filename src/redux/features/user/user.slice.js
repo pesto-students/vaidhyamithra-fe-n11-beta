@@ -1,19 +1,43 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { loginApi } from "../../../api/user/userApi";
 import { USER_SLICE } from "./user.config";
 
-const initialState = {};
+const initialState = {
+  userInfo: {},
+  isLoading: false,
+  errorMessage: "",
+};
+
+export const loginUser = createAsyncThunk(
+  `${USER_SLICE}/login`,
+  async ({ name, password }, { rejectWithValue }) => {
+    try {
+      const data = await loginApi({ name, password });
+      return data;
+    } catch (err) {
+      return rejectWithValue([], err);
+    }
+  }
+);
 
 export const userSlice = createSlice({
   name: USER_SLICE,
   initialState,
-  reducers: {
-    updateUser: (state, action) => {
-      state = action.payload;
+  reducers: {},
+  extraReducers: {
+    [loginUser.fulfilled]: (state, { payload }) => {
+      state.userInfo = payload;
+      state.isLoading = false;
+      state.errorMessage = "";
+    },
+    [loginUser.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [loginUser.rejected]: (state, { meta }) => {
+      state.errorMessage = meta.response.data.message;
+      state.isLoading = false;
     },
   },
 });
-
-// Action creators are generated for each case reducer function
-export const { updateUser } = userSlice.actions;
 
 export default userSlice.reducer;
