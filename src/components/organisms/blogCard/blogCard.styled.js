@@ -18,34 +18,6 @@ export const CardContainer = styled.div`
   position: relative;
 `;
 
-export const BloggerDetails = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  position: absolute;
-  bottom: 0px;
-`;
-
-export const BloggerImg = styled.div`
-  border: 1px solid;
-  border-radius: 50%;
-  padding: 2px;
-`;
-
-export const TopicTag = styled.div`
-  background: #65946a;
-  text-align: center;
-  color: white;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  font-size: 12px;
-  letter-spacing: 1.5px;
-  display: inline-block;
-  padding: 4px 8px;
-`;
-
-export const AuthorDiv = styled.div``;
-
 export const Image = styled.img`
   width="400px";
   height="320px";

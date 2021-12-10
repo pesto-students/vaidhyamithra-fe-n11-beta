@@ -2,19 +2,8 @@ import { ROUTES } from "./values/routes";
 import { Link, Outlet } from "react-router-dom";
 import NavBar from "./components/organisms/navbar";
 import BlogCard from "./components/organisms/blogCard";
-import apiUrl from "./api/apiUrl";
-import { useEffect } from "react";
+
 const App = () => {
-  useEffect(() => {
-    let data = {
-      name:"Manirathnam",
-      password:"Manirathnam123_"
-    }
-    apiUrl.post("login",data).then((res) => {
-      console.log("Data from login:", res.data);
-    })
-  },[]);
-  
   return (
     <>
       {/* <Link to={ROUTES.HOME}>Home</Link>
