@@ -19,3 +19,10 @@ export const AuthorDetails = styled.div`
   position: ${props => props.position};
   bottom: 0px;
 `;
+
+export const BlogPreviewImg = styled.img`
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  padding: 2px;
+`;
