@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "./components/organisms/navbar";
-import RecommendedTopics from "./components/organisms/recommendedTopics/";
 
 const App = () => {
   return (
@@ -8,9 +7,6 @@ const App = () => {
       <NavBar />
       <div>
         <Outlet />
-      </div>
-      <div>
-        <RecommendedTopics />
       </div>
     </>
   );

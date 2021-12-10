@@ -1,7 +1,7 @@
 import { Typography as MuiTypography } from "@mui/material";
 
-const Typography = ({variant, children}) => (
-    <MuiTypography variant={variant}>
+const Typography = ({variant, children, ...otherProps}) => (
+    <MuiTypography variant={variant} {...otherProps}>
         {children}
     </MuiTypography>
 );
