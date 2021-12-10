@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable no-unused-vars */
+import React, { useEffect } from "react";
 import InputField, { INPUT_TYPES } from "../../atoms/input";
 import Button, { BUTTON_VARIANTS } from "../../atoms/button";
 import {
@@ -6,19 +7,32 @@ import {
   FormContainer,
   LeftStart,
 } from "../signUp/signUp.styled";
-import { useLoginUserMutation } from "../../../redux/features/user/user.service";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../../redux/features/user/user.slice";
 
-const TempStatus = ({ data, isLoading, isError }) => {
+const TempStatus = ({ isLoading, errorMessage }) => {
   return (
     <>
-      {isError && <div>Oops! Error!</div>}
+      {errorMessage && <div>{errorMessage}</div>}
       {isLoading && <div>Loading...</div>}
     </>
   );
 };
 
 const LoginForm = () => {
-  const [loginUser, { isLoading, isError }] = useLoginUserMutation();
+  const { isLoading, errorMessage, userInfo } = useSelector(
+    (state) => state.user
+  );
+  const dispatch = useDispatch();
+
+  const handleLogin = () => {
+    dispatch(
+      loginUser({
+        name: "Manirathnam",
+        password: "Manirathnam123_",
+      })
+    );
+  };
 
   return (
     <FormContainer>
@@ -29,8 +43,8 @@ const LoginForm = () => {
           Don't have an account?
           <Button variant={BUTTON_VARIANTS.TEXT}>Sign Up</Button>
         </LeftStart>
-        <TempStatus isLoading={isLoading} isError={isError} />
-        <Button onClick={loginUser}>Login</Button>
+        <TempStatus isLoading={isLoading} errorMessage={errorMessage} />
+        <Button onClick={handleLogin}>Login</Button>
       </ModalActions>
     </FormContainer>
   );
