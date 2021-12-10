@@ -1,7 +1,8 @@
 import { ROUTES } from "./values/routes";
 import { Link, Outlet } from "react-router-dom";
 import NavBar from "./components/organisms/navbar";
-import RecommendedTopics from "./components/organisms/recommendedTopics/";
+import BlogCard from "./components/organisms/blogCard";
+
 const App = () => {
   return (
     <>
@@ -19,7 +20,7 @@ const App = () => {
         <Outlet />
       </div>
       <div>
-        <RecommendedTopics />
+        <BlogCard />
       </div>
     </>
   );

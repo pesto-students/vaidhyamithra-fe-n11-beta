@@ -36,6 +36,10 @@ export const theme = createTheme({
       fontSize: 16,
       fontWeight: "bold"
     },
+    p:{
+      fontFamily: "Inter",
+      fontSize: 16
+    },
     mainTitle: {
       fontFamily: "Lora",
       fontSize: 30,
