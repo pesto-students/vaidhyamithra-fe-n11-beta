@@ -16,6 +16,6 @@ export const AuthorDetails = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  position: absolute;
+  position: ${props => props.position};
   bottom: 0px;
 `;

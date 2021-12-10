@@ -2,14 +2,13 @@ import styled from "styled-components";
 
 export const Card = styled.div`
   display: inline-flex;
-  gap: 37.4px;
+  gap: ${props => props.requiredColumnCard ? "": "36.4px"};
   border-radius: 10px;
   padding: 1rem;
-  margin: 1rem;
-  width: 800px;
-  height: 350px;
-  background: #FFFFF;
+  margin: ${props => props.requiredColumnCard ? "0rem": "1rem"};
+  background: #FFFF;
   box-shadow: 1px 1px 4px rgb(0 0 0 / 25%);
+  flex-direction: ${props => props.requiredColumnCard ? "column": "row"}
 `;
 
 export const CardContainer = styled.div`

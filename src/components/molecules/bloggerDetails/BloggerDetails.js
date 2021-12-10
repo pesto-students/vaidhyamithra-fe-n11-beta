@@ -1,9 +1,9 @@
 import {AuthorDetails, AuthorDiv, Paragraph} from './bloggerDetails.styled';
 import manImg from "../../../images/man_img.png";
 
-const BloggerDetails = ({ authorName, publishedDate }) => {
+const BloggerDetails = ({ authorName, publishedDate, position }) => {
   return (
-    <AuthorDetails>
+    <AuthorDetails position = {position}>
       <img
         src={manImg}
         width="46px"

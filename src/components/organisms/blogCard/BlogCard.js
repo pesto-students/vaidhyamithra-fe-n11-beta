@@ -3,9 +3,9 @@ import { Card, CardContainer, Paragraph } from "./blogCard.styled";
 import BloggerDetails from "../../molecules/bloggerDetails";
 import BlogTag from "../../atoms/blogTag";
 
-const BlogCard = () => {
+const BlogCard = ({isRequiredColumnCard}) => {
   return (
-    <Card>
+    <Card requiredColumnCard = {isRequiredColumnCard}>
       <img
         src={manImg}
         width="400px"
@@ -24,6 +24,7 @@ const BlogCard = () => {
         <BloggerDetails
           authorName="Darlene Robertson"
           publishedDate="March 12, 2021"
+          position = {isRequiredColumnCard ? "relative":"absolute"}
         />
       </CardContainer>
     </Card>

@@ -1,7 +1,8 @@
 import { ROUTES } from "./values/routes";
 import { Link, Outlet } from "react-router-dom";
 import NavBar from "./components/organisms/navbar";
-import BlogCard from "./components/organisms/blogCard";
+//import BlogCard from "./components/organisms/blogCard";
+import BlogDetails from "./pages/blogDetails";
 
 const App = () => {
   return (
@@ -20,7 +21,8 @@ const App = () => {
         <Outlet />
       </div>
       <div>
-        <BlogCard />
+        {/* <BlogCard /> */}
+        <BlogDetails />
       </div>
     </>
   );
