@@ -34,17 +34,17 @@ export const theme = createTheme({
     h3: {
       fontFamily: "Inter",
       fontSize: 16,
-      fontWeight: "bold"
+      fontWeight: "bold",
     },
-    p:{
+    p: {
       fontFamily: "Inter",
-      fontSize: 16
+      fontSize: 16,
     },
     mainTitle: {
       fontFamily: "Lora",
       fontSize: 30,
-      fontWeight: "bold"
-    }
+      fontWeight: "bold",
+    },
   },
   spacing: 8,
   shape: {

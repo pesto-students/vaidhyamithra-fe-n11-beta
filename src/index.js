@@ -13,6 +13,7 @@ import PageNotFound from "./pages/pageNotFound/PageNotFound";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import Home from "./pages/home";
+import EditBlog from "./pages/editBlog";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -25,6 +26,7 @@ ReactDOM.render(
               <Route index element={<Home />} />
               <Route path={ROUTES.LOGIN} element={<Login />} />
               <Route path={ROUTES.SIGNUP} element={<SignUP />} />
+              <Route path={ROUTES.CREATE} element={<EditBlog />} />
               <Route path="*" exact={true} element={<PageNotFound />} />
             </Route>
           </Routes>
