@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import { INPUT_TYPES, INPUT_VARIANTS } from "./input.constant";
 
-const InputField = ({ variant, label, type, fullWidth, helperText }) => {
+const InputField = ({ variant, label, type, fullWidth, helperText, ...otherProps }) => {
   return (
     <TextField
       variant={variant}
@@ -11,6 +11,7 @@ const InputField = ({ variant, label, type, fullWidth, helperText }) => {
       helperText={helperText}
       size="small"
       margin="normal"
+      {...otherProps}
     />
   );
 };
