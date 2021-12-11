@@ -25,4 +25,5 @@ export const BlogPreviewImg = styled.img`
   height: 46px;
   border-radius: 50%;
   padding: 2px;
+  border: 1px solid;
 `;
