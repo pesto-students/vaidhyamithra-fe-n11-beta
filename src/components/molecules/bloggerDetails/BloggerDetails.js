@@ -1,16 +1,15 @@
-import { AuthorDetails, AuthorDiv, Paragraph } from "./bloggerDetails.styled";
+import {
+  AuthorDetails,
+  AuthorDiv,
+  Paragraph,
+  BlogPreviewImg,
+} from "./bloggerDetails.styled";
 import manImg from "../../../images/man_img.png";
 
-const BloggerDetails = ({ authorName, publishedDate }) => {
+const BloggerDetails = ({ authorName, publishedDate, position }) => {
   return (
-    <AuthorDetails>
-      <img
-        src={manImg}
-        width="46px"
-        height="46px"
-        style={{ borderRadius: "50%", padding: "2px" }}
-        alt="avatar-img"
-      />
+    <AuthorDetails position={position}>
+      <BlogPreviewImg src={manImg} alt="avatar-img" />
       <AuthorDiv>
         <Paragraph fontSize="16px" fontWeight="700" fontFamily="Inter">
           {authorName}
