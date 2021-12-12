@@ -5,15 +5,9 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { theme } from "./styles";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { ROUTES } from "./values/routes";
-import Login from "./components/organisms/login";
-import SignUP from "./components/organisms/signUp";
-import PageNotFound from "./pages/pageNotFound/PageNotFound";
+import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
-import Home from "./pages/home";
-import EditBlog from "./pages/editBlog";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -21,15 +15,7 @@ ReactDOM.render(
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>
-          <Routes>
-            <Route path={ROUTES.HOME} element={<App />}>
-              <Route index element={<Home />} />
-              <Route path={ROUTES.LOGIN} element={<Login />} />
-              <Route path={ROUTES.SIGNUP} element={<SignUP />} />
-              <Route path={ROUTES.CREATE} element={<EditBlog />} />
-              <Route path="*" exact={true} element={<PageNotFound />} />
-            </Route>
-          </Routes>
+          <App />
         </BrowserRouter>
       </ThemeProvider>
     </Provider>
