@@ -1,1 +1,1 @@
-export {default} from './SearchBlog';
+export { default } from "./Search";

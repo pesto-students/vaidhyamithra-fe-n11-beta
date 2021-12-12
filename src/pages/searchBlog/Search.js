@@ -1,10 +1,16 @@
 import { useState } from "react";
 import { TabMenu, TabPanel } from "../../components/organisms/tabs";
-import { SearchResultMenuItems } from "./searchBlog.constants";
-import { ResultsContainer, SearchResults, SearchTerm, Title } from "./searchBlog.styled";
+import { SearchResultMenuItems } from "./search.constants";
+import {
+  ResultsContainer,
+  SearchResults,
+  SearchTerm,
+  Title,
+} from "./search.styled";
 
-const SearchBlog = () => {
+const Search = () => {
   const [currentTab, setCurrentTab] = useState(SearchResultMenuItems[0].value);
+
   return (
     <SearchResults>
       <ResultsContainer>
@@ -26,4 +32,4 @@ const SearchBlog = () => {
   );
 };
 
-export default SearchBlog;
+export default Search;
