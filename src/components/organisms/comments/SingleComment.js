@@ -1,11 +1,11 @@
 import Typography from "../../atoms/typography";
 import { TEXT_TYPE } from "../../atoms/typography/typography.constants";
 import BloggerDetails from "../../molecules/bloggerDetails";
-import {Content} from './commentList.styled';
+import { CommentContainer } from "./comments.styled";
 
-const CommentsList = () => {
+const Comment = () => {
   return (
-    <Content>
+    <CommentContainer>
       <BloggerDetails
         authorName="Darlene Robertson"
         publishedDate="March 12, 2021"
@@ -20,8 +20,8 @@ const CommentsList = () => {
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
         officia deserunt mollit anim id est laborum.
       </Typography>
-    </Content>
+    </CommentContainer>
   );
 };
 
-export default CommentsList;
+export default Comment;

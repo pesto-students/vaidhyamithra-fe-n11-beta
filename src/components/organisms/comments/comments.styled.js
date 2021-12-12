@@ -25,3 +25,8 @@ export const SeeAllComments = styled.div`
   justify-content: center;
   margin: 20px;
 `;
+
+export const CommentContainer = styled.div`
+  margin-top: 20px;
+  margin-bottom: 20px;
+`;
