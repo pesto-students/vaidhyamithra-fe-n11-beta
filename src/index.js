@@ -13,7 +13,6 @@ import PageNotFound from "./pages/pageNotFound/PageNotFound";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import Home from "./pages/home";
-import SearchBlog from "./pages/searchBlog";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,7 +22,7 @@ ReactDOM.render(
         <BrowserRouter>
           <Routes>
             <Route path={ROUTES.HOME} element={<App />}>
-              <Route index element={<SearchBlog />} />
+              <Route index element={<Home />} />
               <Route path={ROUTES.LOGIN} element={<Login />} />
               <Route path={ROUTES.SIGNUP} element={<SignUP />} />
               <Route path="*" exact={true} element={<PageNotFound />} />

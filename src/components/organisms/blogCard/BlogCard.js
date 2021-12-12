@@ -1,30 +1,33 @@
 import manImg from "../../../images/man_img.png";
-import { Card, CardContainer, Paragraph } from "./blogCard.styled";
+import {
+  Card,
+  CardContainer,
+  BlogImg,
+  BlogTitle,
+  BlogContent,
+} from "./blogCard.styled";
 import BloggerDetails from "../../molecules/bloggerDetails";
 import BlogTag from "../../atoms/blogTag";
 
-const BlogCard = () => {
+const BlogCard = ({ isRequiredColumnCard }) => {
   return (
-    <Card>
-      <img
+    <Card requiredColumnCard={isRequiredColumnCard}>
+      <BlogImg
         src={manImg}
-        width="400px"
-        height="320px"
-        style={{ borderRadius: "10px" }}
         alt="blog-preview"
+        requiredColumnCard={isRequiredColumnCard}
       />
-      <CardContainer>
+      <CardContainer requiredColumnCard={isRequiredColumnCard}>
         <BlogTag>NEUROSCIENCE</BlogTag>
-        <Paragraph fontWeight="700" mt mb>
-          We need to index the haptic GB card.
-        </Paragraph>
-        <Paragraph fontSize="16px" color="#718797" mt mb fontFamily="Inter">
+        <BlogTitle>We need to index the haptic GB card.</BlogTitle>
+        <BlogContent>
           If we navigate the port, we can get to the AGP microchip through the
           bluetooth SDD alarm.
-        </Paragraph>
+        </BlogContent>
         <BloggerDetails
           authorName="Darlene Robertson"
           publishedDate="March 12, 2021"
+          position={isRequiredColumnCard ? "relative" : "absolute"}
         />
       </CardContainer>
     </Card>
