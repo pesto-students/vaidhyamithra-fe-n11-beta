@@ -26,10 +26,12 @@ export const theme = createTheme({
     h1: {
       fontFamily: "Amiko",
       fontSize: 36,
+      color: COLORS.TUNA,
     },
     h2: {
       fontFamily: "Amiko",
       fontSize: 24,
+      color: COLORS.TUNA,
     },
     h3: {
       fontFamily: "Inter",
