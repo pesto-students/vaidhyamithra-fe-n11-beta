@@ -6,7 +6,7 @@ export const BlogTitle = styled.h1`
   margin-bottom: 10px;
 `;
 
-export const BloggerDetailsSection = styled.div `
+export const BloggerDetailsSection = styled.div`
   margin-bottom: 20px;
 `;
 
@@ -32,6 +32,6 @@ export const BlogImg = styled.img`
   padding: 2px;
 `;
 
-export const CommentSection = styled.div `
+export const CommentSection = styled.div`
   border-bottom: 1px solid;
 `;

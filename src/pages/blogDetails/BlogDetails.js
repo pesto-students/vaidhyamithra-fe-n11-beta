@@ -4,7 +4,7 @@ import {
   DetailsContainer,
   TagSection,
   BlogTitle,
-  BloggerDetailsSection
+  BloggerDetailsSection,
 } from "./blogDetails.styled";
 import BloggerDetails from "../../components/molecules/bloggerDetails";
 import BlogTag from "../../components/atoms/blogTag";
@@ -18,9 +18,7 @@ const BlogDetails = () => {
     <Details>
       <DetailsContainer>
         <img src={bpImg} alt="blog-display" />
-        <BlogTitle>
-          We need to index the haptic GB card.
-        </BlogTitle>
+        <BlogTitle>We need to index the haptic GB card.</BlogTitle>
         <BloggerDetailsSection>
           <BloggerDetails
             authorName="Darlene Robertson"

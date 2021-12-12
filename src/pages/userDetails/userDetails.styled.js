@@ -12,6 +12,6 @@ export const UserBlogs = styled.div`
 `;
 
 export const ProfilePic = styled.img`
-    max-width: 200px;
-    border-radius: 5px;
+  max-width: 200px;
+  border-radius: 5px;
 `;
