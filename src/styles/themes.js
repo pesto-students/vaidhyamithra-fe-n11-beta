@@ -39,6 +39,11 @@ export const theme = createTheme({
       marginTop: 12,
       marginBottom: 12,
     },
+    p: {
+      fontFamily: "Inter",
+      fontSize: 16,
+      color: COLORS.SLATE_GRAY,
+    },
     body1: {
       fontFamily: "Inter",
       fontSize: 16,
