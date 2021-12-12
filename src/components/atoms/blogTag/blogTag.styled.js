@@ -4,7 +4,7 @@ export const Topic = styled.div`
   background: #65946a;
   text-align: center;
   color: white;
-  border-radius: 10px;
+  border-radius: 16px;
   margin-bottom: 10px;
   font-size: 12px;
   letter-spacing: 1.5px;

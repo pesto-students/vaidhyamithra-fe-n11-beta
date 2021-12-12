@@ -5,11 +5,12 @@ import {
   NavBarIconContainer,
 } from "./navBar.styled";
 import Ficon from "../../atoms/featherIcon";
+import { ROUTES } from "../../../values/routes";
 
 const NavBar = () => {
   return (
     <NavBarContainer>
-      <NavBarTitle>
+      <NavBarTitle to={ROUTES.HOME}>
         <Typography variant="mainTitle">VaidhyaMitra</Typography>
       </NavBarTitle>
       <NavBarIconContainer>

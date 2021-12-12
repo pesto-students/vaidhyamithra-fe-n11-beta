@@ -42,7 +42,6 @@ export const theme = createTheme({
     body1: {
       fontFamily: "Inter",
       fontSize: 16,
-      marginTop: 20,
       color: COLORS.SLATE_GRAY,
     },
     // TODO: remove this and as it is getting used only in the navbar - we can use styledComp there
