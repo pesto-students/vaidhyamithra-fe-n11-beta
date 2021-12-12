@@ -10,13 +10,14 @@ import { InputAdornment } from "@mui/material";
 import IconButton from '@mui/material/IconButton';
 import Close from '@mui/icons-material/Close';
 import { useState } from "react";
+import { ROUTES } from "../../../values/routes";
 
 const NavBar = () => {
   const [showInputText, setShowInputText] = useState(false);
 
   return (
     <NavBarContainer>
-      <NavBarTitle>
+      <NavBarTitle to={ROUTES.HOME}>
         <Typography variant="mainTitle">VaidhyaMitra</Typography>
       </NavBarTitle>
       <NavBarIconContainer>
