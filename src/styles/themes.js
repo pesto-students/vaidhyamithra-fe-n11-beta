@@ -33,18 +33,23 @@ export const theme = createTheme({
     },
     h3: {
       fontFamily: "Inter",
-      fontSize: 16,
-      fontWeight: "bold"
+      fontSize: 18,
+      fontWeight: "bold",
+      color: COLORS.TUNA,
+      marginTop: 12,
+      marginBottom: 12,
     },
-    p:{
+    body1: {
       fontFamily: "Inter",
-      fontSize: 16
+      fontSize: 16,
+      color: COLORS.SLATE_GRAY,
     },
+    // TODO: remove this and as it is getting used only in the navbar - we can use styledComp there
     mainTitle: {
       fontFamily: "Lora",
       fontSize: 30,
-      fontWeight: "bold"
-    }
+      fontWeight: "bold",
+    },
   },
   spacing: 8,
   shape: {
