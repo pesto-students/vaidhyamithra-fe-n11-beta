@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { TabMenu, TabPanel } from "../../components/organisms/tabs";
 import { SearchResultMenuItems } from "./search.constants";
-import {
-  ResultsContainer,
-  SearchResults
-} from "./search.styled";
+import { ResultsContainer, SearchResults } from "./search.styled";
 import TextFieldForSearch from "../../components/molecules/textFieldForSearch";
 const Search = () => {
   const [currentTab, setCurrentTab] = useState(SearchResultMenuItems[0].value);
@@ -12,8 +9,7 @@ const Search = () => {
   return (
     <SearchResults>
       <ResultsContainer>
-        <TextFieldForSearch 
-        />
+        <TextFieldForSearch placeHolder="Search here" />
         <TabMenu
           value={currentTab}
           setValue={setCurrentTab}

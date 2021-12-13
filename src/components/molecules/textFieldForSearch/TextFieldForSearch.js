@@ -1,26 +1,28 @@
-import { Close } from "@mui/icons-material";
 import { IconButton, InputAdornment } from "@mui/material";
-import InputField, { INPUT_TYPES, INPUT_VARIANTS } from "../../atoms/input";
+import InputField, {
+  INPUT_TYPES,
+  INPUT_VARIANTS,
+  INPUT_MARGINS,
+} from "../../atoms/input";
 import { SearchField } from "./textFieldForSearch.styled";
 import Ficon from "../../atoms/featherIcon/";
-const TextFieldForSearch = ({}) => {
+const TextFieldForSearch = ({ placeHolder }) => {
   return (
     <SearchField>
       <Ficon icon="search" />
       <InputField
         type={INPUT_TYPES.TEXT}
-        placeholder="Search here"
+        placeholder={placeHolder}
         fullWidth
+        margin={INPUT_MARGINS.NONE}
         variant={INPUT_VARIANTS.STANDARD}
-        // InputProps={{
-        //   endAdorement: (
-        //     <InputAdornment position="end">
-        //       <IconButton>
-        //         <Close />
-        //       </IconButton>
-        //     </InputAdornment>
-        //   ),
-        // }}
+        endAdornment={
+          <InputAdornment>
+            <IconButton onClick={() => console.log("close")}>
+              <Ficon icon="x" />
+            </IconButton>
+          </InputAdornment>
+        }
       />
     </SearchField>
   );
