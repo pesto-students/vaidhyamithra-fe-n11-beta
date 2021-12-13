@@ -6,9 +6,7 @@ import { RelatedSection } from "./relatedBlogs.styled";
 const RelatedBlogs = () => {
   return (
     <>
-      <Typography variant={TEXT_TYPE.H3}>
-        Related Blogs
-      </Typography>
+      <Typography variant={TEXT_TYPE.H3}>Related Blogs</Typography>
       <RelatedSection>
         <BlogCard isRequiredColumnCard={true} />
         <BlogCard isRequiredColumnCard={true} />
