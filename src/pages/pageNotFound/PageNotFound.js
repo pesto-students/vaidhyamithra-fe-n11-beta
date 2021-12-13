@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 const PageNotFound = () => {
   const navigate = useNavigate();
-  const goHome = () => navigate(ROUTES.HOME);
 
   return (
     <Wrapper>
@@ -13,7 +12,9 @@ const PageNotFound = () => {
       <Typography sx={{ mt: 2, mb: 4 }}>
         We don't know what you're looking for but we sure have lots more
       </Typography>
-      <GoToHomepage onClick={goHome}>Go to Homepage</GoToHomepage>
+      <GoToHomepage onClick={() => navigate(ROUTES.HOME)}>
+        Go to Homepage
+      </GoToHomepage>
     </Wrapper>
   );
 };
