@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export const NavBarContainer = withTheme(styled("div")`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   border-bottom: 1px solid ${(props) => props.theme.palette.divider};
   position: sticky;
   top: 0px;
@@ -19,10 +19,11 @@ export const NavBarTitle = withTheme(styled(Link)`
   padding-bottom: 12px;
   text-decoration: none;
   color: ${(props) => props.theme.palette.primary.main};
+  margin-right: auto;
 `);
 
 export const NavBarIconContainer = withTheme(styled("div")`
-  padding-right: 22px;
+  margin: auto 24px;
   gap: 16px;
   display: flex;
   align-items: center;

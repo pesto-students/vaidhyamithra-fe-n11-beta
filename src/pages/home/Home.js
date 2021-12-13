@@ -1,4 +1,3 @@
-import { Divider } from "@mui/material";
 import { useState } from "react";
 import RecommendedTopics from "../../components/organisms/recommendedTopics/RecommendedTopics";
 import { TabMenu, TabPanel } from "../../components/organisms/tabs";
@@ -22,7 +21,6 @@ const Home = () => {
           </TabPanel>
         ))}
       </LeftSection>
-      <Divider orientation="vertical" />
       <RightSection>
         <RecommendedTopics />
       </RightSection>
