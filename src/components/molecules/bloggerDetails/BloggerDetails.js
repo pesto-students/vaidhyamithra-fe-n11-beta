@@ -6,9 +6,9 @@ import {
 } from "./bloggerDetails.styled";
 import manImg from "../../../images/man_img.png";
 
-const BloggerDetails = ({ authorName, publishedDate, position }) => {
+const BloggerDetails = ({ authorName, publishedDate }) => {
   return (
-    <AuthorDetails position={position}>
+    <AuthorDetails>
       <BlogPreviewImg src={manImg} alt="avatar-img" />
       <AuthorDiv>
         <Paragraph fontSize="16px" fontWeight="700" fontFamily="Inter">

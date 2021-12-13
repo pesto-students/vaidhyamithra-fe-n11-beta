@@ -5,9 +5,8 @@ export const Topic = styled.div`
   text-align: center;
   color: white;
   border-radius: 16px;
-  margin-bottom: 10px;
   font-size: 12px;
   letter-spacing: 1.5px;
-  display: inline-block;
+  width: max-content;
   padding: 4px 8px;
 `;
