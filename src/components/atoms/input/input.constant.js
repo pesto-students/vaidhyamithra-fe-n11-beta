@@ -9,3 +9,8 @@ export const INPUT_TYPES = {
   EMAIL: "email",
   PASSWORD: "password",
 };
+
+export const INPUT_MARGINS = {
+  NONE: "none",
+  NORMAL: "normal",
+};

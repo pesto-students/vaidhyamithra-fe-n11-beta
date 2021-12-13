@@ -1,4 +1,4 @@
-import FeatherIcon  from 'feather-icons-react';
+import FeatherIcon from "feather-icons-react";
 
 const Ficon = ({icon, clickHandler}) => {
     return (

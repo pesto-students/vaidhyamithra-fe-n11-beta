@@ -14,4 +14,5 @@ export const Wrapper = styled.div`
 
 export const GoToHomepage = styled(Button)`
   margin-top: 60px;
+  text-decoration: none;
 `;

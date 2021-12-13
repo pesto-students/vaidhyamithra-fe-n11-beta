@@ -6,6 +6,7 @@ import PageNotFound from "./pages/pageNotFound/PageNotFound";
 import Home from "./pages/home";
 import AppSkeleton from "./components/organisms/appSkeleton";
 import Search from "./pages/searchBlog";
+import EditBlog from "./pages/editBlog";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path={ROUTES.LOGIN} element={<Login />} />
         <Route path={ROUTES.SIGNUP} element={<SignUP />} />
         <Route path={ROUTES.SEARCH} element={<Search />} />
+        <Route path={ROUTES.CREATE} element={<EditBlog />} />
         <Route path="*" exact={true} element={<PageNotFound />} />
       </Route>
     </Routes>
