@@ -8,8 +8,8 @@ const RelatedBlogs = () => {
     <>
       <Typography variant={TEXT_TYPE.H3}>Related Blogs</Typography>
       <RelatedSection>
-        <BlogCard isRequiredColumnCard={true} />
-        <BlogCard isRequiredColumnCard={true} />
+        <BlogCard />
+        <BlogCard />
       </RelatedSection>
     </>
   );

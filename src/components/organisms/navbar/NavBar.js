@@ -6,6 +6,7 @@ import {
 } from "./navBar.styled";
 import Ficon from "../../atoms/featherIcon";
 import { ROUTES } from "../../../values/routes";
+import Button from "../../atoms/button";
 import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
@@ -20,6 +21,7 @@ const NavBar = () => {
       <NavBarTitle to={ROUTES.HOME}>
         <Typography variant="mainTitle">VaidhyaMitra</Typography>
       </NavBarTitle>
+      <Button onClick={() => navigate(ROUTES.CREATE)}>Create blog</Button>
       <NavBarIconContainer>
         <Ficon icon="search" clickHandler={clickHandler} />
         {/* {
