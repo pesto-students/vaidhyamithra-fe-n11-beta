@@ -12,10 +12,6 @@ import { useNavigate } from "react-router-dom";
 const NavBar = () => {
   const navigate = useNavigate();
 
-  const clickHandler = () => {
-    navigate(ROUTES.SEARCH);
-  };
-
   return (
     <NavBarContainer>
       <NavBarTitle to={ROUTES.HOME}>
@@ -23,7 +19,7 @@ const NavBar = () => {
       </NavBarTitle>
       <Button onClick={() => navigate(ROUTES.CREATE)}>Create blog</Button>
       <NavBarIconContainer>
-        <Ficon icon="search" clickHandler={clickHandler} />
+        <Ficon icon="search" clickHandler={() => navigate(ROUTES.SEARCH)} />
         {/* {
           showInputText &&
           <InputField 

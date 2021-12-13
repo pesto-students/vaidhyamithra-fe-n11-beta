@@ -17,7 +17,7 @@ const TextFieldForSearch = ({ placeHolder }) => {
         margin={INPUT_MARGINS.NONE}
         variant={INPUT_VARIANTS.STANDARD}
         endAdornment={
-          <InputAdornment>
+          <InputAdornment position="end">
             <IconButton onClick={() => console.log("close")}>
               <Ficon icon="x" />
             </IconButton>
