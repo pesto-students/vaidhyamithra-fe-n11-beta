@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useQuill } from "react-quilljs";
-import "quill/dist/quill.bubble.css";
+// import "quill/dist/quill.bubble.css";
 import "quill/dist/quill.snow.css";
 import { useEffect } from "react";
 import { toolbarOptions } from "./editor.constants";
