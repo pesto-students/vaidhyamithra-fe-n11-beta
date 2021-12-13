@@ -5,15 +5,15 @@ import {
   NavBarIconContainer,
 } from "./navBar.styled";
 import Ficon from "../../atoms/featherIcon";
-import InputField, { INPUT_TYPES } from "../../atoms/input";
-import { InputAdornment } from "@mui/material";
-import IconButton from '@mui/material/IconButton';
-import Close from '@mui/icons-material/Close';
-import { useState } from "react";
 import { ROUTES } from "../../../values/routes";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
-  const [showInputText, setShowInputText] = useState(false);
+  const navigate = useNavigate();
+
+  const clickHandler = () => {
+    navigate(ROUTES.SEARCH);
+  };
 
   return (
     <NavBarContainer>
@@ -21,8 +21,8 @@ const NavBar = () => {
         <Typography variant="mainTitle">VaidhyaMitra</Typography>
       </NavBarTitle>
       <NavBarIconContainer>
-        <Ficon icon="search" onClick={() => setShowInputText(true)}/>
-        {
+        <Ficon icon="search" clickHandler={clickHandler} />
+        {/* {
           showInputText &&
           <InputField 
             type={INPUT_TYPES.TEXT}
@@ -38,7 +38,7 @@ const NavBar = () => {
               </InputAdornment>
             }}
           />
-        }
+        } */}
         <Ficon icon="bookmark" />
         <Ficon icon="user" />
       </NavBarIconContainer>

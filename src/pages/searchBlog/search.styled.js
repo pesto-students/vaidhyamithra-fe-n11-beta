@@ -15,7 +15,3 @@ export const Title = styled.p`
   font-family: Inter;
 `;
 
-export const SearchTerm = styled.b`
-  font-size: 26px;
-  margin-left: 14px;
-`;

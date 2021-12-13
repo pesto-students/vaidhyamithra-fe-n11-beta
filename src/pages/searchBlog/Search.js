@@ -3,20 +3,17 @@ import { TabMenu, TabPanel } from "../../components/organisms/tabs";
 import { SearchResultMenuItems } from "./search.constants";
 import {
   ResultsContainer,
-  SearchResults,
-  SearchTerm,
-  Title,
+  SearchResults
 } from "./search.styled";
-
+import TextFieldForSearch from "../../components/molecules/textFieldForSearch";
 const Search = () => {
   const [currentTab, setCurrentTab] = useState(SearchResultMenuItems[0].value);
 
   return (
     <SearchResults>
       <ResultsContainer>
-        <Title>
-          Search results for <SearchTerm>'blood'</SearchTerm>
-        </Title>
+        <TextFieldForSearch 
+        />
         <TabMenu
           value={currentTab}
           setValue={setCurrentTab}
