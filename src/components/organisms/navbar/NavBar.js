@@ -20,23 +20,6 @@ const NavBar = () => {
       <Button onClick={() => navigate(ROUTES.CREATE)}>Create blog</Button>
       <NavBarIconContainer>
         <Ficon icon="search" clickHandler={() => navigate(ROUTES.SEARCH)} />
-        {/* {
-          showInputText &&
-          <InputField 
-            type={INPUT_TYPES.TEXT}
-            InputProps={{
-              endAdornment: 
-              <InputAdornment position="start">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  edge="end"
-                >
-                  <Close />
-                </IconButton>
-              </InputAdornment>
-            }}
-          />
-        } */}
         <Ficon icon="bookmark" />
         <Ficon icon="user" />
       </NavBarIconContainer>
