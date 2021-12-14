@@ -1,6 +1,7 @@
 export const INPUT_VARIANTS = {
   OUTLINED: "outlined",
-  STANDARD: "standard",
+  FILLED: "filled",
+  STANDARD: "standard"
 };
 
 export const INPUT_TYPES = {

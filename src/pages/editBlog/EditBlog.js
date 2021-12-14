@@ -42,7 +42,7 @@ const EditBlog = () => {
             placeholder="Add category"
             margin={INPUT_MARGINS.NONE}
             endAdornment={
-              <InputAdornment>
+              <InputAdornment position="end">
                 <IconButton onClick={() => console.log("close")}>
                   <FIcon icon="x" />
                 </IconButton>
