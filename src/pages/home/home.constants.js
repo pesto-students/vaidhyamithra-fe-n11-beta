@@ -8,6 +8,10 @@ export const homeMenuItems = [
       <>
         <BlogCard />
         <BlogCard />
+        <BlogCard />
+        <BlogCard />
+        <BlogCard />
+        <BlogCard />
       </>
     ),
   },

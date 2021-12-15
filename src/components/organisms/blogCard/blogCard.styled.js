@@ -1,32 +1,29 @@
 import styled from "styled-components";
+import { withTheme } from "@emotion/react";
 import { COLORS } from "../../../styles/colors";
 
-export const Card = styled.div`
+export const Card = withTheme(styled("div")`
   display: flex;
   border-radius: 10px;
-  padding: 20px;
-  margin-top: 20px;
-  background: #ffff;
-  box-shadow: 0px 0px 2px rgb(0 0 0 / 25%);
+  padding: 20px 0;
+  background: ${({ theme }) => theme.palette.background.paper};
   min-width: 600px;
-  min-height: 350px;
+  border-bottom: 1px solid ${({ theme }) => theme.palette.divider};
 
-  &:hover {
-    cursor: pointer;
-    box-shadow: 0px 0px 8px rgb(0 0 0 / 25%);
+  &:last-of-type {
+    border-bottom: none;
   }
-`;
+`);
 
 export const CardContainer = styled.div`
-  margin: 20px 0 20px 20px;
   display: flex;
   flex-direction: column;
 `;
 
 export const BlogImg = styled.img`
   object-fit: cover;
-  width: 40%;
-  max-height: 300px;
+  width: 35%;
+  max-height: 200px;
   border-radius: 10px;
 `;
 
@@ -37,6 +34,8 @@ export const BlogTitle = styled.h2`
   font-weight: 700;
   font-size: 24px;
   font-family: Amiko;
+
+  cursor: pointer;
 
   /* line clamping - show limited number of lines */
   overflow: hidden;
@@ -63,5 +62,5 @@ export const BlogContent = styled.p`
 `;
 
 export const AuthorInfo = styled.div`
-  margin-top: auto;
+  margin-top: 24px;
 `;
