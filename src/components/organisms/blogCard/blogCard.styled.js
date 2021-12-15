@@ -25,6 +25,7 @@ export const BlogImg = styled.img`
   width: 35%;
   max-height: 200px;
   border-radius: 10px;
+  margin-left: 20px;
 `;
 
 export const BlogTitle = styled.h2`
@@ -56,8 +57,8 @@ export const BlogContent = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
 `;
 

@@ -5,7 +5,7 @@ export const Topic = styled.div`
   text-align: center;
   color: white;
   border-radius: 16px;
-  font-size: 12px;
+  font-size: 10px;
   letter-spacing: 1.5px;
   width: max-content;
   padding: 4px 8px;
