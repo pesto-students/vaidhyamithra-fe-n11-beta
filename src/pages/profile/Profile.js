@@ -5,7 +5,7 @@ import {
   ProfileData,
   UserBlogs,
   ProfilePic,
-} from "./userDetails.styled";
+} from "./profile.styled";
 
 const UserDetails = () => {
   return (

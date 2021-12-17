@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const PageContent = styled.div``;
+
 export const ProfileData = styled.div`
   position: fixed;
   width: 300px;

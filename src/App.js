@@ -7,6 +7,7 @@ import Home from "./pages/home";
 import AppSkeleton from "./components/organisms/appSkeleton";
 import Search from "./pages/searchBlog";
 import EditBlog from "./pages/editBlog";
+import Profile from "./pages/profile";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path={ROUTES.SIGNUP} element={<SignUP />} />
         <Route path={ROUTES.SEARCH} element={<Search />} />
         <Route path={ROUTES.CREATE} element={<EditBlog />} />
+        <Route path={ROUTES.MY_PROFILE} element={<Profile />} />
         <Route path="*" exact={true} element={<PageNotFound />} />
       </Route>
     </Routes>
