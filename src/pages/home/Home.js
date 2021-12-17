@@ -2,7 +2,11 @@ import { useState } from "react";
 import TopicsList from "../../components/organisms/topicsList";
 import { TabMenu, TabPanel } from "../../components/organisms/tabs";
 import { homeMenuItems } from "./home.constants";
-import { LeftSection, RightSection, HomepageContainer } from "./home.styled";
+import { HomepageContainer } from "./home.styled";
+import {
+  LeftSection,
+  RightSection,
+} from "../../components/organisms/appSkeleton";
 
 const Home = () => {
   const [currentTab, setCurrentTab] = useState(homeMenuItems[0].value);

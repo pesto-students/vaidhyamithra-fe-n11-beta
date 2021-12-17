@@ -15,6 +15,18 @@ export const homeMenuItems = [
       </>
     ),
   },
-  { value: 2, label: "Saved", component: <div>Saved</div> },
-  { value: 3, label: "Your Blogs", component: <div>yours</div> },
+  {
+    value: 2,
+    label: "Trending",
+    component: (
+      <>
+        <BlogCard />
+        <BlogCard />
+        <BlogCard />
+        <BlogCard />
+        <BlogCard />
+        <BlogCard />
+      </>
+    ),
+  },
 ];

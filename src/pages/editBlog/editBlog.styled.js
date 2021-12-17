@@ -7,19 +7,6 @@ export const EditBlogPage = styled.div`
   display: flex;
 `;
 
-export const LeftSection = styled.div`
-  height: calc(100vh - 72px); // 72px is height of navbar
-  width: 65%;
-  padding: 40px;
-  overflow: auto;
-`;
-
-export const RightSection = withTheme(styled("div")`
-  padding: 40px;
-  width: 35%;
-  border-left: 1px solid ${({ theme }) => theme.palette.divider};
-`);
-
 export const TitleInput = withTheme(styled(InputField)`
   width: 100%;
   margin-bottom: 20px;
