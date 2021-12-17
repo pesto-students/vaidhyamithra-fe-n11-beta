@@ -14,6 +14,7 @@ export const LeftSection = styled.div`
 
 export const RightSection = withTheme(styled("div")`
   width: 35%;
+  height: calc(100vh - 72px);
   min-width: 300px;
   padding: 40px;
   border-left: 1px solid ${({ theme }) => theme.palette.divider};
