@@ -20,7 +20,7 @@ const NavBar = () => {
       <Button onClick={() => navigate(ROUTES.CREATE)}>Create blog</Button>
       <NavBarIconContainer>
         <Ficon icon="search" handleClick={() => navigate(ROUTES.SEARCH)} />
-        <Ficon icon="bookmark" />
+        {/* <Ficon icon="bookmark" /> */}
         <Ficon icon="user" handleClick={() => navigate(ROUTES.MY_PROFILE)} />
       </NavBarIconContainer>
     </NavBarContainer>

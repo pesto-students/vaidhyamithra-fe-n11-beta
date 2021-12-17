@@ -4,5 +4,5 @@ export const ROUTES = {
   SIGNUP: "/signup",
   SEARCH: "/search",
   CREATE: "/create",
-  MY_PROFILE: "/me",
+  MY_PROFILE: "/profile",
 };
