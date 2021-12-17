@@ -1,5 +1,5 @@
 import { useState } from "react";
-import RecommendedTopics from "../../components/organisms/recommendedTopics/RecommendedTopics";
+import TopicsList from "../../components/organisms/topicsList";
 import { TabMenu, TabPanel } from "../../components/organisms/tabs";
 import { homeMenuItems } from "./home.constants";
 import { LeftSection, RightSection, HomepageContainer } from "./home.styled";
@@ -22,7 +22,7 @@ const Home = () => {
         ))}
       </LeftSection>
       <RightSection>
-        <RecommendedTopics />
+        <TopicsList title="Recommended topics" />
       </RightSection>
     </HomepageContainer>
   );

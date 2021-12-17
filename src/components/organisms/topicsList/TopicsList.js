@@ -1,8 +1,9 @@
+import PropTypes from "prop-types";
 import Typography from "../../atoms/typography";
 import Button, { BUTTON_VARIANTS } from "../../atoms/button";
-import { TopicsContainer, ButtonsContainer } from "./recommendedTopics.styled";
+import { TopicsContainer, ButtonsContainer } from "./topicsList.styled";
 
-const RecommendedTopics = () => {
+const TopicsList = ({ title }) => {
   const topics = [
     { id: 1, topicName: "Cardiology" },
     { id: 2, topicName: "Bariatrics" },
@@ -13,7 +14,7 @@ const RecommendedTopics = () => {
   ];
   return (
     <TopicsContainer>
-      <Typography variant="h3">Recommended topics</Typography>
+      <Typography variant="h3">{title}</Typography>
       <ButtonsContainer>
         {topics.map((topic, key) => (
           <Button
@@ -29,4 +30,12 @@ const RecommendedTopics = () => {
   );
 };
 
-export default RecommendedTopics;
+TopicsList.propTypes = {
+  title: PropTypes.string,
+};
+
+TopicsList.defaultProps = {
+  title: "",
+};
+
+export default TopicsList;

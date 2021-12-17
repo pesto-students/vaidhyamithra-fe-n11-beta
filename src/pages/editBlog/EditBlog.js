@@ -3,7 +3,7 @@ import Button, { BUTTON_VARIANTS } from "../../components/atoms/button";
 import FIcon from "../../components/atoms/featherIcon";
 import { INPUT_MARGINS, INPUT_VARIANTS } from "../../components/atoms/input";
 import Editor from "../../components/organisms/editor";
-import RecommendedTopics from "../../components/organisms/recommendedTopics/RecommendedTopics";
+import TopicsList from "../../components/organisms/topicsList";
 import {
   EditBlogPage,
   EditorContainer,
@@ -51,7 +51,7 @@ const EditBlog = () => {
           />
           <AddCategoryBtn>Add</AddCategoryBtn>
         </SearchBar>
-        <RecommendedTopics />
+        <TopicsList />
       </RightSection>
     </EditBlogPage>
   );
