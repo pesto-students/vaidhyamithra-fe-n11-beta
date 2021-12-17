@@ -4,5 +4,4 @@ export const ROUTES = {
   SIGNUP: "/signup",
   SEARCH: "/search",
   CREATE: "/create",
-  NOT_FOUND: "/not-found",
 };
