@@ -4,7 +4,6 @@ import { COLORS } from "../../../styles/colors";
 
 export const Card = withTheme(styled("div")`
   display: flex;
-  border-radius: 10px;
   padding: 20px 0;
   background: ${({ theme }) => theme.palette.background.paper};
   min-width: 600px;
