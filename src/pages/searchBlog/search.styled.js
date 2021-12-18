@@ -7,11 +7,10 @@ export const SearchResults = styled.div`
 `;
 
 export const ResultsContainer = styled.div`
-  width: 840px;
+  width: 65%;
 `;
 
 export const Title = styled.p`
   font-size: 20px;
   font-family: Inter;
 `;
-

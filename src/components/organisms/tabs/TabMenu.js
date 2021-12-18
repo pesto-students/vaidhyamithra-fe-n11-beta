@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
-import { Tab, Tabs } from "@mui/material";
+import { Tabs } from "@mui/material";
 import { TAB_ORIENTATION } from "./tabMenu.constants";
+import { StyledTab } from "./tabMenu.styled";
 
 export const TabMenu = ({ value, setValue, orientation, menuItems }) => {
   const handleChange = (event, newValue) => {
@@ -15,7 +16,7 @@ export const TabMenu = ({ value, setValue, orientation, menuItems }) => {
       orientation={orientation}
     >
       {menuItems.map(({ label, value }) => (
-        <Tab key={value} label={label} value={value} />
+        <StyledTab key={value} label={label} value={value} />
       ))}
     </Tabs>
   );

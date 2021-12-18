@@ -7,10 +7,10 @@ export const NavBarContainer = withTheme(styled("div")`
   align-items: center;
   justify-content: flex-end;
   border-bottom: 1px solid ${(props) => props.theme.palette.divider};
-  position: sticky;
-  top: 0px;
+  /* position: sticky; */
+  /* top: 0px; */
   background: ${(props) => props.theme.palette.background.default};
-  z-index: 1000;
+  /* z-index: 1000; */
 `);
 
 export const NavBarTitle = withTheme(styled(Link)`

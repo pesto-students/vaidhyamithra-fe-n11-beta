@@ -13,13 +13,14 @@ import BlogTag from "../../atoms/blogTag";
 const BlogCard = () => {
   return (
     <Card>
-      <BlogImg src={manImg} alt="blog-preview" />
       <CardContainer>
         <BlogTag>NEUROSCIENCE</BlogTag>
         <BlogTitle>We need to index the haptic GB card.</BlogTitle>
         <BlogContent>
           If we navigate the port, we can get to the AGP microchip through the
-          bluetooth SDD alarm.
+          bluetooth SDD alarm of the name of the universe. And if we navigate
+          the port, we can get to the AGP microchip through the bluetooth SDD
+          alarm. I were you and you were me then what would this world be like
         </BlogContent>
         <AuthorInfo>
           <BloggerDetails
@@ -29,6 +30,7 @@ const BlogCard = () => {
           />
         </AuthorInfo>
       </CardContainer>
+      <BlogImg src={manImg} alt="blog-preview" />
     </Card>
   );
 };

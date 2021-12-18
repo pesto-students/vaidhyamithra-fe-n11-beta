@@ -1,9 +1,7 @@
 import FeatherIcon from "feather-icons-react";
 
-const Ficon = ({icon, clickHandler}) => {
-    return (
-        <FeatherIcon icon={icon} onClick={clickHandler}/>
-    )
+const Ficon = ({ icon, handleClick }) => {
+  return <FeatherIcon icon={icon} onClick={handleClick} />;
 };
 
 export default Ficon;

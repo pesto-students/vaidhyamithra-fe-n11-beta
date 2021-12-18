@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
+import React from "react";
 import InputField, { INPUT_TYPES } from "../../atoms/input";
 import Button, { BUTTON_VARIANTS } from "../../atoms/button";
 import {
@@ -20,9 +19,7 @@ const TempStatus = ({ isLoading, errorMessage }) => {
 };
 
 const LoginForm = () => {
-  const { isLoading, errorMessage, userInfo } = useSelector(
-    (state) => state.user
-  );
+  const { isLoading, errorMessage } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const handleLogin = () => {

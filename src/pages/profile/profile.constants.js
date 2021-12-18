@@ -1,13 +1,11 @@
 import BlogCard from "../../components/organisms/blogCard/BlogCard";
 
-export const homeMenuItems = [
+export const profileTabMenu = [
   {
     value: 1,
-    label: "Recommended items",
+    label: "Your Blogs",
     component: (
       <>
-        <BlogCard />
-        <BlogCard />
         <BlogCard />
         <BlogCard />
         <BlogCard />
@@ -17,11 +15,9 @@ export const homeMenuItems = [
   },
   {
     value: 2,
-    label: "Trending",
+    label: "Saved",
     component: (
       <>
-        <BlogCard />
-        <BlogCard />
         <BlogCard />
         <BlogCard />
         <BlogCard />

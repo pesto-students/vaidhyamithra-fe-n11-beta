@@ -2,13 +2,15 @@ import { IconButton, InputAdornment } from "@mui/material";
 import Button, { BUTTON_VARIANTS } from "../../components/atoms/button";
 import FIcon from "../../components/atoms/featherIcon";
 import { INPUT_MARGINS, INPUT_VARIANTS } from "../../components/atoms/input";
+import {
+  LeftSection,
+  RightSection,
+} from "../../components/organisms/appSkeleton";
 import Editor from "../../components/organisms/editor";
-import RecommendedTopics from "../../components/organisms/recommendedTopics/RecommendedTopics";
+import TopicsList from "../../components/organisms/topicsList";
 import {
   EditBlogPage,
   EditorContainer,
-  LeftSection,
-  RightSection,
   SaveButton,
   SaveSection,
   TitleInput,
@@ -51,7 +53,7 @@ const EditBlog = () => {
           />
           <AddCategoryBtn>Add</AddCategoryBtn>
         </SearchBar>
-        <RecommendedTopics />
+        <TopicsList />
       </RightSection>
     </EditBlogPage>
   );
