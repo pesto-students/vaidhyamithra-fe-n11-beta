@@ -3,16 +3,22 @@ import { loginApi } from "../../../api/user/userApi";
 import { USER_SLICE } from "./user.config";
 
 const initialState = {
-  userInfo: {},
+  userInfo: {
+    id: "",
+    email: "",
+    name: "",
+    authToken: null,
+  },
   isLoading: false,
   errorMessage: "",
+  isLoginModalOpen: false,
 };
 
 export const loginUser = createAsyncThunk(
   `${USER_SLICE}/login`,
-  async ({ name, password }, { rejectWithValue }) => {
+  async ({ email, password }, { rejectWithValue }) => {
     try {
-      const data = await loginApi({ name, password });
+      const data = await loginApi({ email, password });
       return data;
     } catch (err) {
       return rejectWithValue([], err);

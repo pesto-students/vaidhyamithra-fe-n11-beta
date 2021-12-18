@@ -13,6 +13,9 @@ const InputField = ({
   multiline,
   margin,
   endAdornment,
+  value,
+  handleChange,
+  error,
 }) => {
   return (
     <TextField
@@ -27,6 +30,9 @@ const InputField = ({
       className={className}
       multiline={multiline}
       InputProps={{ endAdornment }}
+      value={value}
+      onChange={handleChange}
+      error={error}
     />
   );
 };
@@ -42,6 +48,9 @@ InputField.defaultProps = {
   multiline: false,
   margin: INPUT_MARGINS.NORMAL,
   endAdornment: null,
+  value: null,
+  handleChange: () => {},
+  error: false,
 };
 
 export default InputField;

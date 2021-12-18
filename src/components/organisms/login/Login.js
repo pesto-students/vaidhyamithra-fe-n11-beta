@@ -1,10 +1,10 @@
-import React from "react";
+import { useState } from "react";
 import { Button as MuiButton } from "@mui/material";
 import Modal from "../../molecules/modal";
 import LoginForm from "./LoginForm";
 
 const Login = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
