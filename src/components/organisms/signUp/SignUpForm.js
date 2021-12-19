@@ -21,8 +21,8 @@ const SignUpForm = () => {
         label="Email"
         helperText={
           <NoteText>
-            <strong>Note:</strong>
-            Verification link will be sent to this email ID
+            <strong>Note:</strong> Verification link will be sent to this email
+            ID
           </NoteText>
         }
       />
@@ -31,9 +31,8 @@ const SignUpForm = () => {
       <Checkbox label="I want to post blogs on the platform" />
 
       <NoteText>
-        <strong>Note:</strong>
-        Only registered medical practitioners can post blogs on the platform
-        after verification by our team
+        <strong>Note:</strong> Only registered medical practitioners can post
+        blogs on the platform after verification by our team
       </NoteText>
 
       <ModalActions>
