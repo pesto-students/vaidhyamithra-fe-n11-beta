@@ -9,7 +9,8 @@ export const useModalHelper = () => {
 
   const openSignup = () => dispatch(showModal({ type: MODAL_TYPES.SIGNUP }));
 
-  const openInterests = () => dispatch(showModal({ type: MODAL_TYPES.SIGNUP }));
+  const openInterests = () =>
+    dispatch(showModal({ type: MODAL_TYPES.INTERESTS }));
 
   const closeModal = () => dispatch(hideModal());
 

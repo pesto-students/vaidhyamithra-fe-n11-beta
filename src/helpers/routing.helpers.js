@@ -9,6 +9,7 @@ export const useRouting = () => {
   const { openLogin } = useModalHelper();
 
   const gotoPrivateRoute = (route) => {
+    // todo: check if user logged in
     if (!userInfo.id) {
       openLogin();
       return;
