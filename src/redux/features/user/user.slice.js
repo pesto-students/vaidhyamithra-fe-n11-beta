@@ -38,6 +38,7 @@ export const userSlice = createSlice({
     },
     [loginUser.pending]: (state) => {
       state.isLoading = true;
+      state.errorMessage = "";
     },
     [loginUser.rejected]: (state, { meta }) => {
       state.errorMessage = meta.response.data.message;

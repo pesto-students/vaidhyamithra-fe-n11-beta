@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import validator from "validator";
 import InputField, { INPUT_TYPES } from "../../atoms/input";
 import Button, { BUTTON_VARIANTS } from "../../atoms/button";
@@ -10,15 +10,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../../redux/features/user/user.slice";
 import { loginErrorMessages } from "./login.constants";
-
-const TempStatus = ({ isLoading, errorMessage }) => {
-  return (
-    <>
-      {errorMessage && <div>{errorMessage}</div>}
-      {isLoading && <div>Loading...</div>}
-    </>
-  );
-};
+import { setAlert } from "../../../redux/features/alerts/alerts.slice";
+import { alertTypes } from "../../molecules/snackbar";
 
 const initialFormFields = {
   email: "",
@@ -26,7 +19,9 @@ const initialFormFields = {
 };
 
 const LoginForm = () => {
-  const { isLoading, errorMessage } = useSelector((state) => state.user);
+  const { isLoading, errorMessage, userInfo } = useSelector(
+    (state) => state.user
+  );
   const dispatch = useDispatch();
   const [loginFields, setLoginFields] = useState(initialFormFields);
   const [errorMsgs, setErrorMsgs] = useState(initialFormFields);
@@ -64,6 +59,20 @@ const LoginForm = () => {
     );
   };
 
+  useEffect(() => {
+    if (errorMessage) {
+      dispatch(setAlert({ text: errorMessage, type: alertTypes.error }));
+    }
+  }, [dispatch, errorMessage]);
+
+  useEffect(() => {
+    if (userInfo.accessToken) {
+      dispatch(
+        setAlert({ text: "Successfully logged in", type: alertTypes.success })
+      );
+    }
+  }, [dispatch, userInfo]);
+
   const isLoginDisabled = !!(errorMsgs.email || errorMsgs.password);
 
   return (
@@ -89,7 +98,6 @@ const LoginForm = () => {
           Don't have an account?
           <Button variant={BUTTON_VARIANTS.TEXT}>Sign Up</Button>
         </LeftStart>
-        <TempStatus isLoading={isLoading} errorMessage={errorMessage} />
         <Button
           disabled={isLoginDisabled}
           loading={isLoading}
