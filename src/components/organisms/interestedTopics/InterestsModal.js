@@ -46,7 +46,9 @@ const InterestsModal = () => {
           </Button>
         ))}
         <Confirmation>
-          <Button variant={BUTTON_VARIANTS.TEXT}>Skip</Button>
+          <Button onClick={closeModal} variant={BUTTON_VARIANTS.TEXT}>
+            Skip
+          </Button>
           <Button>Continue</Button>
         </Confirmation>
       </Modal>
