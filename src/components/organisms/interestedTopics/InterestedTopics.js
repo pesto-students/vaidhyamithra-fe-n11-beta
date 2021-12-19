@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { MODAL_TYPES } from "../../../redux/features/modals/modals.congif";
+import {
+  hideModal,
+  showModal,
+} from "../../../redux/features/modals/modals.slice";
 import Button, { BUTTON_VARIANTS } from "../../atoms/button";
 import Modal from "../../molecules/modal";
 import { Info, Confirmation } from "./interestedTopics.styled";
 
 const InterestedTopics = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [open, setOpen] = useState(true);
+  const { modalType } = useSelector((state) => state.modals);
+  const dispatch = useDispatch();
+
+  const handleOpen = () => dispatch(showModal({ type: MODAL_TYPES.INTERESTS }));
+  const handleClose = () => dispatch(hideModal());
+
+  useEffect(() => {
+    setOpen(modalType === MODAL_TYPES.INTERESTS);
+  }, [modalType]);
+
   const topics = [
     { id: 1, topicName: "Cardiology" },
     { id: 2, topicName: "Bariatrics" },
