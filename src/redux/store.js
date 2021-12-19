@@ -4,11 +4,14 @@ import { USER_SLICE } from "./features/user/user.config";
 
 import userReducer from "./features/user/user.slice";
 import alertsReducer from "./features/alerts/alerts.slice";
+import { MODALS_SLICE } from "./features/modals/modals.congif";
+import modalsReducer from "./features/modals/modals.slice";
 
 export const store = configureStore({
   reducer: {
     [USER_SLICE]: userReducer,
     [ALERTS_SLICE]: alertsReducer,
+    [MODALS_SLICE]: modalsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
