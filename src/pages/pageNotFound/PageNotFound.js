@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import { useRouting } from "../../helpers/routing.helper";
+import { useRouting } from "../../helpers";
 import { ROUTES } from "../../values/routes";
 import { GoToHomepage, Wrapper } from "./pageNotFound.styled";
 

@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { useModalHelper } from "../../../helpers";
 import { MODAL_TYPES } from "../../../redux/features/modals/modals.congif";
-import {
-  hideModal,
-  showModal,
-} from "../../../redux/features/modals/modals.slice";
 import Button, { BUTTON_VARIANTS } from "../../atoms/button";
 import Modal from "../../molecules/modal";
-import { Info, Confirmation } from "./interestedTopics.styled";
+import { Info, Confirmation } from "./interestsModal.styled";
 
-const InterestedTopics = () => {
+const InterestsModal = () => {
   const [open, setOpen] = useState(true);
   const { modalType } = useSelector((state) => state.modals);
-  const dispatch = useDispatch();
-
-  const handleOpen = () => dispatch(showModal({ type: MODAL_TYPES.INTERESTS }));
-  const handleClose = () => dispatch(hideModal());
+  const { closeModal } = useModalHelper();
 
   useEffect(() => {
     setOpen(modalType === MODAL_TYPES.INTERESTS);
@@ -32,10 +26,9 @@ const InterestedTopics = () => {
 
   return (
     <>
-      <Button onClick={handleOpen}>Click me</Button>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={closeModal}
         title="What topics are you interested in?"
       >
         <Info>
@@ -61,4 +54,4 @@ const InterestedTopics = () => {
   );
 };
 
-export default InterestedTopics;
+export default InterestsModal;

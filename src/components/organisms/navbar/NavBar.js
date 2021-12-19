@@ -7,7 +7,7 @@ import {
 import Ficon from "../../atoms/featherIcon";
 import { ROUTES } from "../../../values/routes";
 import Button from "../../atoms/button";
-import { useRouting } from "../../../helpers/routing.helper";
+import { useRouting } from "../../../helpers";
 
 const NavBar = () => {
   const { gotoPrivateRoute, gotoRoute } = useRouting();

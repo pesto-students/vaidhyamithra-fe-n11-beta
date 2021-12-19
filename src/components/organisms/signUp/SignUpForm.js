@@ -8,8 +8,11 @@ import {
   FormContainer,
   LeftStart,
 } from "./signUp.styled";
+import { useModalHelper } from "../../../helpers";
 
 const SignUpForm = () => {
+  const { openLogin } = useModalHelper();
+
   return (
     <FormContainer>
       <InputField type={INPUT_TYPES.TEXT} label="Name" />
@@ -36,7 +39,9 @@ const SignUpForm = () => {
       <ModalActions>
         <LeftStart>
           Already have an account?
-          <Button variant={BUTTON_VARIANTS.TEXT}>Login</Button>
+          <Button variant={BUTTON_VARIANTS.TEXT} onClick={openLogin}>
+            Login
+          </Button>
         </LeftStart>
         <Button sx={{ ml: "auto" }}>Sign Up</Button>
       </ModalActions>

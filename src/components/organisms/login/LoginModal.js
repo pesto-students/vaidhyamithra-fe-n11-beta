@@ -3,14 +3,12 @@ import Modal from "../../molecules/modal";
 import LoginForm from "./LoginForm";
 import { useSelector } from "react-redux";
 import { MODAL_TYPES } from "../../../redux/features/modals/modals.congif";
-import { useDispatch } from "react-redux";
-import { hideModal } from "../../../redux/features/modals/modals.slice";
+import { useModalHelper } from "../../../helpers";
 
 const LoginModal = () => {
   const [open, setOpen] = useState(true);
   const { modalType } = useSelector((state) => state.modals);
-  const dispatch = useDispatch();
-  const handleClose = () => dispatch(hideModal());
+  const { closeModal } = useModalHelper();
 
   useEffect(() => {
     setOpen(modalType === MODAL_TYPES.LOGIN);
@@ -18,7 +16,7 @@ const LoginModal = () => {
 
   return (
     <>
-      <Modal open={open} onClose={handleClose} title="Login">
+      <Modal open={open} onClose={closeModal} title="Login">
         <LoginForm />
       </Modal>
     </>

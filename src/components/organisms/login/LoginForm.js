@@ -12,7 +12,7 @@ import { loginUser } from "../../../redux/features/user/user.slice";
 import { loginErrorMessages } from "./login.constants";
 import { setAlert } from "../../../redux/features/alerts/alerts.slice";
 import { alertTypes } from "../../molecules/snackbar";
-import { hideModal } from "../../../redux/features/modals/modals.slice";
+import { useModalHelper } from "../../../helpers";
 
 const initialFormFields = {
   email: "",
@@ -26,6 +26,7 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const [loginFields, setLoginFields] = useState(initialFormFields);
   const [errorMsgs, setErrorMsgs] = useState(initialFormFields);
+  const { closeModal, openSignup } = useModalHelper();
 
   const handleFieldChange = (field, value) => {
     const newVals = {
@@ -72,9 +73,9 @@ const LoginForm = () => {
         setAlert({ text: "Successfully logged in", type: alertTypes.success })
       );
       // add code to save auth info in localstorage
-      dispatch(hideModal());
+      closeModal();
     }
-  }, [dispatch, userInfo]);
+  }, [closeModal, dispatch, userInfo]);
 
   const isLoginDisabled = !!(errorMsgs.email || errorMsgs.password);
 
@@ -99,7 +100,9 @@ const LoginForm = () => {
       <ModalActions>
         <LeftStart>
           Don't have an account?
-          <Button variant={BUTTON_VARIANTS.TEXT}>Sign Up</Button>
+          <Button variant={BUTTON_VARIANTS.TEXT} onClick={openSignup}>
+            Sign Up
+          </Button>
         </LeftStart>
         <Button
           disabled={isLoginDisabled}

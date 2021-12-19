@@ -1,16 +1,16 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useLogin } from "../components/organisms/login";
 import { USER_SLICE } from "../redux/features/user/user.config";
+import { useModalHelper } from "./modal.helpers";
 
 export const useRouting = () => {
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state[USER_SLICE]);
-  const { openLoginModal } = useLogin();
+  const { openLogin } = useModalHelper();
 
   const gotoPrivateRoute = (route) => {
     if (!userInfo.id) {
-      openLoginModal();
+      openLogin();
       return;
     }
     navigate(route);
