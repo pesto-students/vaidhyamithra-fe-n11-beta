@@ -7,21 +7,26 @@ import {
 import Ficon from "../../atoms/featherIcon";
 import { ROUTES } from "../../../values/routes";
 import Button from "../../atoms/button";
-import { useNavigate } from "react-router-dom";
+import { useRouting } from "../../../helpers/routing.helper";
 
 const NavBar = () => {
-  const navigate = useNavigate();
+  const { gotoPrivateRoute, gotoRoute } = useRouting();
 
   return (
     <NavBarContainer>
       <NavBarTitle to={ROUTES.HOME}>
         <Typography variant="mainTitle">VaidhyaMitra</Typography>
       </NavBarTitle>
-      <Button onClick={() => navigate(ROUTES.CREATE)}>Create blog</Button>
+      <Button onClick={() => gotoPrivateRoute(ROUTES.CREATE)}>
+        Create blog
+      </Button>
       <NavBarIconContainer>
-        <Ficon icon="search" handleClick={() => navigate(ROUTES.SEARCH)} />
+        <Ficon icon="search" handleClick={() => gotoRoute(ROUTES.SEARCH)} />
         {/* <Ficon icon="bookmark" /> */}
-        <Ficon icon="user" handleClick={() => navigate(ROUTES.MY_PROFILE)} />
+        <Ficon
+          icon="user"
+          handleClick={() => gotoPrivateRoute(ROUTES.SEARCH)}
+        />
       </NavBarIconContainer>
     </NavBarContainer>
   );

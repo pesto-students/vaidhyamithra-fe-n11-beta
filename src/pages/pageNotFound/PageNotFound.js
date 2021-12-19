@@ -1,10 +1,10 @@
 import { Typography } from "@mui/material";
+import { useRouting } from "../../helpers/routing.helper";
 import { ROUTES } from "../../values/routes";
 import { GoToHomepage, Wrapper } from "./pageNotFound.styled";
-import { useNavigate } from "react-router-dom";
 
 const PageNotFound = () => {
-  const navigate = useNavigate();
+  const { gotoRoute } = useRouting();
 
   return (
     <Wrapper>
@@ -12,7 +12,7 @@ const PageNotFound = () => {
       <Typography sx={{ mt: 2, mb: 4 }}>
         We don't know what you're looking for but we sure have lots more
       </Typography>
-      <GoToHomepage onClick={() => navigate(ROUTES.HOME)}>
+      <GoToHomepage onClick={() => gotoRoute(ROUTES.HOME)}>
         Go to Homepage
       </GoToHomepage>
     </Wrapper>

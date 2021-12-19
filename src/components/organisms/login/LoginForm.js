@@ -12,6 +12,7 @@ import { loginUser } from "../../../redux/features/user/user.slice";
 import { loginErrorMessages } from "./login.constants";
 import { setAlert } from "../../../redux/features/alerts/alerts.slice";
 import { alertTypes } from "../../molecules/snackbar";
+import { hideModal } from "../../../redux/features/modals/modals.slice";
 
 const initialFormFields = {
   email: "",
@@ -70,6 +71,8 @@ const LoginForm = () => {
       dispatch(
         setAlert({ text: "Successfully logged in", type: alertTypes.success })
       );
+      // add code to save auth info in localstorage
+      dispatch(hideModal());
     }
   }, [dispatch, userInfo]);
 
