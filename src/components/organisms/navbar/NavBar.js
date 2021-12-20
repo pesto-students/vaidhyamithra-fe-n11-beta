@@ -25,7 +25,7 @@ const NavBar = () => {
         {/* <Ficon icon="bookmark" /> */}
         <Ficon
           icon="user"
-          handleClick={() => gotoPrivateRoute(ROUTES.SEARCH)}
+          handleClick={() => gotoPrivateRoute(ROUTES.MY_PROFILE)}
         />
       </NavBarIconContainer>
     </NavBarContainer>
