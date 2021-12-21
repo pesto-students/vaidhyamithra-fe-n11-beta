@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { IconButton, InputAdornment } from "@mui/material";
 import Button, { BUTTON_VARIANTS } from "../../components/atoms/button";
 import FIcon from "../../components/atoms/featherIcon";
@@ -18,34 +19,58 @@ import {
   SearchInput,
   AddCategoryBtn,
 } from "./editBlog.styled";
+import validator from "validator";
 
 const EditBlog = () => {
+  const [title, setTitle] = useState("");
+  const [blogContent, setBlogContent] = useState("");
+  const [isSaveDisabled, setIsSaveDisabled] = useState(false);
+  const [searchTopicStr, setSearchTopicStr] = useState("");
+
+  useEffect(() => {
+    const validTitle = !validator.isEmpty(title);
+    const validBlogContent =
+      !validator.isEmpty(blogContent) && blogContent !== "<p><br></p>";
+
+    const validFields = validTitle && validBlogContent;
+    setIsSaveDisabled(!validFields);
+  }, [title, blogContent]);
+
   return (
     <EditBlogPage>
       <LeftSection>
         <TitleInput
+          value={title}
+          handleChange={(e) => setTitle(e.target.value)}
           variant={INPUT_VARIANTS.STANDARD}
           placeholder="Blog title here"
           multiline
         />
         <EditorContainer>
-          <Editor />
+          <Editor handleChange={setBlogContent} />
         </EditorContainer>
       </LeftSection>
       <RightSection>
         <SaveSection>
-          <Button>Publish</Button>
-          <SaveButton variant={BUTTON_VARIANTS.OUTLINED}>Save</SaveButton>
+          <Button disabled={isSaveDisabled}>Publish</Button>
+          <SaveButton
+            disabled={isSaveDisabled}
+            variant={BUTTON_VARIANTS.OUTLINED}
+          >
+            Save
+          </SaveButton>
         </SaveSection>
         <SearchBar>
           <FIcon icon="search" />
           <SearchInput
+            value={searchTopicStr}
+            handleChange={(e) => setSearchTopicStr(e.target.value)}
             variant={INPUT_VARIANTS.STANDARD}
-            placeholder="Add category"
+            placeholder="Add upto 3 categories"
             margin={INPUT_MARGINS.NONE}
             endAdornment={
               <InputAdornment position="end">
-                <IconButton onClick={() => console.log("close")}>
+                <IconButton onClick={() => setSearchTopicStr("")}>
                   <FIcon icon="x" />
                 </IconButton>
               </InputAdornment>
