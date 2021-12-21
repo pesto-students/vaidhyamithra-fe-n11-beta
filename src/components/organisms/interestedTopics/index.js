@@ -1,1 +1,1 @@
-export { default } from "./InterestedTopics";
+export { default } from "./InterestsModal";

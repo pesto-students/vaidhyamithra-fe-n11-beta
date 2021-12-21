@@ -1,14 +1,16 @@
-import { Button as MuiButton } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
+
 import { BUTTON_VARIANTS } from ".";
 
-const Button = ({ variant, children, ...otherProps }) => (
-  <MuiButton variant={variant} {...otherProps}>
+const Button = ({ variant, children, loading, ...otherProps }) => (
+  <LoadingButton variant={variant} loading={loading} {...otherProps}>
     {children}
-  </MuiButton>
+  </LoadingButton>
 );
 
 Button.defaultProps = {
   variant: BUTTON_VARIANTS.CONTAINED,
+  loading: false,
 };
 
 export default Button;

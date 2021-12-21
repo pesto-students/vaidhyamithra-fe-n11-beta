@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useModalHelper } from "../../../helpers";
+import { MODAL_TYPES } from "../../../redux/features/modals/modals.congif";
 import Button, { BUTTON_VARIANTS } from "../../atoms/button";
 import Modal from "../../molecules/modal";
-import { Info, Confirmation } from "./interestedTopics.styled";
+import { Info, Confirmation } from "./interestsModal.styled";
 
-const InterestedTopics = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+const InterestsModal = () => {
+  const [open, setOpen] = useState(true);
+  const { modalType } = useSelector((state) => state.modals);
+  const { closeModal } = useModalHelper();
+
+  useEffect(() => {
+    setOpen(modalType === MODAL_TYPES.INTERESTS);
+  }, [modalType]);
+
   const topics = [
     { id: 1, topicName: "Cardiology" },
     { id: 2, topicName: "Bariatrics" },
@@ -18,10 +26,9 @@ const InterestedTopics = () => {
 
   return (
     <>
-      <Button onClick={handleOpen}>Click me</Button>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={closeModal}
         title="What topics are you interested in?"
       >
         <Info>
@@ -39,7 +46,9 @@ const InterestedTopics = () => {
           </Button>
         ))}
         <Confirmation>
-          <Button variant={BUTTON_VARIANTS.TEXT}>Skip</Button>
+          <Button onClick={closeModal} variant={BUTTON_VARIANTS.TEXT}>
+            Skip
+          </Button>
           <Button>Continue</Button>
         </Confirmation>
       </Modal>
@@ -47,4 +56,4 @@ const InterestedTopics = () => {
   );
 };
 
-export default InterestedTopics;
+export default InterestsModal;
