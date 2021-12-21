@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import manImg from "../../images/man_img.png";
 import {
   ProfileContainer,
@@ -15,9 +15,20 @@ import { TabMenu, TabPanel } from "../../components/organisms/tabs";
 import { profileTabMenu } from "./profile.constants";
 import Typography from "../../components/atoms/typography";
 import { TEXT_TYPE } from "../../components/atoms/typography/typography.constants";
+import { useAuth, useRouting } from "../../helpers";
+import { ROUTES } from "../../values/routes";
 
 const Profile = () => {
   const [currentTab, setCurrentTab] = useState(profileTabMenu[0].value);
+
+  const { isLoggedIn } = useAuth();
+  const { gotoRoute } = useRouting();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      gotoRoute(ROUTES.HOME);
+    }
+  }, [gotoRoute, isLoggedIn]);
 
   return (
     <ProfileContainer>
