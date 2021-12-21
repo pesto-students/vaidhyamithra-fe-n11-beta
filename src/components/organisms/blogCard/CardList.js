@@ -42,7 +42,7 @@ export const CardList = () => {
         </div>
       }
       height={500}
-      elementHeight={70}
+      elementHeight={270}
       rowRenderer={rowRenderer}
       children={items}
     />

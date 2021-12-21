@@ -10,9 +10,9 @@ import {
 import BloggerDetails from "../../molecules/bloggerDetails";
 import BlogTag from "../../atoms/blogTag";
 
-const BlogCard = ({ tag, title, content }) => {
+const BlogCard = ({ tag, title, content, style }) => {
   return (
-    <Card>
+    <Card style={{...style}}>
       <CardContainer>
         <BlogTag>{tag}</BlogTag>
         <BlogTitle>{title}</BlogTitle>
