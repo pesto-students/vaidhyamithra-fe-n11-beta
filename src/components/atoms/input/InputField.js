@@ -13,6 +13,7 @@ const InputField = ({
   multiline,
   margin,
   endAdornment,
+  onChangeValue
 }) => {
   return (
     <TextField
@@ -27,6 +28,7 @@ const InputField = ({
       className={className}
       multiline={multiline}
       InputProps={{ endAdornment }}
+      onChange = {(e) => onChangeValue(e.target.value)}
     />
   );
 };
