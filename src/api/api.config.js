@@ -10,8 +10,8 @@ const getAccessToken = () => {
 };
 
 export default axios.create({
-  // baseURL: "https://vaidhyamitrabackend.herokuapp.com", // PROD
-  baseURL: "https://pesto-vaidhyamitra.herokuapp.com/", // STAGING
+  baseURL: "https://vaidhyamitrabackend.herokuapp.com", // PROD
+  // baseURL: "https://pesto-vaidhyamitra.herokuapp.com/", // STAGING
   headers: {
     "x-access-token": getAccessToken(),
   },
