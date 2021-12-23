@@ -9,4 +9,5 @@ export const Topic = styled.div`
   letter-spacing: 1.5px;
   width: max-content;
   padding: 4px 8px;
+  text-transform: uppercase;
 `;

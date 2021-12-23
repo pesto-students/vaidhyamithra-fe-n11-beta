@@ -6,7 +6,8 @@ import InputField, {
 } from "../../atoms/input";
 import { SearchField } from "./textFieldForSearch.styled";
 import Ficon from "../../atoms/featherIcon/";
-const TextFieldForSearch = ({ placeHolder }) => {
+
+const TextFieldForSearch = ({ placeHolder, handleChange, value }) => {
   return (
     <SearchField>
       <Ficon icon="search" />
@@ -14,11 +15,13 @@ const TextFieldForSearch = ({ placeHolder }) => {
         type={INPUT_TYPES.TEXT}
         placeholder={placeHolder}
         fullWidth
+        value={value}
         margin={INPUT_MARGINS.NONE}
         variant={INPUT_VARIANTS.STANDARD}
+        handleChange={(e) => handleChange(e.target.value)}
         endAdornment={
           <InputAdornment position="end">
-            <IconButton onClick={() => console.log("close")}>
+            <IconButton onClick={() => handleChange("")}>
               <Ficon icon="x" />
             </IconButton>
           </InputAdornment>
