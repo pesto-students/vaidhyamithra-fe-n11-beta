@@ -10,18 +10,13 @@ import {
 import BloggerDetails from "../../molecules/bloggerDetails";
 import BlogTag from "../../atoms/blogTag";
 
-const BlogCard = () => {
+const BlogCard = ({ tag, title, content, style }) => {
   return (
-    <Card>
+    <Card style={{ ...style }}>
       <CardContainer>
-        <BlogTag>NEUROSCIENCE</BlogTag>
-        <BlogTitle>We need to index the haptic GB card.</BlogTitle>
-        <BlogContent>
-          If we navigate the port, we can get to the AGP microchip through the
-          bluetooth SDD alarm of the name of the universe. And if we navigate
-          the port, we can get to the AGP microchip through the bluetooth SDD
-          alarm. I were you and you were me then what would this world be like
-        </BlogContent>
+        <BlogTag>{tag}</BlogTag>
+        <BlogTitle>{title}</BlogTitle>
+        <BlogContent dangerouslySetInnerHTML={{ __html: content }} />
         <AuthorInfo>
           <BloggerDetails
             authorName="Darlene Robertson"
@@ -33,6 +28,13 @@ const BlogCard = () => {
       <BlogImg src={manImg} alt="blog-preview" />
     </Card>
   );
+};
+
+BlogCard.defaultProps = {
+  tag: "neuroscience",
+  title: "We need to index the haptic GB card",
+  content:
+    "If we navigate the port, we can get to the AGP microchip through the bluetooth SDD alarm of the name of the universe. And if we navigate the port, we can get to the AGP microchip through the bluetooth SDD alarm. I were you and you were me then what would this world be like",
 };
 
 export default BlogCard;
