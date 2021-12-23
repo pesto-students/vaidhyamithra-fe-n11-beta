@@ -12,11 +12,11 @@ import BlogTag from "../../atoms/blogTag";
 
 const BlogCard = ({ tag, title, content, style }) => {
   return (
-    <Card style={{...style}}>
+    <Card style={{ ...style }}>
       <CardContainer>
         <BlogTag>{tag}</BlogTag>
         <BlogTitle>{title}</BlogTitle>
-        <BlogContent>{content}</BlogContent>
+        <BlogContent dangerouslySetInnerHTML={{ __html: content }} />
         <AuthorInfo>
           <BloggerDetails
             authorName="Darlene Robertson"

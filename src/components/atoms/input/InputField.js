@@ -48,7 +48,6 @@ InputField.defaultProps = {
   multiline: false,
   margin: INPUT_MARGINS.NORMAL,
   endAdornment: null,
-  value: null,
   handleChange: () => {},
   error: false,
 };

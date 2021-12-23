@@ -46,7 +46,7 @@ export const BlogTitle = styled.h2`
   -webkit-box-orient: vertical;
 `;
 
-export const BlogContent = styled.p`
+export const BlogContent = styled.div`
   color: ${COLORS.SLATE_GRAY};
   font-size: 16px;
   margin: 0;
