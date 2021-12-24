@@ -77,7 +77,7 @@ export const CardList = () => {
                   loading...
                 </div>
               }
-              height={500}
+              height={450}
               elementHeight={270}
               rowRenderer={rowRenderer}
               children={items.paginatedResults}

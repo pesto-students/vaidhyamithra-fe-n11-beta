@@ -48,7 +48,7 @@ export const searchSlice = createSlice({
       state.results.paginatedResults = state.results.paginatedResults.concat(
         payload.paginatedResults
       );
-      if (payload.totalCount) state.results.totalCount = payload.totalCount[0];
+      if (payload.totalCount) state.results.totalCount = payload.totalCount;
       state.isLoading = false;
       state.errorMessage = "";
     },
