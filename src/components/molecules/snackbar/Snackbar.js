@@ -24,7 +24,12 @@ const Snackbar = () => {
 
   return (
     <Stack spacing={2} sx={{ width: "100%" }}>
-      <MuiSnackbar open={!!text} autoHideDuration={6000} onClose={handleClose}>
+      <MuiSnackbar
+        open={!!text}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "left" }}
+      >
         <Alert onClose={handleClose} severity={type} sx={{ width: "100%" }}>
           {text}
         </Alert>
