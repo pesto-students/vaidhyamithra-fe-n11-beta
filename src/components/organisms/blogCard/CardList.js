@@ -1,49 +1,43 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  removeSearchResults,
   search,
-  updateHasMore,
 } from "../../../redux/features/search/search.slice";
 import InfiniteScroller from "../infiniteScroller";
 import BlogCard from "./BlogCard";
 
+const pageSize = 5;
+
 export const CardList = () => {
   const dispatch = useDispatch();
-  const { hasMore } = useSelector((state) => state.search);
-  const [counter, setCounter] = useState(2);
-  const isLoading = useSelector((state) => state.search.isLoading);
-  const items = useSelector((state) => state.search.results);
-  const { searchText } = useSelector((state) => state.search);
+  const [counter, setCounter] = useState(1);
+  const {
+    searchText,
+    results: { totalCount, paginatedResults },
+  } = useSelector((state) => state.search);
 
-  const setStateVariables = () => {
-    dispatch(updateHasMore(false));
-    setCounter(2);
-  };
-
-  const fetchMoreData = () => {
+  const fetchMoreData = useCallback(() => {
+    if (!searchText || searchText.length < 4) {
+      return;
+    }
     let searchObj = {
       searchText: searchText,
       pageNumber: counter,
-      pageSize: 5,
+      pageSize,
     };
 
-    if (counter < items.totalCount) {
-      dispatch(search(searchObj))
-        .unwrap()
-        .then((res) => {
-          if (res && res.paginatedResults.length === 0) {
-            setStateVariables();
-            return;
-          }
-          setCounter(counter + 1);
-        });
-    } else {
-      setStateVariables();
-    }
-  };
+    dispatch(search(searchObj));
+  }, [counter, dispatch, searchText]);
+
+  useEffect(() => {
+    setCounter(1);
+    dispatch(removeSearchResults());
+    fetchMoreData(); // check if needed
+  }, [dispatch, fetchMoreData, searchText]);
 
   const rowRenderer = ({ key, index, style }) => {
-    let blog = items.paginatedResults[index];
+    let blog = paginatedResults[index];
     return (
       <BlogCard
         key={key}
@@ -58,30 +52,30 @@ export const CardList = () => {
 
   return (
     <>
-          {items.paginatedResults.length > 0 ? (
-            <InfiniteScroller
-              dataLength={items.length}
-              hasMore={hasMore}
-              next={fetchMoreData}
-              loader={
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  loading...
-                </div>
-              }
-              height={450}
-              elementHeight={270}
-              rowRenderer={rowRenderer}
-              children={items.paginatedResults}
-            />
-          ) : (
-            <div>No results</div>
-          )}
+      {paginatedResults.length > 0 ? (
+        <InfiniteScroller
+          dataLength={paginatedResults.length}
+          hasMore={counter * pageSize < totalCount} // make change here
+          next={fetchMoreData}
+          loader={
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              loading...
+            </div>
+          }
+          height={450}
+          elementHeight={270}
+          rowRenderer={rowRenderer}
+          children={paginatedResults}
+        />
+      ) : (
+        <div>No results</div>
+      )}
     </>
   );
 };
