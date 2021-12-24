@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ROUTES } from "./values/routes";
-import LinearProgress from "./components/atoms/linearProgress";
+import { LinearProgress } from "./components/atoms/progress";
 import { PrivateRoute } from "./helpers";
 
 const PageNotFound = lazy(() => import("./pages/pageNotFound/PageNotFound"));
@@ -10,6 +10,7 @@ const AppSkeleton = lazy(() => import("./components/organisms/appSkeleton"));
 const Search = lazy(() => import("./pages/searchBlog"));
 const EditBlog = lazy(() => import("./pages/editBlog"));
 const Profile = lazy(() => import("./pages/profile"));
+const BlogDetails = lazy(() => import("./pages/blogDetails"));
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path={ROUTES.HOME} element={<AppSkeleton />}>
           <Route index element={<Home />} />
           <Route path={ROUTES.SEARCH} element={<Search />} />
+          <Route path={ROUTES.BLOG} element={<BlogDetails />} />
           <Route
             path={ROUTES.CREATE}
             element={

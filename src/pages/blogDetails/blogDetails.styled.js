@@ -8,6 +8,8 @@ export const BlogTitle = styled.h1`
 
 export const BloggerDetailsSection = styled.div`
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const Details = styled.div`
@@ -22,7 +24,7 @@ export const DetailsContainer = styled.div`
 `;
 
 export const TagSection = styled.section`
-  margin-top: 36px;
+  margin: 24px 0 36px;
   display: inline-flex;
   gap: 10px;
 `;
@@ -35,3 +37,5 @@ export const BlogImg = styled.img`
 export const CommentSection = styled.div`
   border-bottom: 1px solid;
 `;
+
+export const BlogContent = styled.div``;
