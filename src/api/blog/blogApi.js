@@ -1,7 +1,19 @@
 import apiConfig from "../api.config";
 
-export const createBlogApi = async () => {
-  const { data } = await apiConfig.post("/create");
+export const createBlogApi = async ({
+  title,
+  content,
+  tags,
+  authorId,
+  status,
+}) => {
+  const { data } = await apiConfig.post("/blog", {
+    title,
+    content,
+    tags,
+    authorId,
+    status,
+  });
   return data;
 };
 

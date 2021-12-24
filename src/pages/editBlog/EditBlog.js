@@ -1,40 +1,73 @@
 import { useEffect, useState } from "react";
-import { IconButton, InputAdornment } from "@mui/material";
 import Button, { BUTTON_VARIANTS } from "../../components/atoms/button";
-import FIcon from "../../components/atoms/featherIcon";
-import { INPUT_MARGINS, INPUT_VARIANTS } from "../../components/atoms/input";
+import { INPUT_VARIANTS } from "../../components/atoms/input";
 import {
   LeftSection,
   RightSection,
 } from "../../components/organisms/appSkeleton";
 import Editor from "../../components/organisms/editor";
-import TopicsList from "../../components/organisms/topicsList";
 import {
   EditBlogPage,
   EditorContainer,
   SaveButton,
   SaveSection,
   TitleInput,
-  SearchBar,
-  SearchInput,
-  AddCategoryBtn,
 } from "./editBlog.styled";
 import validator from "validator";
+import AddTags from "./AddTags";
+import { useSelector } from "react-redux";
+import { createBlog } from "../../redux/features/blog/blog.slice";
+import { alertTypes } from "../../components/molecules/snackbar";
+import { useDispatch } from "react-redux";
+import { setAlert } from "../../redux/features/alerts/alerts.slice";
 
 const EditBlog = () => {
+  const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [blogContent, setBlogContent] = useState("");
+  const [topics, setTopics] = useState([]);
   const [isSaveDisabled, setIsSaveDisabled] = useState(false);
-  const [searchTopicStr, setSearchTopicStr] = useState("");
+
+  const { isLoading, errorMessage, blogInfo } = useSelector(
+    (state) => state.blog
+  );
+  const {
+    userInfo: { id: userId },
+  } = useSelector((state) => state.user);
 
   useEffect(() => {
     const validTitle = !validator.isEmpty(title);
     const validBlogContent =
       !validator.isEmpty(blogContent) && blogContent !== "<p><br></p>";
 
-    const validFields = validTitle && validBlogContent;
+    const validFields = validTitle && validBlogContent; // && topics.length;
     setIsSaveDisabled(!validFields);
-  }, [title, blogContent]);
+  }, [title, blogContent, topics.length]);
+
+  // TODO: modify tags here
+  const saveBlog = ({ status }) => {
+    dispatch(
+      createBlog({
+        title,
+        content: blogContent,
+        tags: [],
+        authorId: userId,
+        status,
+      })
+    );
+  };
+
+  useEffect(() => {
+    if (errorMessage) {
+      dispatch(setAlert({ text: errorMessage, type: alertTypes.error }));
+    }
+  }, [dispatch, errorMessage]);
+
+  useEffect(() => {
+    if (blogInfo._id) {
+      dispatch(setAlert({ text: "Success!", type: alertTypes.success }));
+    }
+  }, [dispatch, blogInfo]);
 
   return (
     <EditBlogPage>
@@ -52,33 +85,23 @@ const EditBlog = () => {
       </LeftSection>
       <RightSection>
         <SaveSection>
-          <Button disabled={isSaveDisabled}>Publish</Button>
+          <Button
+            loading={isLoading}
+            disabled={isSaveDisabled}
+            onClick={() => saveBlog({ status: "published" })}
+          >
+            Publish
+          </Button>
           <SaveButton
+            loading={isLoading}
             disabled={isSaveDisabled}
             variant={BUTTON_VARIANTS.OUTLINED}
+            onClick={() => saveBlog({ status: "draft" })}
           >
             Save
           </SaveButton>
         </SaveSection>
-        <SearchBar>
-          <FIcon icon="search" />
-          <SearchInput
-            value={searchTopicStr}
-            handleChange={(e) => setSearchTopicStr(e.target.value)}
-            variant={INPUT_VARIANTS.STANDARD}
-            placeholder="Add upto 3 categories"
-            margin={INPUT_MARGINS.NONE}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton onClick={() => setSearchTopicStr("")}>
-                  <FIcon icon="x" />
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-          <AddCategoryBtn>Add</AddCategoryBtn>
-        </SearchBar>
-        <TopicsList />
+        <AddTags topics={topics} setTopics={setTopics} />
       </RightSection>
     </EditBlogPage>
   );

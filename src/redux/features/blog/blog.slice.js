@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getBlogApi } from "../../../api/blog/blogApi";
+import { createBlogApi, getBlogApi } from "../../../api/blog/blogApi";
 import { BLOG_SLICE } from "./blog.congif";
 
 const initialState = {
@@ -32,6 +32,24 @@ export const getBlog = createAsyncThunk(
   }
 );
 
+export const createBlog = createAsyncThunk(
+  `${BLOG_SLICE}/createBlog`,
+  async ({ title, content, tags, authorId, status }, { rejectWithValue }) => {
+    try {
+      const data = await createBlogApi({
+        title,
+        content,
+        tags,
+        authorId,
+        status,
+      });
+      return data;
+    } catch (err) {
+      return rejectWithValue([], err);
+    }
+  }
+);
+
 export const blogSlice = createSlice({
   name: BLOG_SLICE,
   initialState,
@@ -50,6 +68,20 @@ export const blogSlice = createSlice({
       state.errorMessage = "";
     },
     [getBlog.rejected]: (state, { meta }) => {
+      state.blogInfo = initialState.blogInfo;
+      state.errorMessage = meta.response.data.message;
+      state.isLoading = false;
+    },
+    [createBlog.pending]: (state) => {
+      state.isLoading = true;
+      state.errorMessage = "";
+    },
+    [createBlog.fulfilled]: (state, { payload }) => {
+      state.blogInfo = payload;
+      state.isLoading = false;
+      state.errorMessage = "";
+    },
+    [createBlog.rejected]: (state, { meta }) => {
       state.blogInfo = initialState.blogInfo;
       state.errorMessage = meta.response.data.message;
       state.isLoading = false;

@@ -8,3 +8,10 @@ export const searchApi = async ({ searchText, pageNumber, pageSize }) => {
   });
   return data;
 };
+
+export const searchTopicsApi = async ({ tagName }) => {
+  const { data } = await apiConfig.post("/getTagsBySearchText", {
+    tagName,
+  });
+  return data;
+};
