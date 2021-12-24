@@ -6,6 +6,7 @@ const initialState = {
   userInfo: {
     id: "",
     userName: "",
+    email: "",
     isDoctor: true,
     accessToken: null,
   },
