@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   removeSearchResults,
@@ -11,29 +11,32 @@ const pageSize = 5;
 
 export const CardList = () => {
   const dispatch = useDispatch();
-  const [counter, setCounter] = useState(1);
   const {
     searchText,
     results: { totalCount, paginatedResults },
+    pageNumber,
   } = useSelector((state) => state.search);
 
-  const fetchMoreData = useCallback(() => {
-    if (!searchText || searchText.length < 4) {
-      return;
-    }
-    let searchObj = {
-      searchText: searchText,
-      pageNumber: counter,
-      pageSize,
-    };
+  const fetchMoreData = useCallback(
+    (pageNumber) => {
+      if (!searchText || searchText.length < 4) {
+        dispatch(removeSearchResults());
+        return;
+      }
+      let searchObj = {
+        searchText: searchText,
+        pageNumber,
+        pageSize,
+      };
 
-    dispatch(search(searchObj));
-  }, [counter, dispatch, searchText]);
+      dispatch(search(searchObj));
+    },
+    [dispatch, searchText]
+  );
 
   useEffect(() => {
-    setCounter(1);
     dispatch(removeSearchResults());
-    fetchMoreData(); // check if needed
+    fetchMoreData();
   }, [dispatch, fetchMoreData, searchText]);
 
   const rowRenderer = ({ key, index, style }) => {
@@ -50,13 +53,15 @@ export const CardList = () => {
     );
   };
 
+  const hasMore = pageNumber <= Math.ceil(totalCount / pageSize);
+
   return (
     <>
       {paginatedResults.length > 0 ? (
         <InfiniteScroller
           dataLength={paginatedResults.length}
-          hasMore={counter * pageSize < totalCount} // make change here
-          next={fetchMoreData}
+          hasMore={hasMore}
+          next={() => fetchMoreData(pageNumber)}
           loader={
             <div
               style={{

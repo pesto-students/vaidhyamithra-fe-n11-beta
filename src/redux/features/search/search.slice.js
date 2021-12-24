@@ -7,6 +7,7 @@ const initialState = {
     paginatedResults: [],
     totalCount: 999,
   },
+  pageNumber: 1,
   searchText: "",
   isLoading: false,
   errorMessage: "",
@@ -30,6 +31,7 @@ export const searchSlice = createSlice({
   reducers: {
     removeSearchResults: (state) => {
       state.results = initialState.results;
+      state.pageNumber = initialState.pageNumber;
     },
     updateSearchText: (state, { payload }) => {
       state.searchText = payload;
@@ -44,11 +46,13 @@ export const searchSlice = createSlice({
       state.results.paginatedResults = state.results.paginatedResults.concat(
         payload.paginatedResults
       );
+      state.pageNumber = state.pageNumber + 1;
       if (payload.totalCount) state.results.totalCount = payload.totalCount;
       state.isLoading = false;
       state.errorMessage = "";
     },
     [search.rejected]: (state, { meta }) => {
+      state.pageNumber = initialState.pageNumber;
       state.errorMessage = meta.response.data.message;
       state.isLoading = false;
     },
