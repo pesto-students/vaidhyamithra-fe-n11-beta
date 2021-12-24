@@ -8,7 +8,7 @@ import {
   BlogContent,
 } from "./blogDetails.styled";
 import BloggerDetails from "../../components/molecules/bloggerDetails";
-import BlogTag from "../../components/atoms/blogTag";
+import BlogTags from "../../components/atoms/blogTags";
 // import RelatedBlogs from "../../components/organisms/relatedBlogs";
 // import Comments from "../../components/organisms/comments";
 import { useParams } from "react-router-dom";
@@ -73,9 +73,7 @@ const BlogDetails = () => {
           dangerouslySetInnerHTML={{ __html: content.replace("<p><br>") }}
         />
         <TagSection>
-          {tags.map((tag) => (
-            <BlogTag key={tag}>{tag}</BlogTag>
-          ))}
+          <BlogTags tags={tags} />
         </TagSection>
         {/* <Comments />
         <RelatedBlogs /> */}

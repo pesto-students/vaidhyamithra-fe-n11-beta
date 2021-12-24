@@ -25,8 +25,6 @@ export const DetailsContainer = styled.div`
 
 export const TagSection = styled.section`
   margin: 24px 0 36px;
-  display: inline-flex;
-  gap: 10px;
 `;
 
 export const BlogImg = styled.img`

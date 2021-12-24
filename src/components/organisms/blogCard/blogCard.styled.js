@@ -25,6 +25,7 @@ export const BlogImg = styled.img`
   max-height: 200px;
   border-radius: 10px;
   margin-left: 20px;
+  cursor: pointer;
 `;
 
 export const BlogTitle = styled.h2`
@@ -51,6 +52,8 @@ export const BlogContent = styled.div`
   font-size: 16px;
   margin: 0;
   font-family: Inter;
+
+  cursor: pointer;
 
   /* line clamping - show limited number of lines */
   overflow: hidden;
