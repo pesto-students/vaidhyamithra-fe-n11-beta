@@ -13,7 +13,7 @@ import BlogTags from "../../components/atoms/blogTags";
 // import Comments from "../../components/organisms/comments";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getBlog } from "../../redux/features/blog/blog.slice";
+import { getBlog, resetBlogState } from "../../redux/features/blog/blog.slice";
 import { useEffect } from "react";
 import PageNotFound from "../pageNotFound/PageNotFound";
 import { CircularProgress } from "../../components/atoms/progress";
@@ -29,6 +29,13 @@ const BlogDetails = () => {
   useEffect(() => {
     dispatch(getBlog({ blogId }));
   }, [blogId, dispatch]);
+
+  // cleaning up redux state!
+  useEffect(() => {
+    return () => {
+      dispatch(resetBlogState());
+    };
+  }, [dispatch]);
 
   const {
     isLoading,

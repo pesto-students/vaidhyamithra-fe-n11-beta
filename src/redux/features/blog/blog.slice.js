@@ -35,7 +35,9 @@ export const getBlog = createAsyncThunk(
 export const blogSlice = createSlice({
   name: BLOG_SLICE,
   initialState,
-  reducers: {},
+  reducers: {
+    resetBlogState: () => initialState,
+  },
   extraReducers: {
     [getBlog.pending]: (state) => {
       state.blogInfo = initialState.blogInfo;
@@ -54,5 +56,7 @@ export const blogSlice = createSlice({
     },
   },
 });
+
+export const { resetBlogState } = blogSlice.actions;
 
 export default blogSlice.reducer;
