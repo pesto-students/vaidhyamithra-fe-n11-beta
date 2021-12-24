@@ -26,7 +26,8 @@ export const CardList = () => {
       pageNumber: counter,
       pageSize: 5,
     };
-    if (counter < items.totalCount.count) {
+
+    if (counter < items.totalCount) {
       dispatch(search(searchObj))
         .unwrap()
         .then((res) => {
@@ -57,10 +58,6 @@ export const CardList = () => {
 
   return (
     <>
-      {isLoading === true ? (
-        <div>loading...</div>
-      ) : (
-        <>
           {items.paginatedResults.length > 0 ? (
             <InfiniteScroller
               dataLength={items.length}
@@ -85,8 +82,6 @@ export const CardList = () => {
           ) : (
             <div>No results</div>
           )}
-        </>
-      )}
     </>
   );
 };
