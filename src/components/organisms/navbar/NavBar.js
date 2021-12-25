@@ -21,7 +21,7 @@ const NavBar = () => {
       </NavBarTitle>
       {isDoctor && (
         <Button onClick={() => gotoPrivateRoute(ROUTES.CREATE)}>
-          Create blog
+          Start writing
         </Button>
       )}
       <NavBarIconContainer>
