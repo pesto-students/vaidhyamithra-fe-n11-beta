@@ -8,6 +8,7 @@ export const Card = withTheme(styled("div")`
   background: ${({ theme }) => theme.palette.background.paper};
   min-width: 600px;
   border-bottom: 1px solid ${({ theme }) => theme.palette.divider};
+  justify-content: space-between;
 
   &:last-of-type {
     border-bottom: none;

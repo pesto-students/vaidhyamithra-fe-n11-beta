@@ -72,14 +72,10 @@ const EditBlog = () => {
   }, [dispatch, errorMessage]);
 
   useEffect(() => {
-    if (blogInfo._id) {
+    if (blogInfo._id && matchPath(pathname, ROUTES.CREATE)) {
       dispatch(setAlert({ text: "Success!", type: alertTypes.success }));
-
-      // go to blog page if CREATE-ing
-      if (matchPath(pathname, ROUTES.CREATE)) {
-        const blogPath = generatePath(ROUTES.BLOG, { blogId: blogInfo._id });
-        gotoRoute(blogPath);
-      }
+      const blogPath = generatePath(ROUTES.BLOG, { blogId: blogInfo._id });
+      gotoRoute(blogPath);
     }
   }, [dispatch, blogInfo, pathname, gotoRoute]);
 
