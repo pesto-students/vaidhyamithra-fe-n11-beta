@@ -39,12 +39,12 @@ export const BlogTitle = styled.h2`
   cursor: pointer;
 
   /* line clamping - show limited number of lines */
-  overflow: hidden;
+  /* overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: vertical; */
 `;
 
 export const BlogContent = styled.div`
@@ -62,6 +62,12 @@ export const BlogContent = styled.div`
   -webkit-line-clamp: 2;
   line-clamp: 2;
   -webkit-box-orient: vertical;
+
+  * {
+    font-size: 16px;
+    font-weight: normal;
+    margin: 4px 0;
+  }
 `;
 
 export const AuthorInfo = styled.div`
