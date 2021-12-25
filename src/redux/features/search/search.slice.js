@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { searchApi } from "../../../api/search/searchApi";
-import { SEARCH_SLICE } from "./search.config";
+import { insertTagApi, searchApi, searchTopicsApi } from "../../../api/search/searchApi";
+import { CREATE_TAG_SLICE, SEARCH_SLICE, SEARCH_TAG_SLICE } from "./search.config";
 
 const initialState = {
   results: {
@@ -9,6 +9,7 @@ const initialState = {
   },
   pageNumber: 1,
   searchText: "",
+  tags: [],
   isLoading: false,
   errorMessage: "",
 };
@@ -18,6 +19,30 @@ export const search = createAsyncThunk(
   async ({ searchText, pageNumber, pageSize }, { rejectWithValue }) => {
     try {
       const data = await searchApi({ searchText, pageNumber, pageSize });
+      return data;
+    } catch (err) {
+      return rejectWithValue([], err);
+    }
+  }
+);
+
+export const searchTags = createAsyncThunk(
+  `${SEARCH_SLICE}/getTagsBySearchText`,
+  async ({ tagName }, { rejectWithValue }) => {
+    try {
+      const data = await searchTopicsApi({ tagName });
+      return data;
+    } catch (err) {
+      return rejectWithValue([], err);
+    }
+  }
+);
+
+export const createTag = createAsyncThunk(
+  `${SEARCH_SLICE}/createTag`,
+  async ({ tagName }, { rejectWithValue }) => {
+    try {
+      const data = await insertTagApi({ tagName });
       return data;
     } catch (err) {
       return rejectWithValue([], err);
@@ -36,6 +61,12 @@ export const searchSlice = createSlice({
     updateSearchText: (state, { payload }) => {
       state.searchText = payload;
     },
+    removeSearchTagsResult: (state) => {
+      state.tags = initialState.tags;
+    },
+    updateSearchTagsResult: (state, {payload}) => {
+      state.tags = payload;
+    }
   },
   extraReducers: {
     [search.pending]: (state) => {
@@ -56,8 +87,22 @@ export const searchSlice = createSlice({
       state.errorMessage = meta.response.data.message;
       state.isLoading = false;
     },
+    [searchTags.pending]: (state) => {
+      state.isLoading = true;
+      state.errorMessage = "";
+    },
+    [searchTags.fulfilled]: (state, { payload }) => {
+      state.tags = payload.map(({tagName}) => tagName);
+      state.isLoading = false;
+      state.errorMessage = "";
+    },
+    [searchTags.rejected]: (state, { meta }) => {
+      state.errorMessage = meta.response.data.message;
+      state.isLoading = false;
+    },
   },
 });
 
-export const { removeSearchResults, updateSearchText } = searchSlice.actions;
+export const { removeSearchResults, updateSearchText, removeSearchTagsResult, updateSearchTagsResult } =
+  searchSlice.actions;
 export default searchSlice.reducer;

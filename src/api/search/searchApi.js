@@ -15,3 +15,10 @@ export const searchTopicsApi = async ({ tagName }) => {
   });
   return data;
 };
+
+export const insertTagApi = async ({ tagName }) => {
+  const { data } = await getApiConfig().post("/createTag", {
+    tagName,
+  });
+  return data;
+};
