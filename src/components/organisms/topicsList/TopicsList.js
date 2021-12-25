@@ -40,12 +40,18 @@ const TopicsList = ({ title, tags, isLoading, handleClick, selected }) => {
 
 TopicsList.propTypes = {
   title: PropTypes.string,
+  selected: PropTypes.bool,
+  tags: PropTypes.arrayOf(PropTypes.string),
+  isLoading: PropTypes.bool,
+  handleClick: PropTypes.func,
 };
 
 TopicsList.defaultProps = {
   title: "",
   selected: false,
   tags: ["blood", "heart", "brain", "neurology"],
+  isLoading: false,
+  handleClick: () => {},
 };
 
 export default TopicsList;
