@@ -18,6 +18,6 @@ export const createBlogApi = async ({
 };
 
 export const getBlogApi = async ({ blogId }) => {
-  const { data } = await getApiConfig.get(`/blog/${blogId}`);
+  const { data } = await getApiConfig().get(`/blog/${blogId}`);
   return data;
 };

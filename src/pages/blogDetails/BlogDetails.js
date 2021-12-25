@@ -76,9 +76,7 @@ const BlogDetails = () => {
             </Button>
           )}
         </BloggerDetailsSection>
-        <BlogContent
-          dangerouslySetInnerHTML={{ __html: content.replace("<p><br>") }}
-        />
+        <BlogContent dangerouslySetInnerHTML={{ __html: content }} />
         <TagSection>
           <BlogTags tags={tags} />
         </TagSection>
