@@ -1,5 +1,5 @@
 import { IconButton, InputAdornment } from "@mui/material";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FIcon from "../../components/atoms/featherIcon";
 import { INPUT_MARGINS, INPUT_VARIANTS } from "../../components/atoms/input";
