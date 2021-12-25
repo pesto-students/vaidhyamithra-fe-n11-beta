@@ -1,6 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { insertTagApi, searchApi, searchTopicsApi } from "../../../api/search/searchApi";
-import { CREATE_TAG_SLICE, SEARCH_SLICE, SEARCH_TAG_SLICE } from "./search.config";
+import {
+  insertTagApi,
+  searchApi,
+  searchTopicsApi,
+} from "../../../api/search/searchApi";
+import { SEARCH_SLICE } from "./search.config";
 
 const initialState = {
   results: {
@@ -64,9 +68,9 @@ export const searchSlice = createSlice({
     removeSearchTagsResult: (state) => {
       state.tags = initialState.tags;
     },
-    updateSearchTagsResult: (state, {payload}) => {
+    updateSearchTagsResult: (state, { payload }) => {
       state.tags = payload;
-    }
+    },
   },
   extraReducers: {
     [search.pending]: (state) => {
@@ -92,7 +96,7 @@ export const searchSlice = createSlice({
       state.errorMessage = "";
     },
     [searchTags.fulfilled]: (state, { payload }) => {
-      state.tags = payload.map(({tagName}) => tagName);
+      state.tags = payload.map(({ tagName }) => tagName);
       state.isLoading = false;
       state.errorMessage = "";
     },
@@ -103,6 +107,10 @@ export const searchSlice = createSlice({
   },
 });
 
-export const { removeSearchResults, updateSearchText, removeSearchTagsResult, updateSearchTagsResult } =
-  searchSlice.actions;
+export const {
+  removeSearchResults,
+  updateSearchText,
+  removeSearchTagsResult,
+  updateSearchTagsResult,
+} = searchSlice.actions;
 export default searchSlice.reducer;
