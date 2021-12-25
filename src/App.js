@@ -29,6 +29,14 @@ const App = () => {
             }
           />
           <Route
+            path={ROUTES.EDIT_BLOG}
+            element={
+              <PrivateRoute>
+                <EditBlog />
+              </PrivateRoute>
+            }
+          />
+          <Route
             path={ROUTES.MY_PROFILE}
             element={
               <PrivateRoute>
