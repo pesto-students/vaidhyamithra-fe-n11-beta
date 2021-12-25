@@ -5,9 +5,10 @@ import { USER_SLICE } from "./user.config";
 const initialState = {
   userInfo: {
     id: "",
+    userName: "",
     email: "",
-    name: "",
-    authToken: null,
+    isDoctor: true,
+    accessToken: null,
   },
   isLoading: false,
   errorMessage: "",

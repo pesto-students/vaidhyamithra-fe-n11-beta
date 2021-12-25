@@ -7,6 +7,11 @@ import {
 import manImg from "../../../images/man_img.png";
 
 const BloggerDetails = ({ authorName, publishedDate }) => {
+  const formattedDate = new Date(publishedDate).toLocaleDateString(
+    {},
+    { timeZone: "UTC", month: "long", day: "2-digit", year: "numeric" }
+  );
+
   return (
     <AuthorDetails>
       <BlogPreviewImg src={manImg} alt="avatar-img" />
@@ -15,7 +20,7 @@ const BloggerDetails = ({ authorName, publishedDate }) => {
           {authorName}
         </Paragraph>
         <Paragraph fontSize="12px" color="#718797" fontFamily="Inter" mt>
-          {publishedDate}
+          {publishedDate ? formattedDate : ""}
         </Paragraph>
       </AuthorDiv>
     </AuthorDetails>

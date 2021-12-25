@@ -1,63 +1,87 @@
-import bpImg from "../../images/bp_image.jpg";
+// import bpImg from "../../images/bp_image.jpg";
 import {
   Details,
   DetailsContainer,
   TagSection,
   BlogTitle,
   BloggerDetailsSection,
+  BlogContent,
 } from "./blogDetails.styled";
 import BloggerDetails from "../../components/molecules/bloggerDetails";
-import BlogTag from "../../components/atoms/blogTag";
-import RelatedBlogs from "../../components/organisms/relatedBlogs";
-import Typography from "../../components/atoms/typography";
-import { TEXT_TYPE } from "../../components/atoms/typography/typography.constants";
-import Comments from "../../components/organisms/comments";
+import BlogTags from "../../components/atoms/blogTags";
+// import RelatedBlogs from "../../components/organisms/relatedBlogs";
+// import Comments from "../../components/organisms/comments";
+import { generatePath, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getBlog, resetBlogState } from "../../redux/features/blog/blog.slice";
+import { useEffect } from "react";
+import PageNotFound from "../pageNotFound/PageNotFound";
+import { CircularProgress } from "../../components/atoms/progress";
+import Button from "../../components/atoms/button";
+import { ROUTES } from "../../values/routes";
+import { useRouting } from "../../helpers";
 
 const BlogDetails = () => {
+  const { blogId } = useParams();
+  const dispatch = useDispatch();
+  const {
+    userInfo: { id: userId },
+  } = useSelector((state) => state.user);
+  const { gotoPrivateRoute } = useRouting();
+
+  useEffect(() => {
+    dispatch(getBlog({ blogId }));
+  }, [blogId, dispatch]);
+
+  // cleaning up redux state!
+  useEffect(() => {
+    return () => {
+      dispatch(resetBlogState());
+    };
+  }, [dispatch]);
+
+  const {
+    isLoading,
+    errorMessage,
+    blogInfo: { title, content, updatedAt, authorDetails, tags, authorId },
+  } = useSelector((state) => state.blog);
+
+  const editBlogPath = generatePath(ROUTES.EDIT_BLOG, { blogId });
+
+  if (!isLoading && errorMessage) {
+    return <PageNotFound />;
+  }
+
+  if (isLoading) {
+    return (
+      <Details>
+        <CircularProgress />
+      </Details>
+    );
+  }
+
   return (
     <Details>
       <DetailsContainer>
-        <img src={bpImg} alt="blog-display" />
-        <BlogTitle>We need to index the haptic GB card.</BlogTitle>
+        {/* <img src={bpImg} alt="blog-display" /> */}
+        <BlogTitle>{title}</BlogTitle>
         <BloggerDetailsSection>
           <BloggerDetails
-            authorName="Darlene Robertson"
-            publishedDate="March 12, 2021"
-            position="relative"
+            authorName={authorDetails?.name}
+            publishedDate={updatedAt}
           />
+          {userId === authorId && (
+            <Button onClick={() => gotoPrivateRoute(editBlogPath)}>
+              Edit Blog
+            </Button>
+          )}
         </BloggerDetailsSection>
-        <Typography variant={TEXT_TYPE.H3}>
-          We need to index the haptic GB card.
-        </Typography>
-        <Typography variant={TEXT_TYPE.BODY1}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-        </Typography>
-        <Typography variant={TEXT_TYPE.H3}>
-          We need to index the haptic GB card.
-        </Typography>
-        <Typography variant={TEXT_TYPE.BODY1}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-        </Typography>
+        <BlogContent dangerouslySetInnerHTML={{ __html: content }} />
         <TagSection>
-          <BlogTag>CARDIAC ISSUES</BlogTag>
-          <BlogTag>BLOOD</BlogTag>
+          <BlogTags tags={tags} />
         </TagSection>
-        <Comments />
-        <RelatedBlogs />
+        {/* <Comments />
+        <RelatedBlogs /> */}
       </DetailsContainer>
     </Details>
   );

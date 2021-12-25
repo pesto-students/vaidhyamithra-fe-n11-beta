@@ -5,4 +5,6 @@ export const ROUTES = {
   SEARCH: "/search",
   CREATE: "/create",
   MY_PROFILE: "/profile",
+  BLOG: "/blog/:blogId",
+  EDIT_BLOG: "/blog/:blogId/edit",
 };

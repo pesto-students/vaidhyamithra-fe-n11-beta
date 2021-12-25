@@ -41,16 +41,7 @@ export const CardList = () => {
 
   const rowRenderer = ({ key, index, style }) => {
     let blog = paginatedResults[index];
-    return (
-      <BlogCard
-        key={key}
-        i={index}
-        style={style}
-        title={blog.title}
-        tag={blog.tags}
-        content={blog.content}
-      />
-    );
+    return <BlogCard key={key} i={index} style={style} {...blog} />;
   };
 
   const hasMore = pageNumber <= Math.ceil(totalCount / pageSize);

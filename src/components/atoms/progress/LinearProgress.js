@@ -1,7 +1,5 @@
 import MuiLinearProgress from "@mui/material/LinearProgress";
 
-const LinearProgress = (props) => {
+export const LinearProgress = (props) => {
   return <MuiLinearProgress {...props} />;
 };
-
-export default LinearProgress;

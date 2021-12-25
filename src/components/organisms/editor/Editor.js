@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { toolbarOptions } from "./editor.constants";
 import { StyledEditorContainer } from "./editor.styled";
 
-const Editor = ({ initialContent }) => {
+const Editor = ({ initialContent, handleChange }) => {
   const { quill, quillRef, Quill } = useQuill({
     modules: {
       magicUrl: true,
@@ -24,15 +24,12 @@ const Editor = ({ initialContent }) => {
   useEffect(() => {
     if (quill) {
       quill.on("text-change", (delta, oldDelta, source) => {
-        console.log("Text change!");
-        console.log(quill.root.innerHTML);
+        handleChange(quill.root.innerHTML);
       });
 
-      if (initialContent) {
-        quill.clipboard.dangerouslyPasteHTML(initialContent);
-      }
+      quill.clipboard.dangerouslyPasteHTML(initialContent);
     }
-  }, [quill, quillRef, initialContent]);
+  }, [quill, quillRef, initialContent, handleChange]);
 
   return (
     <div style={{ width: "100%", height: "calc(100% - 80px)" }}>
@@ -41,17 +38,26 @@ const Editor = ({ initialContent }) => {
   );
 };
 
-const StyledEditor = ({ initialContent }) => (
+const StyledEditor = ({ initialContent, handleChange }) => (
   <StyledEditorContainer>
-    <Editor initialContent={initialContent} />
+    <Editor initialContent={initialContent} handleChange={handleChange} />
   </StyledEditorContainer>
 );
 
 const editorPropTypes = {
   initialContent: PropTypes.string,
+  handleChange: PropTypes.func,
+};
+
+const editorDefaultProps = {
+  initialContent: "",
+  handleChange: () => {},
 };
 
 StyledEditor.propTypes = editorPropTypes;
 Editor.propTypes = editorPropTypes;
+
+StyledEditor.defaultProps = editorDefaultProps;
+Editor.defaultProps = editorDefaultProps;
 
 export default StyledEditor;

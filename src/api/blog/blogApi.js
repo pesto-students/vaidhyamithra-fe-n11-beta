@@ -1,6 +1,41 @@
-import apiConfig from "../api.config";
+import getApiConfig from "../api.config";
 
-export const createBlogApi = async () => {
-  const { data } = await apiConfig.post("/create");
+export const createBlogApi = async ({
+  title,
+  content,
+  tags,
+  authorId,
+  status,
+}) => {
+  const { data } = await getApiConfig().post("/blog", {
+    title,
+    content,
+    tags,
+    authorId,
+    status,
+  });
+  return data;
+};
+
+export const updateBlogApi = async ({
+  blogId,
+  title,
+  content,
+  tags,
+  authorId,
+  status,
+}) => {
+  const { data } = await getApiConfig().put(`/blog/${blogId}`, {
+    title,
+    content,
+    tags,
+    authorId,
+    status,
+  });
+  return data;
+};
+
+export const getBlogApi = async ({ blogId }) => {
+  const { data } = await getApiConfig().get(`/blog/${blogId}`);
   return data;
 };
