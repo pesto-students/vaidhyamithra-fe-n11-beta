@@ -52,17 +52,16 @@ const AddTags = ({ topics, setTopics }) => {
 
   const handleDeleteTag = (fromTagArray, tagName, requireDispatch) => {
     let indx = fromTagArray.findIndex((tag) => tag === tagName);
-    if(indx !== -1)
-    {
+    if (indx !== -1) {
       let tagsCopy = [...fromTagArray];
       tagsCopy.splice(indx, 1);
-      if(requireDispatch){
+      if (requireDispatch) {
         dispatch(updateSearchTagsResult(tagsCopy));
         return;
       }
       setTopics(tagsCopy);
     }
-  }
+  };
 
   return (
     <>
@@ -81,13 +80,17 @@ const AddTags = ({ topics, setTopics }) => {
               </IconButton>
             </InputAdornment>
           }
+          disabled={topics.length >= 3}
         />
-        {(searchTopicStr.length > 0 && tags.length === 0) && (
-          <AddCategoryBtn onClick={Add}>Add</AddCategoryBtn>
-        )}
+        {!!searchTopicStr.length &&
+          !topics.includes(searchTopicStr) &&
+          !tags.includes(searchTopicStr) &&
+          topics.length < 3 && (
+            <AddCategoryBtn onClick={Add}>Add</AddCategoryBtn>
+          )}
       </SearchBar>
       <TopicsList
-        tags={tags.filter(tagName => !topics.includes(tagName))}
+        tags={tags.filter((tagName) => !topics.includes(tagName))}
         isLoading={isLoading}
         handleClick={(tagName) => handleSelectTag(tagName)}
       />
