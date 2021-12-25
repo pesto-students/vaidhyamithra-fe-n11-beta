@@ -9,6 +9,7 @@ import Editor from "../../components/organisms/editor";
 import {
   EditBlogPage,
   EditorContainer,
+  LoaderContainer,
   SaveButton,
   SaveSection,
   TitleInput,
@@ -18,86 +19,125 @@ import AddTags from "./AddTags";
 import { useSelector } from "react-redux";
 import {
   createBlog,
+  getBlog,
   resetBlogState,
+  updateBlog,
 } from "../../redux/features/blog/blog.slice";
 import { alertTypes } from "../../components/molecules/snackbar";
 import { useDispatch } from "react-redux";
 import { setAlert } from "../../redux/features/alerts/alerts.slice";
-import { generatePath, matchPath, useLocation } from "react-router-dom";
+import { generatePath, useParams } from "react-router-dom";
 import { ROUTES } from "../../values/routes";
 import { useRouting } from "../../helpers";
+import PageNotFound from "../pageNotFound";
+import { CircularProgress } from "../../components/atoms/progress";
 
-const EditBlog = () => {
+const EditBlog = ({ isCreateMode }) => {
+  const { blogId } = useParams();
   const dispatch = useDispatch();
-  const [title, setTitle] = useState("");
+  const [blogTitle, setBlogTitle] = useState("");
   const [blogContent, setBlogContent] = useState("");
-  const [topics, setTopics] = useState([]);
+  const [blogTags, setBlogTags] = useState([]);
   const [isSaveDisabled, setIsSaveDisabled] = useState(false);
-  const { pathname } = useLocation();
   const { gotoRoute } = useRouting();
 
-  const { isLoading, errorMessage, blogInfo } = useSelector(
-    (state) => state.blog
-  );
   const {
-    userInfo: { id: userId },
+    isLoading,
+    errorMessage,
+    blogInfo: { authorId, content },
+  } = useSelector((state) => state.blog);
+  const {
+    userInfo: { id: userId, isDoctor },
   } = useSelector((state) => state.user);
 
+  // fetching blog if blogId is set
   useEffect(() => {
-    const validTitle = !validator.isEmpty(title);
+    dispatch(resetBlogState());
+    if (blogId) {
+      dispatch(getBlog({ blogId }))
+        .unwrap()
+        .then(([{ content, title, tags }]) => {
+          setBlogTitle(title);
+          setBlogContent(content);
+          setBlogTags(tags);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [blogId, dispatch]);
+
+  // validation
+  useEffect(() => {
+    const validTitle = !validator.isEmpty(blogTitle);
     const validBlogContent =
       !validator.isEmpty(blogContent) && blogContent !== "<p><br></p>";
 
     const validFields = validTitle && validBlogContent; // && topics.length;
     setIsSaveDisabled(!validFields);
-  }, [title, blogContent, topics.length]);
+  }, [blogContent, blogTitle]);
 
-  // TODO: modify tags here
   const saveBlog = ({ status }) => {
+    const saveFn = isCreateMode ? createBlog : updateBlog;
     dispatch(
-      createBlog({
-        title,
+      saveFn({
+        title: blogTitle,
         content: blogContent,
-        tags: [],
+        tags: blogTags,
         authorId: userId,
         status,
+        ...(isCreateMode ? {} : { blogId }),
       })
-    );
+    )
+      .unwrap()
+      .then(({ _id }) => {
+        if (_id) {
+          dispatch(setAlert({ text: "Success!", type: alertTypes.success }));
+          if (isCreateMode) {
+            const blogPath = generatePath(ROUTES.EDIT_BLOG, { blogId: _id });
+            gotoRoute(blogPath);
+          }
+        }
+      })
+      .catch(() => {
+        dispatch(setAlert({ text: errorMessage, type: alertTypes.error }));
+      });
   };
-
-  useEffect(() => {
-    if (errorMessage) {
-      dispatch(setAlert({ text: errorMessage, type: alertTypes.error }));
-    }
-  }, [dispatch, errorMessage]);
-
-  useEffect(() => {
-    if (blogInfo._id && matchPath(pathname, ROUTES.CREATE)) {
-      dispatch(setAlert({ text: "Success!", type: alertTypes.success }));
-      const blogPath = generatePath(ROUTES.BLOG, { blogId: blogInfo._id });
-      gotoRoute(blogPath);
-    }
-  }, [dispatch, blogInfo, pathname, gotoRoute]);
 
   // cleaning up redux state!
   useEffect(() => {
+    dispatch(resetBlogState());
+    setBlogTitle("");
+    setBlogContent("");
+    setBlogTags([]);
+
     return () => {
       dispatch(resetBlogState());
     };
-  }, [dispatch]);
+  }, [isCreateMode, dispatch]);
+
+  if (!isDoctor || (authorId && authorId !== userId)) {
+    return <PageNotFound />;
+  }
+
+  if (isLoading) {
+    return (
+      <LoaderContainer>
+        <CircularProgress />
+      </LoaderContainer>
+    );
+  }
 
   return (
     <EditBlogPage>
       <LeftSection>
         <TitleInput
-          value={title}
-          handleChange={(e) => setTitle(e.target.value)}
+          value={blogTitle}
+          handleChange={(e) => setBlogTitle(e.target.value)}
           variant={INPUT_VARIANTS.STANDARD}
           placeholder="Blog title here"
           multiline
         />
         <EditorContainer>
-          <Editor handleChange={setBlogContent} />
+          <Editor initialContent={content} handleChange={setBlogContent} />
         </EditorContainer>
       </LeftSection>
       <RightSection>
@@ -118,10 +158,14 @@ const EditBlog = () => {
             Save
           </SaveButton>
         </SaveSection>
-        <AddTags topics={topics} setTopics={setTopics} />
+        <AddTags topics={blogTags} setTopics={setBlogTags} />
       </RightSection>
     </EditBlogPage>
   );
+};
+
+EditBlog.defaultProps = {
+  isCreateMode: false,
 };
 
 export default EditBlog;

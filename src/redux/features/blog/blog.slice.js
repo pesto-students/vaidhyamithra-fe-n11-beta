@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createBlogApi, getBlogApi } from "../../../api/blog/blogApi";
+import {
+  createBlogApi,
+  getBlogApi,
+  updateBlogApi,
+} from "../../../api/blog/blogApi";
 import { BLOG_SLICE } from "./blog.congif";
 
 const initialState = {
@@ -37,6 +41,28 @@ export const createBlog = createAsyncThunk(
   async ({ title, content, tags, authorId, status }, { rejectWithValue }) => {
     try {
       const data = await createBlogApi({
+        title,
+        content,
+        tags,
+        authorId,
+        status,
+      });
+      return data;
+    } catch (err) {
+      return rejectWithValue([], err);
+    }
+  }
+);
+
+export const updateBlog = createAsyncThunk(
+  `${BLOG_SLICE}/updateBlog`,
+  async (
+    { blogId, title, content, tags, authorId, status },
+    { rejectWithValue }
+  ) => {
+    try {
+      const data = await updateBlogApi({
+        blogId,
         title,
         content,
         tags,

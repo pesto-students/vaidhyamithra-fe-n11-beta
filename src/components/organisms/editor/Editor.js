@@ -27,9 +27,7 @@ const Editor = ({ initialContent, handleChange }) => {
         handleChange(quill.root.innerHTML);
       });
 
-      if (initialContent) {
-        quill.clipboard.dangerouslyPasteHTML(initialContent);
-      }
+      quill.clipboard.dangerouslyPasteHTML(initialContent);
     }
   }, [quill, quillRef, initialContent, handleChange]);
 
