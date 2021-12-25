@@ -71,9 +71,9 @@ const EditBlog = ({ isCreateMode }) => {
     const validBlogContent =
       !validator.isEmpty(blogContent) && blogContent !== "<p><br></p>";
 
-    const validFields = validTitle && validBlogContent; // && topics.length;
+    const validFields = validTitle && validBlogContent && blogTags.length;
     setIsSaveDisabled(!validFields);
-  }, [blogContent, blogTitle]);
+  }, [blogContent, blogTags, blogTitle]);
 
   const saveBlog = ({ status }) => {
     const saveFn = isCreateMode ? createBlog : updateBlog;
