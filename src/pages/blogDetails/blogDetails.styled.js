@@ -21,6 +21,7 @@ export const Details = styled.div`
 export const DetailsContainer = styled.div`
   max-width: 850px;
   padding-bottom: 20px;
+  min-width: 600px;
 `;
 
 export const TagSection = styled.section`

@@ -16,10 +16,16 @@ import {
 import validator from "validator";
 import AddTags from "./AddTags";
 import { useSelector } from "react-redux";
-import { createBlog } from "../../redux/features/blog/blog.slice";
+import {
+  createBlog,
+  resetBlogState,
+} from "../../redux/features/blog/blog.slice";
 import { alertTypes } from "../../components/molecules/snackbar";
 import { useDispatch } from "react-redux";
 import { setAlert } from "../../redux/features/alerts/alerts.slice";
+import { generatePath, matchPath, useLocation } from "react-router-dom";
+import { ROUTES } from "../../values/routes";
+import { useRouting } from "../../helpers";
 
 const EditBlog = () => {
   const dispatch = useDispatch();
@@ -27,6 +33,8 @@ const EditBlog = () => {
   const [blogContent, setBlogContent] = useState("");
   const [topics, setTopics] = useState([]);
   const [isSaveDisabled, setIsSaveDisabled] = useState(false);
+  const { pathname } = useLocation();
+  const { gotoRoute } = useRouting();
 
   const { isLoading, errorMessage, blogInfo } = useSelector(
     (state) => state.blog
@@ -66,8 +74,21 @@ const EditBlog = () => {
   useEffect(() => {
     if (blogInfo._id) {
       dispatch(setAlert({ text: "Success!", type: alertTypes.success }));
+
+      // go to blog page if CREATE-ing
+      if (matchPath(pathname, ROUTES.CREATE)) {
+        const blogPath = generatePath(ROUTES.BLOG, { blogId: blogInfo._id });
+        gotoRoute(blogPath);
+      }
     }
-  }, [dispatch, blogInfo]);
+  }, [dispatch, blogInfo, pathname, gotoRoute]);
+
+  // cleaning up redux state!
+  useEffect(() => {
+    return () => {
+      dispatch(resetBlogState());
+    };
+  }, [dispatch]);
 
   return (
     <EditBlogPage>

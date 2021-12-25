@@ -40,14 +40,7 @@ const BlogDetails = () => {
   const {
     isLoading,
     errorMessage,
-    blogInfo: {
-      title,
-      content,
-      updatedAt,
-      authorDetails: { name: authorName },
-      tags,
-      authorId,
-    },
+    blogInfo: { title, content, updatedAt, authorDetails, tags, authorId },
   } = useSelector((state) => state.blog);
 
   if (!isLoading && errorMessage) {
@@ -68,7 +61,10 @@ const BlogDetails = () => {
         {/* <img src={bpImg} alt="blog-display" /> */}
         <BlogTitle>{title}</BlogTitle>
         <BloggerDetailsSection>
-          <BloggerDetails authorName={authorName} publishedDate={updatedAt} />
+          <BloggerDetails
+            authorName={authorDetails?.name}
+            publishedDate={updatedAt}
+          />
           {userId === authorId && (
             // TODO: goto edit blog page
             <Button onClick={() => console.log("GOTO edit blog")}>
