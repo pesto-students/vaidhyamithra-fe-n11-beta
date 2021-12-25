@@ -1,7 +1,7 @@
-import apiConfig from "../api.config";
+import getApiConfig from "../api.config";
 
 export const searchApi = async ({ searchText, pageNumber, pageSize }) => {
-  const { data } = await apiConfig.post("/search", {
+  const { data } = await getApiConfig().post("/search", {
     searchText,
     pageNumber,
     pageSize,
@@ -10,7 +10,7 @@ export const searchApi = async ({ searchText, pageNumber, pageSize }) => {
 };
 
 export const searchTopicsApi = async ({ tagName }) => {
-  const { data } = await apiConfig.post("/getTagsBySearchText", {
+  const { data } = await getApiConfig().post("/getTagsBySearchText", {
     tagName,
   });
   return data;

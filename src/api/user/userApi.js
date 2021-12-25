@@ -1,12 +1,12 @@
-import apiConfig from "../api.config";
+import getApiConfig from "../api.config";
 
 export const loginApi = async ({ email, password }) => {
-  const { data } = await apiConfig.post("/login", { email, password });
+  const { data } = await getApiConfig().post("/login", { email, password });
   return data;
 };
 
 export const signupApi = async ({ name, email, password, isDoctor }) => {
-  const { data } = await apiConfig.post("/signup", {
+  const { data } = await getApiConfig().post("/signup", {
     name,
     email,
     password,

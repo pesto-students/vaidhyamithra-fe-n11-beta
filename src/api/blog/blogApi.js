@@ -1,4 +1,4 @@
-import apiConfig from "../api.config";
+import getApiConfig from "../api.config";
 
 export const createBlogApi = async ({
   title,
@@ -7,7 +7,7 @@ export const createBlogApi = async ({
   authorId,
   status,
 }) => {
-  const { data } = await apiConfig.post("/blog", {
+  const { data } = await getApiConfig().post("/blog", {
     title,
     content,
     tags,
@@ -18,6 +18,6 @@ export const createBlogApi = async ({
 };
 
 export const getBlogApi = async ({ blogId }) => {
-  const { data } = await apiConfig.get(`/blog/${blogId}`);
+  const { data } = await getApiConfig.get(`/blog/${blogId}`);
   return data;
 };
