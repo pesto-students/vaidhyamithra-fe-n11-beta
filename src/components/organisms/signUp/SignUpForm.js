@@ -89,8 +89,7 @@ const SignUpForm = () => {
   }, [dispatch, errorMessage]);
 
   useEffect(() => {
-    // TODO: remove userInfo.message from the next line and replace with signup logic
-    if (userInfo.message) {
+    if (userInfo.accessToken) {
       dispatch(
         setAlert({ text: "Successfully Signed Up", type: alertTypes.success })
       );
@@ -158,8 +157,10 @@ const SignUpForm = () => {
       />
 
       <NoteText>
-        <strong>Note:</strong> Only registered medical practitioners can post
-        blogs on the platform after verification by our team
+        <>
+          <strong>Note:</strong> Only registered medical practitioners can post
+          blogs on the platform after verification by our team
+        </>
       </NoteText>
 
       <ModalActions>

@@ -24,7 +24,7 @@ const App = () => {
             path={ROUTES.CREATE}
             element={
               <PrivateRoute>
-                <EditBlog />
+                <EditBlog isCreateMode />
               </PrivateRoute>
             }
           />

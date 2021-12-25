@@ -44,3 +44,9 @@ export const SearchInput = withTheme(styled(InputField)`
 export const AddCategoryBtn = styled(Button)`
   margin-left: 8px !important;
 `;
+
+export const LoaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+`;
