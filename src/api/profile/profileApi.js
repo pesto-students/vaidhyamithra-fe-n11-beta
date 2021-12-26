@@ -21,3 +21,8 @@ export const getDraftBlogsApi = async ({ userId }) => {
   const { data } = await getApiConfig().get(`blogsByAuthor/draft/${userId}`);
   return data;
 };
+
+export const getProfileDetailsApi = async ({ userId }) => {
+  const { data } = await getApiConfig().get(`getUserInfo/${userId}`);
+  return data;
+};

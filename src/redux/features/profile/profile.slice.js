@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   getDraftBlogsApi,
+  getProfileDetailsApi,
   getPublishedBlogsApi,
   getSavedBlogsApi,
   getTagsByAuthorApi,
@@ -10,7 +11,7 @@ import { PROFILE_SLICE } from "./profile.config";
 const initialState = {
   userInfo: {
     id: "",
-    userName: "Dharmit Dosani", // replace this with empty string
+    userName: "Author",
     about: "",
     tags: [],
   },
@@ -62,6 +63,18 @@ export const getDraftBlogs = createAsyncThunk(
   async ({ userId }, { rejectWithValue }) => {
     try {
       const data = await getDraftBlogsApi({ userId });
+      return data;
+    } catch (err) {
+      return rejectWithValue([], err);
+    }
+  }
+);
+
+export const getProfileDetails = createAsyncThunk(
+  `${PROFILE_SLICE}/getProfileDetails`,
+  async ({ userId }, { rejectWithValue }) => {
+    try {
+      const data = await getProfileDetailsApi({ userId });
       return data;
     } catch (err) {
       return rejectWithValue([], err);
@@ -129,6 +142,20 @@ export const profileSlice = createSlice({
       state.errorMessage = "";
     },
     [getDraftBlogs.rejected]: (state, { meta }) => {
+      state.errorMessage = meta.response.data.message;
+      state.isLoading = false;
+    },
+    // Profile Basic Info
+    [getProfileDetails.pending]: (state) => {
+      state.isLoading = true;
+      state.errorMessage = "";
+    },
+    [getProfileDetails.fulfilled]: (state, { payload }) => {
+      state.userInfo = payload;
+      state.isLoading = false;
+      state.errorMessage = "";
+    },
+    [getProfileDetails.rejected]: (state, { meta }) => {
       state.errorMessage = meta.response.data.message;
       state.isLoading = false;
     },

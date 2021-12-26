@@ -10,6 +10,7 @@ import ProfileData from "./ProfileData";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
+  getProfileDetails,
   getTagsByAuthor,
   resetProfile,
 } from "../../redux/features/profile/profile.slice";
@@ -58,15 +59,14 @@ const Profile = () => {
     });
   }
 
-  // cleanup
+  // init + cleanup
   useEffect(() => {
+    dispatch(getProfileDetails({ userId }));
+    dispatch(getTagsByAuthor({ authorId: userId }));
+
     return () => {
       dispatch(resetProfile());
     };
-  }, [dispatch, userId]);
-
-  useEffect(() => {
-    dispatch(getTagsByAuthor({ authorId: userId }));
   }, [dispatch, userId]);
 
   return (

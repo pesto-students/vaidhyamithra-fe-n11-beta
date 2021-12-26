@@ -9,7 +9,7 @@ import { TEXT_TYPE } from "../../components/atoms/typography/typography.constant
 import { useSelector } from "react-redux";
 
 const ProfileData = () => {
-  const { userName, about } = useSelector((state) => state.user.userInfo);
+  const { userName, about } = useSelector((state) => state.profile.userInfo);
 
   return (
     <ProfileDataContainer>
