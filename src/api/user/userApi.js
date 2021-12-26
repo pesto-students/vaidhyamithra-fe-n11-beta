@@ -14,3 +14,8 @@ export const signupApi = async ({ name, email, password, isDoctor }) => {
   });
   return data;
 };
+
+export const updateUserInfoApi = async (userData) => {
+  const { data } = await getApiConfig().put("/updateUserInfo", userData);
+  return data;
+};
