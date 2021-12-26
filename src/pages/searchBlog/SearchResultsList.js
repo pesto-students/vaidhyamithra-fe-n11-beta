@@ -8,6 +8,8 @@ import InfiniteScroller from "../../components/organisms/infiniteScroller";
 import BlogCard from "../../components/organisms/blogCard/BlogCard";
 import Typography from "../../components/atoms/typography";
 import { TEXT_TYPE } from "../../components/atoms/typography/typography.constants";
+import { CircularProgress } from "../../components/atoms/progress";
+import { UserFeedbackContainer } from "./search.styled";
 
 const pageSize = 5;
 
@@ -17,6 +19,7 @@ const SearchResultsList = () => {
     searchText,
     results: { totalCount, paginatedResults },
     pageNumber,
+    isLoading,
   } = useSelector((state) => state.search);
 
   const fetchMoreData = useCallback(
@@ -71,14 +74,22 @@ const SearchResultsList = () => {
           rowRenderer={rowRenderer}
           children={paginatedResults}
         />
-      ) : searchText ? (
-        <Typography variant={TEXT_TYPE.H2}>
-          Uh-oh! We got nothin! Try something else...
-        </Typography>
       ) : (
-        <Typography variant={TEXT_TYPE.H2}>
-          Type something to search...
-        </Typography>
+        <UserFeedbackContainer>
+          {searchText ? (
+            <Typography variant={TEXT_TYPE.H2}>
+              {isLoading ? (
+                <CircularProgress />
+              ) : (
+                `Uh-oh! We got nothin! Try something else...`
+              )}
+            </Typography>
+          ) : (
+            <Typography variant={TEXT_TYPE.H2}>
+              Type something to search...
+            </Typography>
+          )}
+        </UserFeedbackContainer>
       )}
     </>
   );

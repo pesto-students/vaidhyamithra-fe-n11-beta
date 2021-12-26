@@ -14,3 +14,10 @@ export const Title = styled.p`
   font-size: 20px;
   font-family: Inter;
 `;
+
+export const UserFeedbackContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+`;
