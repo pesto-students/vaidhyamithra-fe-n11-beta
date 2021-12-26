@@ -24,7 +24,7 @@ const InterestsModal = () => {
   }, [dispatch, modalType]);
 
   const getVariant = (tagName) => {
-    if (selectedTags.includes(tagName)){
+    if (selectedTags.includes(tagName)) {
       return BUTTON_VARIANTS.CONTAINED;
     }
     return BUTTON_VARIANTS.OUTLINED;
@@ -48,7 +48,6 @@ const InterestsModal = () => {
       userId: id,
       interests: selectedTags,
     };
-    console.log("Data to update:", dataToUpdate);
     dispatch(updateUserInfo(dataToUpdate))
       .unwrap()
       .then(() => {
