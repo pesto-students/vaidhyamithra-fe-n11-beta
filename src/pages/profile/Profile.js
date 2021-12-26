@@ -1,11 +1,5 @@
-import { useState } from "react";
-import manImg from "../../images/man_img.png";
-import {
-  ProfileContainer,
-  ProfileData,
-  ProfilePic,
-  ProfileDescription,
-} from "./profile.styled";
+import { useEffect, useState } from "react";
+import { ProfileContainer } from "./profile.styled";
 import {
   LeftSection,
   RightSection,
@@ -13,27 +7,34 @@ import {
 import TopicsList from "../../components/organisms/topicsList";
 import { TabMenu, TabPanel } from "../../components/organisms/tabs";
 import { profileTabMenu } from "./profile.constants";
+import ProfileData from "./ProfileData";
 import Typography from "../../components/atoms/typography";
 import { TEXT_TYPE } from "../../components/atoms/typography/typography.constants";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getTagsByAuthor } from "../../redux/features/profile/profile.slice";
 
 const Profile = () => {
   const [currentTab, setCurrentTab] = useState(profileTabMenu[0].value);
+  const { id: selfUserId } = useSelector((state) => state.user.userInfo);
+  const { tags, userName } = useSelector((state) => state.profile.userInfo);
+  const { userId } = useParams();
+  const dispatch = useDispatch();
+
+  const isSelfProfile = selfUserId === userId;
+  console.log("isSelfProfile: ", isSelfProfile);
+
+  useEffect(() => {
+    dispatch(getTagsByAuthor({ authorId: userId }));
+  }, [dispatch, userId]);
 
   return (
     <ProfileContainer>
       <LeftSection>
-        <ProfileData>
-          <ProfilePic src={manImg} />
-          <ProfileDescription>
-            <Typography variant={TEXT_TYPE.H1}>Dharmit Dosani</Typography>
-            <Typography>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book.
-            </Typography>
-          </ProfileDescription>
-        </ProfileData>
+        <ProfileData />
+        {!isSelfProfile && (
+          <Typography variant={TEXT_TYPE.H2}>{userName}'s blogs</Typography>
+        )}
         <TabMenu
           value={currentTab}
           setValue={setCurrentTab}
@@ -46,7 +47,7 @@ const Profile = () => {
         ))}
       </LeftSection>
       <RightSection>
-        <TopicsList title="Topics by Author" />
+        <TopicsList tags={tags} title={`Topics by ${userName}`} />
       </RightSection>
     </ProfileContainer>
   );

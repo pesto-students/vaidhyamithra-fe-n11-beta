@@ -36,7 +36,7 @@ const BlogCard = ({
         />
         <AuthorInfo>
           <BloggerDetails
-            authorName={authorDetails.name}
+            authorDetails={authorDetails}
             publishedDate={updatedAt}
           />
         </AuthorInfo>
@@ -58,8 +58,9 @@ BlogCard.defaultProps = {
     "If we navigate the port, we can get to the AGP microchip through the bluetooth SDD alarm of the name of the universe. And if we navigate the port, we can get to the AGP microchip through the bluetooth SDD alarm. I were you and you were me then what would this world be like",
   authorDetails: {
     _id: "",
-    name: "",
+    name: "Darlene Robertson",
   },
+  updatedAt: new Date(),
 };
 
 export default BlogCard;

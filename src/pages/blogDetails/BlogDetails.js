@@ -67,7 +67,7 @@ const BlogDetails = () => {
         <BlogTitle>{title}</BlogTitle>
         <BloggerDetailsSection>
           <BloggerDetails
-            authorName={authorDetails?.name}
+            authorDetails={authorDetails}
             publishedDate={updatedAt}
           />
           {userId === authorId && (

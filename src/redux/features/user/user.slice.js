@@ -7,6 +7,7 @@ const initialState = {
     id: "",
     userName: "",
     email: "",
+    about: "",
     isDoctor: false,
     accessToken: null,
   },

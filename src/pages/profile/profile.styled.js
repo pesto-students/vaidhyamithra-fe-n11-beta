@@ -4,7 +4,7 @@ export const ProfileContainer = styled.div`
   display: flex;
 `;
 
-export const ProfileData = styled.div`
+export const ProfileDataContainer = styled.div`
   display: flex;
   margin-bottom: 20px;
   align-items: center;

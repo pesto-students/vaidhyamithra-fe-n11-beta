@@ -4,7 +4,7 @@ export const ROUTES = {
   SIGNUP: "/signup",
   SEARCH: "/search",
   CREATE: "/create",
-  MY_PROFILE: "/profile",
+  PROFILE: "/profile/:userId",
   BLOG: "/blog/:blogId",
   EDIT_BLOG: "/blog/:blogId/edit",
 };
