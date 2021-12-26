@@ -3,13 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   removeSearchResults,
   search,
-} from "../../../redux/features/search/search.slice";
-import InfiniteScroller from "../infiniteScroller";
-import BlogCard from "./BlogCard";
+} from "../../redux/features/search/search.slice";
+import InfiniteScroller from "../../components/organisms/infiniteScroller";
+import BlogCard from "../../components/organisms/blogCard/BlogCard";
+import Typography from "../../components/atoms/typography";
+import { TEXT_TYPE } from "../../components/atoms/typography/typography.constants";
 
 const pageSize = 5;
 
-export const CardList = () => {
+const SearchResultsList = () => {
   const dispatch = useDispatch();
   const {
     searchText,
@@ -69,9 +71,17 @@ export const CardList = () => {
           rowRenderer={rowRenderer}
           children={paginatedResults}
         />
+      ) : searchText ? (
+        <Typography variant={TEXT_TYPE.H2}>
+          Uh-oh! We got nothin! Try something else...
+        </Typography>
       ) : (
-        <div>No results</div>
+        <Typography variant={TEXT_TYPE.H2}>
+          Type something to search...
+        </Typography>
       )}
     </>
   );
 };
+
+export default SearchResultsList;
