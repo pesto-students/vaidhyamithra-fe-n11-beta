@@ -12,6 +12,7 @@ import { useParams } from "react-router-dom";
 import { getTagsByAuthor } from "../../redux/features/profile/profile.slice";
 import { CardList } from "../../components/organisms/blogCard";
 import SavedBlogs from "./SavedBlogs";
+import PublishedBlogs from "./PublishedBlogs";
 
 const Profile = () => {
   const [currentTab, setCurrentTab] = useState(1);
@@ -37,7 +38,7 @@ const Profile = () => {
         {
           value: 2,
           label: "Published",
-          component: <CardList />,
+          component: <PublishedBlogs userId={userId} />,
         },
         {
           value: 3,
@@ -53,8 +54,6 @@ const Profile = () => {
       component: <CardList />,
     });
   }
-
-  console.log("isSelfProfile: ", isSelfProfile);
 
   useEffect(() => {
     dispatch(getTagsByAuthor({ authorId: userId }));

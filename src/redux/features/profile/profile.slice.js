@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
+  getPublishedBlogsApi,
   getSavedBlogsApi,
   getTagsByAuthorApi,
 } from "../../../api/profile/profileApi";
@@ -43,6 +44,18 @@ export const getSavedBlogs = createAsyncThunk(
   }
 );
 
+export const getPublishedBlogs = createAsyncThunk(
+  `${PROFILE_SLICE}/getPublishedBlogs`,
+  async ({ userId }, { rejectWithValue }) => {
+    try {
+      const data = await getPublishedBlogsApi({ userId });
+      return data;
+    } catch (err) {
+      return rejectWithValue([], err);
+    }
+  }
+);
+
 export const profileSlice = createSlice({
   name: PROFILE_SLICE,
   initialState,
@@ -73,6 +86,20 @@ export const profileSlice = createSlice({
       state.errorMessage = "";
     },
     [getSavedBlogs.rejected]: (state, { meta }) => {
+      state.errorMessage = meta.response.data.message;
+      state.isLoading = false;
+    },
+    // Published blogs
+    [getPublishedBlogs.pending]: (state) => {
+      state.isLoading = true;
+      state.errorMessage = "";
+    },
+    [getPublishedBlogs.fulfilled]: (state, { payload }) => {
+      state.published = payload;
+      state.isLoading = false;
+      state.errorMessage = "";
+    },
+    [getPublishedBlogs.rejected]: (state, { meta }) => {
       state.errorMessage = meta.response.data.message;
       state.isLoading = false;
     },
