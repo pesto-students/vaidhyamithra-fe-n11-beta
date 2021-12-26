@@ -21,4 +21,5 @@ export const ProfileDescription = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 20px;
+  width: 100%;
 `;

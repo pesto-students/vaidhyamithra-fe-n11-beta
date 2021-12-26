@@ -3,7 +3,7 @@ import { CardList } from "../../components/organisms/blogCard";
 export const homeMenuItems = [
   {
     value: 1,
-    label: "Recommended items",
+    label: "Recommended for you",
     component: <CardList />,
   },
   {

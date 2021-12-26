@@ -19,6 +19,7 @@ import PublishedBlogs from "./PublishedBlogs";
 import DraftBlogs from "./DraftBlogs";
 import Button from "../../components/atoms/button";
 import { useModalHelper } from "../../helpers";
+import EditableProfileData from "./EditableProfileData";
 
 const Profile = () => {
   const [currentTab, setCurrentTab] = useState(1);
@@ -77,7 +78,7 @@ const Profile = () => {
   return (
     <ProfileContainer>
       <LeftSection>
-        <ProfileData />
+        {isSelfProfile ? <EditableProfileData /> : <ProfileData />}
         <TabMenu
           value={currentTab}
           setValue={setCurrentTab}
