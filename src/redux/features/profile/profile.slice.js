@@ -12,7 +12,7 @@ const initialState = {
   userInfo: {
     id: "",
     userName: "Author",
-    about: "",
+    about: "Short description about the author",
     tags: [],
   },
   bookmarks: [],
