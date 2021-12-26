@@ -1,40 +1,19 @@
-import BlogCard from "../../components/organisms/blogCard/BlogCard";
+import { CardList } from "../../components/organisms/blogCard";
 
 export const profileTabMenu = [
   {
     value: 1,
     label: "Saved",
-    component: (
-      <>
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-      </>
-    ),
+    component: <CardList />,
   },
   {
     value: 2,
     label: "Published",
-    component: (
-      <>
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-      </>
-    ),
+    component: <CardList />,
   },
   {
     value: 3,
     label: "Drafts",
-    component: (
-      <>
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-      </>
-    ),
+    component: <CardList />,
   },
 ];

@@ -32,19 +32,22 @@ const Profile = () => {
     <ProfileContainer>
       <LeftSection>
         <ProfileData />
-        {!isSelfProfile && (
+        {isSelfProfile ? (
+          <>
+            <TabMenu
+              value={currentTab}
+              setValue={setCurrentTab}
+              menuItems={profileTabMenu}
+            />
+            {profileTabMenu.map(({ value, component }) => (
+              <TabPanel key={value} value={value} currentValue={currentTab}>
+                {component}
+              </TabPanel>
+            ))}
+          </>
+        ) : (
           <Typography variant={TEXT_TYPE.H2}>{userName}'s blogs</Typography>
         )}
-        <TabMenu
-          value={currentTab}
-          setValue={setCurrentTab}
-          menuItems={profileTabMenu}
-        />
-        {profileTabMenu.map(({ value, component }) => (
-          <TabPanel key={value} value={value} currentValue={currentTab}>
-            {component}
-          </TabPanel>
-        ))}
       </LeftSection>
       <RightSection>
         <TopicsList tags={tags} title={`Topics by ${userName}`} />
