@@ -1,18 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { NoCardsDisplay } from "./blogCard.styled";
+import { FeedbackContainer } from "./blogCard.styled";
 import Typography from "../../atoms/typography";
 import BlogCard from "./BlogCard";
+import { CircularProgress } from "../../atoms/progress";
 
-const NoCards = () => (
-  <NoCardsDisplay>
-    <Typography>No blogs to show</Typography>
-  </NoCardsDisplay>
-);
+const CardList = ({ blogs, isLoading }) => {
+  if (isLoading) {
+    return (
+      <FeedbackContainer>
+        <CircularProgress />
+      </FeedbackContainer>
+    );
+  }
 
-const CardList = ({ blogs }) => {
   if (!blogs.length) {
-    return <NoCards />;
+    return (
+      <FeedbackContainer>
+        <Typography>No blogs to show</Typography>
+      </FeedbackContainer>
+    );
   }
 
   return (
@@ -26,11 +33,13 @@ const CardList = ({ blogs }) => {
 
 CardList.propTypes = {
   blogs: PropTypes.array,
+  isLoading: PropTypes.bool,
 };
 
 CardList.defaultProps = {
-  blogs: [{}, {}],
+  blogs: [{ _id: 1 }, { _id: 2 }],
   // blogs: [],
+  isLoading: false,
 };
 
 export { CardList };

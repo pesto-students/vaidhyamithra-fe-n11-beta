@@ -75,7 +75,7 @@ export const AuthorInfo = styled.div`
   margin-top: 24px;
 `;
 
-export const NoCardsDisplay = styled.div`
+export const FeedbackContainer = styled.div`
   display: flex;
   height: 150px;
   align-items: center;

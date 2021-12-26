@@ -1,5 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getTagsByAuthorApi } from "../../../api/profile/profileApi";
+import {
+  getSavedBlogsApi,
+  getTagsByAuthorApi,
+} from "../../../api/profile/profileApi";
 import { PROFILE_SLICE } from "./profile.config";
 
 const initialState = {
@@ -9,6 +12,9 @@ const initialState = {
     about: "",
     tags: [],
   },
+  bookmarks: [],
+  published: [],
+  drafts: [],
   isLoading: false,
   errorMessage: "",
 };
@@ -25,11 +31,24 @@ export const getTagsByAuthor = createAsyncThunk(
   }
 );
 
+export const getSavedBlogs = createAsyncThunk(
+  `${PROFILE_SLICE}/getSavedBlogs`,
+  async ({ userId }, { rejectWithValue }) => {
+    try {
+      const data = await getSavedBlogsApi({ userId });
+      return data;
+    } catch (err) {
+      return rejectWithValue([], err);
+    }
+  }
+);
+
 export const profileSlice = createSlice({
   name: PROFILE_SLICE,
   initialState,
   reducers: {},
   extraReducers: {
+    // Tags by author
     [getTagsByAuthor.pending]: (state) => {
       state.isLoading = true;
       state.errorMessage = "";
@@ -40,6 +59,20 @@ export const profileSlice = createSlice({
       state.errorMessage = "";
     },
     [getTagsByAuthor.rejected]: (state, { meta }) => {
+      state.errorMessage = meta.response.data.message;
+      state.isLoading = false;
+    },
+    // Saved blogs
+    [getSavedBlogs.pending]: (state) => {
+      state.isLoading = true;
+      state.errorMessage = "";
+    },
+    [getSavedBlogs.fulfilled]: (state, { payload }) => {
+      state.bookmarks = payload.map(({ blogDetails }) => blogDetails);
+      state.isLoading = false;
+      state.errorMessage = "";
+    },
+    [getSavedBlogs.rejected]: (state, { meta }) => {
       state.errorMessage = meta.response.data.message;
       state.isLoading = false;
     },

@@ -6,22 +6,54 @@ import {
 } from "../../components/organisms/appSkeleton";
 import TopicsList from "../../components/organisms/topicsList";
 import { TabMenu, TabPanel } from "../../components/organisms/tabs";
-import { profileTabMenu } from "./profile.constants";
 import ProfileData from "./ProfileData";
-import Typography from "../../components/atoms/typography";
-import { TEXT_TYPE } from "../../components/atoms/typography/typography.constants";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getTagsByAuthor } from "../../redux/features/profile/profile.slice";
+import { CardList } from "../../components/organisms/blogCard";
+import SavedBlogs from "./SavedBlogs";
 
 const Profile = () => {
-  const [currentTab, setCurrentTab] = useState(profileTabMenu[0].value);
-  const { id: selfUserId } = useSelector((state) => state.user.userInfo);
+  const [currentTab, setCurrentTab] = useState(1);
+  const { id: selfUserId, isDoctor } = useSelector(
+    (state) => state.user.userInfo
+  );
   const { tags, userName } = useSelector((state) => state.profile.userInfo);
-  const { userId } = useParams();
   const dispatch = useDispatch();
+  const { userId } = useParams();
 
   const isSelfProfile = selfUserId === userId;
+
+  const profileMenu = [];
+  if (isSelfProfile) {
+    profileMenu.push({
+      value: 1,
+      label: "Your Bookmarks",
+      component: <SavedBlogs userId={userId} />,
+    });
+
+    if (isDoctor) {
+      profileMenu.push(
+        {
+          value: 2,
+          label: "Published",
+          component: <CardList />,
+        },
+        {
+          value: 3,
+          label: "Drafts",
+          component: <CardList />,
+        }
+      );
+    }
+  } else {
+    profileMenu.push({
+      value: 1,
+      label: `${userName}'s blogs`,
+      component: <CardList />,
+    });
+  }
+
   console.log("isSelfProfile: ", isSelfProfile);
 
   useEffect(() => {
@@ -32,22 +64,16 @@ const Profile = () => {
     <ProfileContainer>
       <LeftSection>
         <ProfileData />
-        {isSelfProfile ? (
-          <>
-            <TabMenu
-              value={currentTab}
-              setValue={setCurrentTab}
-              menuItems={profileTabMenu}
-            />
-            {profileTabMenu.map(({ value, component }) => (
-              <TabPanel key={value} value={value} currentValue={currentTab}>
-                {component}
-              </TabPanel>
-            ))}
-          </>
-        ) : (
-          <Typography variant={TEXT_TYPE.H2}>{userName}'s blogs</Typography>
-        )}
+        <TabMenu
+          value={currentTab}
+          setValue={setCurrentTab}
+          menuItems={profileMenu}
+        />
+        {profileMenu.map(({ value, component }) => (
+          <TabPanel key={value} value={value} currentValue={currentTab}>
+            {component}
+          </TabPanel>
+        ))}
       </LeftSection>
       <RightSection>
         <TopicsList tags={tags} title={`Topics by ${userName}`} />
