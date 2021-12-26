@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
+  getDraftBlogsApi,
   getPublishedBlogsApi,
   getSavedBlogsApi,
   getTagsByAuthorApi,
@@ -56,10 +57,24 @@ export const getPublishedBlogs = createAsyncThunk(
   }
 );
 
+export const getDraftBlogs = createAsyncThunk(
+  `${PROFILE_SLICE}/getDraftBlogs`,
+  async ({ userId }, { rejectWithValue }) => {
+    try {
+      const data = await getDraftBlogsApi({ userId });
+      return data;
+    } catch (err) {
+      return rejectWithValue([], err);
+    }
+  }
+);
+
 export const profileSlice = createSlice({
   name: PROFILE_SLICE,
   initialState,
-  reducers: {},
+  reducers: {
+    resetProfile: () => initialState,
+  },
   extraReducers: {
     // Tags by author
     [getTagsByAuthor.pending]: (state) => {
@@ -103,7 +118,23 @@ export const profileSlice = createSlice({
       state.errorMessage = meta.response.data.message;
       state.isLoading = false;
     },
+    // Draft blogs
+    [getDraftBlogs.pending]: (state) => {
+      state.isLoading = true;
+      state.errorMessage = "";
+    },
+    [getDraftBlogs.fulfilled]: (state, { payload }) => {
+      state.drafts = payload;
+      state.isLoading = false;
+      state.errorMessage = "";
+    },
+    [getDraftBlogs.rejected]: (state, { meta }) => {
+      state.errorMessage = meta.response.data.message;
+      state.isLoading = false;
+    },
   },
 });
+
+export const { resetProfile } = profileSlice.actions;
 
 export default profileSlice.reducer;

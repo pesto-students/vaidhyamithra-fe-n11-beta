@@ -9,10 +9,13 @@ import { TabMenu, TabPanel } from "../../components/organisms/tabs";
 import ProfileData from "./ProfileData";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getTagsByAuthor } from "../../redux/features/profile/profile.slice";
-import { CardList } from "../../components/organisms/blogCard";
+import {
+  getTagsByAuthor,
+  resetProfile,
+} from "../../redux/features/profile/profile.slice";
 import SavedBlogs from "./SavedBlogs";
 import PublishedBlogs from "./PublishedBlogs";
+import DraftBlogs from "./DraftBlogs";
 
 const Profile = () => {
   const [currentTab, setCurrentTab] = useState(1);
@@ -43,7 +46,7 @@ const Profile = () => {
         {
           value: 3,
           label: "Drafts",
-          component: <CardList />,
+          component: <DraftBlogs userId={userId} />,
         }
       );
     }
@@ -51,9 +54,16 @@ const Profile = () => {
     profileMenu.push({
       value: 1,
       label: `${userName}'s blogs`,
-      component: <CardList />,
+      component: <PublishedBlogs userId={userId} />,
     });
   }
+
+  // cleanup
+  useEffect(() => {
+    return () => {
+      dispatch(resetProfile());
+    };
+  }, [dispatch, userId]);
 
   useEffect(() => {
     dispatch(getTagsByAuthor({ authorId: userId }));
