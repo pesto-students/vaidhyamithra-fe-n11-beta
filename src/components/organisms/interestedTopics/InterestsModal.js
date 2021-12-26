@@ -10,11 +10,15 @@ const InterestsModal = () => {
   const [open, setOpen] = useState(true);
   const { modalType } = useSelector((state) => state.modals);
   const { closeModal } = useModalHelper();
+  const { interests } = useSelector((state) => state.user.userInfo);
+  const [selectedTags, setSelectedTags] = useState(interests);
+  // Use selectedTags to update the userInfo
 
   useEffect(() => {
     setOpen(modalType === MODAL_TYPES.INTERESTS);
   }, [modalType]);
 
+  // TODO: topics = fetch from server - ALL TOPICS
   const topics = [
     { id: 1, topicName: "Cardiology" },
     { id: 2, topicName: "Bariatrics" },
