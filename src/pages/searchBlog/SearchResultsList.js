@@ -59,15 +59,9 @@ const SearchResultsList = () => {
           hasMore={hasMore}
           next={() => fetchMoreData(pageNumber)}
           loader={
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              loading...
-            </div>
+            <UserFeedbackContainer>
+              <CircularProgress />
+            </UserFeedbackContainer>
           }
           height={450}
           elementHeight={270}
