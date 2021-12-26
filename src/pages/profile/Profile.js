@@ -17,15 +17,20 @@ import {
 import SavedBlogs from "./SavedBlogs";
 import PublishedBlogs from "./PublishedBlogs";
 import DraftBlogs from "./DraftBlogs";
+import Button from "../../components/atoms/button";
+import { useModalHelper } from "../../helpers";
 
 const Profile = () => {
   const [currentTab, setCurrentTab] = useState(1);
-  const { id: selfUserId, isDoctor } = useSelector(
-    (state) => state.user.userInfo
-  );
+  const {
+    id: selfUserId,
+    isDoctor,
+    interests,
+  } = useSelector((state) => state.user.userInfo);
   const { tags, userName } = useSelector((state) => state.profile.userInfo);
   const dispatch = useDispatch();
   const { userId } = useParams();
+  const { openInterests } = useModalHelper();
 
   const isSelfProfile = selfUserId === userId;
 
@@ -86,6 +91,15 @@ const Profile = () => {
       </LeftSection>
       <RightSection>
         <TopicsList tags={tags} title={`Topics by ${userName}`} />
+        {isSelfProfile && (
+          <>
+            <TopicsList
+              tags={interests}
+              title={`Topics you're interested in`}
+            />
+            <Button onClick={openInterests}>Update interests</Button>
+          </>
+        )}
       </RightSection>
     </ProfileContainer>
   );
