@@ -35,8 +35,7 @@ export const profileSlice = createSlice({
       state.errorMessage = "";
     },
     [getTagsByAuthor.fulfilled]: (state, { payload }) => {
-      // state.userInfo.tags = payload;
-      state.userInfo.tags = ["heart", "blood", "brain"];
+      state.userInfo.tags = payload;
       state.isLoading = false;
       state.errorMessage = "";
     },
