@@ -49,7 +49,7 @@ TopicsList.propTypes = {
 TopicsList.defaultProps = {
   title: "",
   selected: false,
-  tags: ["blood", "heart", "brain", "neurology"],
+  tags: [],
   isLoading: false,
   handleClick: () => {},
 };
