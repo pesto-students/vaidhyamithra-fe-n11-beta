@@ -71,6 +71,7 @@ export const searchSlice = createSlice({
     updateSearchTagsResult: (state, { payload }) => {
       state.tags = payload;
     },
+    resetSearch: () => initialState,
   },
   extraReducers: {
     [search.pending]: (state) => {
@@ -112,6 +113,7 @@ export const {
   updateSearchText,
   removeSearchTagsResult,
   updateSearchTagsResult,
+  resetSearch,
 } = searchSlice.actions;
 
 export default searchSlice.reducer;
