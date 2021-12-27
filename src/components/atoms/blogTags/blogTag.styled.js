@@ -6,11 +6,13 @@ export const Topic = styled.div`
   color: white;
   border-radius: 16px;
   font-size: 10px;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.2px;
   width: max-content;
-  padding: 4px 8px;
+  padding: 2px 8px;
   text-transform: uppercase;
   margin: 0 4px;
+  font-weight: 500;
+  cursor: pointer;
 `;
 
 export const TagsList = styled.div`

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Button from "../../components/atoms/button";
 
 export const BlogTitle = styled.h1`
   color: black;
@@ -38,3 +39,7 @@ export const CommentSection = styled.div`
 `;
 
 export const BlogContent = styled.div``;
+
+export const EditBlogBtn = styled(Button)`
+  margin-bottom: auto;
+`;

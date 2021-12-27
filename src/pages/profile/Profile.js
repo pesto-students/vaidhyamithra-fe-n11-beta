@@ -91,7 +91,14 @@ const Profile = () => {
         ))}
       </LeftSection>
       <RightSection>
-        <TopicsList tags={tags} title={`Topics by ${userName}`} />
+        <TopicsList
+          tags={tags}
+          title={
+            isSelfProfile
+              ? `Topics you've written blogs for`
+              : `Topics by ${userName}`
+          }
+        />
         {isSelfProfile && (
           <>
             <TopicsList

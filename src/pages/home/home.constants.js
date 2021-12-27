@@ -3,12 +3,12 @@ import { CardList } from "../../components/organisms/blogCard";
 export const homeMenuItems = [
   {
     value: 1,
-    label: "Recommended for you",
+    label: "Latest",
     component: <CardList />,
   },
   {
     value: 2,
-    label: "Trending",
+    label: "Recommended for you",
     component: <CardList />,
   },
 ];
