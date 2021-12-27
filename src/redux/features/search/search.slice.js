@@ -113,4 +113,5 @@ export const {
   removeSearchTagsResult,
   updateSearchTagsResult,
 } = searchSlice.actions;
+
 export default searchSlice.reducer;
