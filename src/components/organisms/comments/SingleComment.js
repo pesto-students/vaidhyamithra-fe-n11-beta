@@ -7,9 +7,10 @@ const Comment = () => {
   return (
     <CommentContainer>
       <BloggerDetails
-        authorName="Darlene Robertson"
+        authorDetails={{
+          authorName: "Darlene Robertson",
+        }}
         publishedDate="March 12, 2021"
-        position="relative"
       />
       <Typography variant={TEXT_TYPE.BODY1}>
         Comment vaala Lorem ipsum dolor sit amet, consectetur adipiscing elit,

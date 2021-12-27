@@ -36,14 +36,7 @@ const App = () => {
               </PrivateRoute>
             }
           />
-          <Route
-            path={ROUTES.MY_PROFILE}
-            element={
-              <PrivateRoute>
-                <Profile />
-              </PrivateRoute>
-            }
-          />
+          <Route path={ROUTES.PROFILE} element={<Profile />} />
           <Route path="*" exact={true} element={<PageNotFound />} />
         </Route>
       </Routes>

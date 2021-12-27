@@ -1,52 +1,106 @@
-import { useState } from "react";
-import manImg from "../../images/man_img.png";
-import {
-  ProfileContainer,
-  ProfileData,
-  ProfilePic,
-  ProfileDescription,
-} from "./profile.styled";
+import { useEffect, useState } from "react";
+import { ProfileContainer } from "./profile.styled";
 import {
   LeftSection,
   RightSection,
 } from "../../components/organisms/appSkeleton";
 import TopicsList from "../../components/organisms/topicsList";
 import { TabMenu, TabPanel } from "../../components/organisms/tabs";
-import { profileTabMenu } from "./profile.constants";
-import Typography from "../../components/atoms/typography";
-import { TEXT_TYPE } from "../../components/atoms/typography/typography.constants";
+import ProfileData from "./ProfileData";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import {
+  getProfileDetails,
+  getTagsByAuthor,
+  resetProfile,
+} from "../../redux/features/profile/profile.slice";
+import SavedBlogs from "./SavedBlogs";
+import PublishedBlogs from "./PublishedBlogs";
+import DraftBlogs from "./DraftBlogs";
+import Button from "../../components/atoms/button";
+import { useModalHelper } from "../../helpers";
+import EditableProfileData from "./EditableProfileData";
 
 const Profile = () => {
-  const [currentTab, setCurrentTab] = useState(profileTabMenu[0].value);
+  const [currentTab, setCurrentTab] = useState(1);
+  const {
+    id: selfUserId,
+    isDoctor,
+    interests,
+  } = useSelector((state) => state.user.userInfo);
+  const { tags, userName } = useSelector((state) => state.profile.userInfo);
+  const dispatch = useDispatch();
+  const { userId } = useParams();
+  const { openInterests } = useModalHelper();
+
+  const isSelfProfile = selfUserId === userId;
+
+  const profileMenu = [];
+  if (isSelfProfile) {
+    profileMenu.push({
+      value: 1,
+      label: "Your Bookmarks",
+      component: <SavedBlogs userId={userId} />,
+    });
+
+    if (isDoctor) {
+      profileMenu.push(
+        {
+          value: 2,
+          label: "Published",
+          component: <PublishedBlogs userId={userId} />,
+        },
+        {
+          value: 3,
+          label: "Drafts",
+          component: <DraftBlogs userId={userId} />,
+        }
+      );
+    }
+  } else {
+    profileMenu.push({
+      value: 1,
+      label: `${userName}'s blogs`,
+      component: <PublishedBlogs userId={userId} />,
+    });
+  }
+
+  // init + cleanup
+  useEffect(() => {
+    dispatch(getProfileDetails({ userId }));
+    dispatch(getTagsByAuthor({ authorId: userId }));
+
+    return () => {
+      dispatch(resetProfile());
+    };
+  }, [dispatch, userId]);
 
   return (
     <ProfileContainer>
       <LeftSection>
-        <ProfileData>
-          <ProfilePic src={manImg} />
-          <ProfileDescription>
-            <Typography variant={TEXT_TYPE.H1}>Dharmit Dosani</Typography>
-            <Typography>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book.
-            </Typography>
-          </ProfileDescription>
-        </ProfileData>
+        {isSelfProfile ? <EditableProfileData /> : <ProfileData />}
         <TabMenu
           value={currentTab}
           setValue={setCurrentTab}
-          menuItems={profileTabMenu}
+          menuItems={profileMenu}
         />
-        {profileTabMenu.map(({ value, component }) => (
+        {profileMenu.map(({ value, component }) => (
           <TabPanel key={value} value={value} currentValue={currentTab}>
             {component}
           </TabPanel>
         ))}
       </LeftSection>
       <RightSection>
-        <TopicsList title="Topics by Author" />
+        <TopicsList tags={tags} title={`Topics by ${userName}`} />
+        {isSelfProfile && (
+          <>
+            <TopicsList
+              tags={interests}
+              title={`Topics you're interested in`}
+            />
+            <Button onClick={openInterests}>Update interests</Button>
+          </>
+        )}
       </RightSection>
     </ProfileContainer>
   );

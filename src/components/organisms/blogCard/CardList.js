@@ -1,77 +1,45 @@
-import React, { useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  removeSearchResults,
-  search,
-} from "../../../redux/features/search/search.slice";
-import InfiniteScroller from "../infiniteScroller";
+import React from "react";
+import PropTypes from "prop-types";
+import { FeedbackContainer } from "./blogCard.styled";
+import Typography from "../../atoms/typography";
 import BlogCard from "./BlogCard";
+import { CircularProgress } from "../../atoms/progress";
 
-const pageSize = 5;
+const CardList = ({ blogs, isLoading }) => {
+  if (isLoading) {
+    return (
+      <FeedbackContainer>
+        <CircularProgress />
+      </FeedbackContainer>
+    );
+  }
 
-export const CardList = () => {
-  const dispatch = useDispatch();
-  const {
-    searchText,
-    results: { totalCount, paginatedResults },
-    pageNumber,
-  } = useSelector((state) => state.search);
-
-  const fetchMoreData = useCallback(
-    (pageNumber) => {
-      if (!searchText || searchText.length < 4) {
-        dispatch(removeSearchResults());
-        return;
-      }
-      let searchObj = {
-        searchText: searchText,
-        pageNumber,
-        pageSize,
-      };
-
-      dispatch(search(searchObj));
-    },
-    [dispatch, searchText]
-  );
-
-  useEffect(() => {
-    dispatch(removeSearchResults());
-    fetchMoreData();
-  }, [dispatch, fetchMoreData, searchText]);
-
-  const rowRenderer = ({ key, index, style }) => {
-    let blog = paginatedResults[index];
-    return <BlogCard key={key} i={index} style={style} {...blog} />;
-  };
-
-  const hasMore = pageNumber <= Math.ceil(totalCount / pageSize);
+  if (!blogs.length) {
+    return (
+      <FeedbackContainer>
+        <Typography>No blogs to show</Typography>
+      </FeedbackContainer>
+    );
+  }
 
   return (
     <>
-      {paginatedResults.length > 0 ? (
-        <InfiniteScroller
-          dataLength={paginatedResults.length}
-          hasMore={hasMore}
-          next={() => fetchMoreData(pageNumber)}
-          loader={
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              loading...
-            </div>
-          }
-          height={450}
-          elementHeight={270}
-          rowRenderer={rowRenderer}
-          children={paginatedResults}
-        />
-      ) : (
-        <div>No results</div>
-      )}
+      {blogs.map((blogInfo) => (
+        <BlogCard key={blogInfo._id} {...blogInfo} />
+      ))}
     </>
   );
 };
+
+CardList.propTypes = {
+  blogs: PropTypes.array,
+  isLoading: PropTypes.bool,
+};
+
+CardList.defaultProps = {
+  blogs: [{ _id: 1 }, { _id: 2 }],
+  // blogs: [],
+  isLoading: false,
+};
+
+export { CardList };

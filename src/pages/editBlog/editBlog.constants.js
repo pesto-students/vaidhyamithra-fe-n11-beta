@@ -6,3 +6,8 @@ export const editorErrorMessages = {
     required: "Required",
   },
 };
+
+export const BLOG_STATUS = {
+  PUBLISHED: "published",
+  DRAFT: "draft",
+};

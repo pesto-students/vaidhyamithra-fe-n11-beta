@@ -31,6 +31,7 @@ import { ROUTES } from "../../values/routes";
 import { useRouting } from "../../helpers";
 import PageNotFound from "../pageNotFound";
 import { CircularProgress } from "../../components/atoms/progress";
+import { BLOG_STATUS } from "./editBlog.constants";
 
 const EditBlog = ({ isCreateMode }) => {
   const { blogId } = useParams();
@@ -44,7 +45,7 @@ const EditBlog = ({ isCreateMode }) => {
   const {
     isLoading,
     errorMessage,
-    blogInfo: { authorId, content },
+    blogInfo: { authorId, content, status: currentStatus },
   } = useSelector((state) => state.blog);
   const {
     userInfo: { id: userId, isDoctor },
@@ -91,10 +92,11 @@ const EditBlog = ({ isCreateMode }) => {
       .then(({ _id }) => {
         if (_id) {
           dispatch(setAlert({ text: "Success!", type: alertTypes.success }));
-          if (isCreateMode) {
-            const blogPath = generatePath(ROUTES.EDIT_BLOG, { blogId: _id });
-            gotoRoute(blogPath);
-          }
+          const blogPath = generatePath(
+            status === BLOG_STATUS.DRAFT ? ROUTES.EDIT_BLOG : ROUTES.BLOG,
+            { blogId: _id }
+          );
+          gotoRoute(blogPath);
         }
       })
       .catch(() => {
@@ -145,18 +147,20 @@ const EditBlog = ({ isCreateMode }) => {
           <Button
             loading={isLoading}
             disabled={isSaveDisabled}
-            onClick={() => saveBlog({ status: "published" })}
+            onClick={() => saveBlog({ status: BLOG_STATUS.PUBLISHED })}
           >
             Publish
           </Button>
-          <SaveButton
-            loading={isLoading}
-            disabled={isSaveDisabled}
-            variant={BUTTON_VARIANTS.OUTLINED}
-            onClick={() => saveBlog({ status: "draft" })}
-          >
-            Save
-          </SaveButton>
+          {currentStatus !== BLOG_STATUS.PUBLISHED && (
+            <SaveButton
+              loading={isLoading}
+              disabled={isSaveDisabled}
+              variant={BUTTON_VARIANTS.OUTLINED}
+              onClick={() => saveBlog({ status: BLOG_STATUS.DRAFT })}
+            >
+              Save
+            </SaveButton>
+          )}
         </SaveSection>
         <AddTags topics={blogTags} setTopics={setBlogTags} />
       </RightSection>

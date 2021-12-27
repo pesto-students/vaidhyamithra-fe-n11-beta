@@ -1,32 +1,14 @@
-import BlogCard from "../../components/organisms/blogCard/BlogCard";
+import { CardList } from "../../components/organisms/blogCard";
 
 export const homeMenuItems = [
   {
     value: 1,
-    label: "Recommended items",
-    component: (
-      <>
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-      </>
-    ),
+    label: "Recommended for you",
+    component: <CardList />,
   },
   {
     value: 2,
     label: "Trending",
-    component: (
-      <>
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-      </>
-    ),
+    component: <CardList />,
   },
 ];

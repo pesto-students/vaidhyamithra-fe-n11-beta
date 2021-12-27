@@ -1,28 +1,5 @@
-import BlogCard from "../../components/organisms/blogCard/BlogCard";
-
-export const profileTabMenu = [
-  {
-    value: 1,
-    label: "Your Blogs",
-    component: (
-      <>
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-      </>
-    ),
+export const editProfileErrorMessages = {
+  userName: {
+    required: "Required",
   },
-  {
-    value: 2,
-    label: "Saved",
-    component: (
-      <>
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-      </>
-    ),
-  },
-];
+};

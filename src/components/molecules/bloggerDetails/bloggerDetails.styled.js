@@ -8,6 +8,7 @@ export const Paragraph = styled.p`
   margin-top: ${(props) => (props.mt ? "10px" : "0px")};
   margin-bottom: ${(props) => (props.mb ? "10px" : "0px")};
   color: ${(props) => props.color || "black"};
+  cursor: ${(props) => props.cursor || "default"};
 `;
 
 export const AuthorDiv = styled.div``;
@@ -25,4 +26,5 @@ export const BlogPreviewImg = styled.img`
   border-radius: 50%;
   padding: 2px;
   border: 1px solid;
+  cursor: pointer;
 `;

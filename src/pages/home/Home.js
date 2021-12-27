@@ -26,7 +26,7 @@ const Home = () => {
         ))}
       </LeftSection>
       <RightSection>
-        <TopicsList title="Recommended topics" />
+        <TopicsList title="Trending topics" />
       </RightSection>
     </HomepageContainer>
   );

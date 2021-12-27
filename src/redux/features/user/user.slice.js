@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { loginApi, signupApi } from "../../../api/user/userApi";
+import {
+  loginApi,
+  signupApi,
+  updateUserInfoApi,
+} from "../../../api/user/userApi";
 import { USER_SLICE } from "./user.config";
 
 const initialState = {
@@ -7,7 +11,9 @@ const initialState = {
     id: "",
     userName: "",
     email: "",
-    isDoctor: true,
+    about: "",
+    isDoctor: false,
+    interests: [],
     accessToken: null,
   },
   isLoading: false,
@@ -39,6 +45,18 @@ export const signupUser = createAsyncThunk(
   }
 );
 
+export const updateUserInfo = createAsyncThunk(
+  `${USER_SLICE}/updateUserInfo`,
+  async (userData, { rejectWithValue }) => {
+    try {
+      const data = await updateUserInfoApi(userData);
+      return data;
+    } catch (err) {
+      return rejectWithValue([], err);
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: USER_SLICE,
   initialState,
@@ -63,12 +81,24 @@ export const userSlice = createSlice({
       state.errorMessage = "";
     },
     [signupUser.fulfilled]: (state, { payload }) => {
-      // TODO: make API send same auth details as from login
       state.userInfo = payload;
       state.isLoading = false;
       state.errorMessage = "";
     },
     [signupUser.rejected]: (state, { meta }) => {
+      state.errorMessage = meta.response.data.message;
+      state.isLoading = false;
+    },
+    [updateUserInfo.pending]: (state) => {
+      state.isLoading = true;
+      state.errorMessage = "";
+    },
+    [updateUserInfo.fulfilled]: (state, { payload }) => {
+      state.userInfo = { ...payload, accessToken: state.userInfo.accessToken };
+      state.isLoading = false;
+      state.errorMessage = "";
+    },
+    [updateUserInfo.rejected]: (state, { meta }) => {
       state.errorMessage = meta.response.data.message;
       state.isLoading = false;
     },

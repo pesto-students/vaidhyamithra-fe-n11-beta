@@ -4,6 +4,7 @@ import {
   getBlogApi,
   updateBlogApi,
 } from "../../../api/blog/blogApi";
+import { BLOG_STATUS } from "../../../pages/editBlog/editBlog.constants";
 import { BLOG_SLICE } from "./blog.congif";
 
 const initialState = {
@@ -13,7 +14,7 @@ const initialState = {
     content: "",
     authorId: "",
     tags: [],
-    status: "",
+    status: BLOG_STATUS.DRAFT,
     updatedAt: "",
     authorDetails: {
       _id: "",
@@ -108,6 +109,20 @@ export const blogSlice = createSlice({
       state.errorMessage = "";
     },
     [createBlog.rejected]: (state, { meta }) => {
+      state.blogInfo = initialState.blogInfo;
+      state.errorMessage = meta.response.data.message;
+      state.isLoading = false;
+    },
+    [updateBlog.pending]: (state) => {
+      state.isLoading = true;
+      state.errorMessage = "";
+    },
+    [updateBlog.fulfilled]: (state, { payload }) => {
+      state.blogInfo = payload;
+      state.isLoading = false;
+      state.errorMessage = "";
+    },
+    [updateBlog.rejected]: (state, { meta }) => {
       state.blogInfo = initialState.blogInfo;
       state.errorMessage = meta.response.data.message;
       state.isLoading = false;
