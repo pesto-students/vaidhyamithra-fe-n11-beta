@@ -158,7 +158,7 @@ const EditBlog = ({ isCreateMode }) => {
               variant={BUTTON_VARIANTS.OUTLINED}
               onClick={() => saveBlog({ status: BLOG_STATUS.DRAFT })}
             >
-              Save
+              Save draft
             </SaveButton>
           )}
         </SaveSection>
