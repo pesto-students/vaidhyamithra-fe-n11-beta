@@ -1,4 +1,5 @@
 // import bpImg from "../../images/bp_image.jpg";
+import { useState } from "react";
 import {
   Details,
   DetailsContainer,
@@ -10,7 +11,6 @@ import {
 import BloggerDetails from "../../components/molecules/bloggerDetails";
 import BlogTags from "../../components/atoms/blogTags";
 // import RelatedBlogs from "../../components/organisms/relatedBlogs";
-// import Comments from "../../components/organisms/comments";
 import { generatePath, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getBlog, resetBlogState } from "../../redux/features/blog/blog.slice";
@@ -19,18 +19,29 @@ import PageNotFound from "../pageNotFound/PageNotFound";
 import { CircularProgress } from "../../components/atoms/progress";
 import Button from "../../components/atoms/button";
 import { ROUTES } from "../../values/routes";
-import { useRouting } from "../../helpers";
+import { useAuth, useRouting } from "../../helpers";
+import Comments from "../../components/organisms/comments";
+import {
+  deleteComment,
+  getBlogComments,
+  postBlogComment,
+  updateComments,
+} from "../../redux/features/comments/comment.slice";
 
 const BlogDetails = () => {
   const { blogId } = useParams();
   const dispatch = useDispatch();
+  const [commentText, setCommentText] = useState("");
   const {
     userInfo: { id: userId },
   } = useSelector((state) => state.user);
   const { gotoPrivateRoute } = useRouting();
+  const { comments } = useSelector((state) => state.comment);
+  const { authenticatedFunction } = useAuth();
 
   useEffect(() => {
     dispatch(getBlog({ blogId }));
+    dispatch(getBlogComments({ blogId }));
   }, [blogId, dispatch]);
 
   // cleaning up redux state!
@@ -46,6 +57,8 @@ const BlogDetails = () => {
     blogInfo: { title, content, updatedAt, authorDetails, tags, authorId },
   } = useSelector((state) => state.blog);
 
+  const { isCommentsLoading } = useSelector((state) => state.comment.isLoading);
+
   const editBlogPath = generatePath(ROUTES.EDIT_BLOG, { blogId });
 
   if (!isLoading && errorMessage) {
@@ -59,6 +72,34 @@ const BlogDetails = () => {
       </Details>
     );
   }
+
+  const addComment = () => {
+
+    if(commentText.length === 0){
+      return;
+    }
+
+    dispatch(
+      postBlogComment({ userId: userId, blogId: blogId, comment: commentText })
+    )
+      .unwrap()
+      .then(() => {
+        setCommentText("");
+      });
+  };
+
+  const authenticatedAddComment = () => {
+    authenticatedFunction(addComment);
+  };
+
+  const handleDeleteComment = (commentId) => {
+    dispatch(deleteComment(commentId))
+    .unwrap()
+    .then(() => {
+      let filteredComments = comments.filter(comment => comment._id !== commentId);
+      dispatch(updateComments(filteredComments));
+    })
+  };
 
   return (
     <Details>
@@ -82,6 +123,16 @@ const BlogDetails = () => {
         </TagSection>
         {/* <Comments />
         <RelatedBlogs /> */}
+        <Comments
+          isLoading={isCommentsLoading}
+          blogComments={comments}
+          value={commentText}
+          handleAddComment={authenticatedAddComment}
+          handleTextChange={(e) => setCommentText(e.target.value)}
+          canDelete = {userId === authorId}
+          userId = {userId}
+          deleteComment={handleDeleteComment}
+        />
       </DetailsContainer>
     </Details>
   );

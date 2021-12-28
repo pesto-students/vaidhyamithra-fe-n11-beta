@@ -9,6 +9,7 @@ import { SEARCH_SLICE } from "./features/search/search.config";
 import { BLOG_SLICE } from "./features/blog/blog.congif";
 import { TAG_SLICE } from "./features/tags/tags.config";
 import { PROFILE_SLICE } from "./features/profile/profile.config";
+import { COMMENT_SLICE } from "./features/comments/comment.config";
 
 import userReducer from "./features/user/user.slice";
 import alertsReducer from "./features/alerts/alerts.slice";
@@ -17,6 +18,7 @@ import searchReducer from "./features/search/search.slice";
 import blogReducer from "./features/blog/blog.slice";
 import profileReducer from "./features/profile/profile.slice";
 import tagReducer from "./features/tags/tags.slice";
+import commentReducer from "./features/comments/comment.slice";
 
 const reducers = combineReducers({
   [USER_SLICE]: userReducer,
@@ -25,7 +27,8 @@ const reducers = combineReducers({
   [SEARCH_SLICE]: searchReducer,
   [BLOG_SLICE]: blogReducer,
   [PROFILE_SLICE]: profileReducer,
-  [TAG_SLICE]: tagReducer
+  [TAG_SLICE]: tagReducer,
+  [COMMENT_SLICE]: commentReducer
 });
 
 const persistConfig = {

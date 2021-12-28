@@ -1,14 +1,38 @@
-import Button, { BUTTON_VARIANTS } from "../../atoms/button";
 import SingleComment from "./SingleComment";
-import { SeeAllComments } from "./comments.styled";
+import { FeedbackContainer } from "./comments.styled";
+import { CircularProgress } from "../../atoms/progress";
 
-const CommentsList = () => {
+const CommentsList = ({
+  blogComments,
+  isLoading,
+  isCanDelete,
+  handleDelete,
+  userId,
+}) => {
   return (
     <>
-      <SingleComment />
-      <SeeAllComments>
+      {isLoading ? (
+        <FeedbackContainer>
+          <CircularProgress />
+        </FeedbackContainer>
+      ) : (
+        <>
+          {blogComments.map((comment, key) => (
+            <SingleComment
+              key={key}
+              userId={userId}
+              blogComment={comment}
+              userDetails={comment.userDetails}
+              isCanDelete={isCanDelete}
+              handleDeleteComment={handleDelete}
+            />
+          ))}
+        </>
+      )}
+
+      {/* <SeeAllComments>
         <Button variant={BUTTON_VARIANTS.TEXT}> See All Comments</Button>
-      </SeeAllComments>
+      </SeeAllComments> */}
     </>
   );
 };
