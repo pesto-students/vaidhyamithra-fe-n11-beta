@@ -30,3 +30,23 @@ export const CommentContainer = styled.div`
   margin-top: 20px;
   margin-bottom: 20px;
 `;
+
+export const FeedbackContainer = styled.div`
+  display: flex;
+  height: 150px;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const BloggerDetailsSection = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+`;
+
+export const DeleteButton = styled.div`
+  cursor: pointer;
+  color: #ea4335;
+  display: flex;
+  align-items: end;
+`;
