@@ -13,11 +13,13 @@ const Search = () => {
   const dispatch = useDispatch();
   const [internalStr, setInternalStr] = useState("");
 
+  // INTENTIONALLY kept the function deps empty -> returns the SAME function again!
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateStoreText = useCallback(
     debounce((text) => {
       dispatch(updateSearchText(text));
     }, 250),
-    [] // intentionally kept the function deps empty -> returns the SAME function again!
+    []
   );
 
   const handleSearchTextChange = (text) => {
