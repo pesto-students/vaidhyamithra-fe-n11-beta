@@ -12,7 +12,6 @@ const initialState = {
 export const getLatestBlogs = createAsyncThunk(
   `${HOME_SLICE}/getLatestBlogs`,
   async (input, { rejectWithValue }) => {
-    console.log("hi");
     try {
       const data = await getLatestBlogsApi();
       return data;
