@@ -39,3 +39,13 @@ export const getBlogApi = async ({ blogId }) => {
   const { data } = await getApiConfig().get(`/blog/${blogId}`);
   return data;
 };
+
+export const getLatestBlogsApi = async () => {
+  const { data } = await getApiConfig().get(`/getLatestBlogs`);
+  return data;
+};
+
+export const getBlogsByTagsApi = async ({ tags }) => {
+  const { data } = await getApiConfig().post(`/blogsByTags`, { tags });
+  return data;
+};

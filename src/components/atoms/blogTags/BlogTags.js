@@ -5,7 +5,7 @@ const BlogTags = ({ tags }) => {
   return (
     <TagsList>
       {tags.map((tag) => (
-        <BlogTag key={tag}>{tag}</BlogTag>
+        <BlogTag key={tag} tag={tag} />
       ))}
     </TagsList>
   );

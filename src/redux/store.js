@@ -10,6 +10,8 @@ import { BLOG_SLICE } from "./features/blog/blog.congif";
 import { TAG_SLICE } from "./features/tags/tags.config";
 import { PROFILE_SLICE } from "./features/profile/profile.config";
 import { COMMENT_SLICE } from "./features/comments/comment.config";
+import { HOME_SLICE } from "./features/home/home.config";
+import { BLOGS_BY_TAG_SLICE } from "./features/blogsByTag/blogsByTag.config";
 
 import userReducer from "./features/user/user.slice";
 import alertsReducer from "./features/alerts/alerts.slice";
@@ -19,6 +21,8 @@ import blogReducer from "./features/blog/blog.slice";
 import profileReducer from "./features/profile/profile.slice";
 import tagReducer from "./features/tags/tags.slice";
 import commentReducer from "./features/comments/comment.slice";
+import homeReducer from "./features/home/home.slice";
+import blogsByTagReducer from "./features/blogsByTag/blogsByTag.slice";
 
 const reducers = combineReducers({
   [USER_SLICE]: userReducer,
@@ -28,7 +32,9 @@ const reducers = combineReducers({
   [BLOG_SLICE]: blogReducer,
   [PROFILE_SLICE]: profileReducer,
   [TAG_SLICE]: tagReducer,
-  [COMMENT_SLICE]: commentReducer
+  [COMMENT_SLICE]: commentReducer,
+  [HOME_SLICE]: homeReducer,
+  [BLOGS_BY_TAG_SLICE]: blogsByTagReducer,
 });
 
 const persistConfig = {

@@ -7,6 +7,7 @@ import {
   BlogTitle,
   BloggerDetailsSection,
   BlogContent,
+  EditBlogBtn,
 } from "./blogDetails.styled";
 import BloggerDetails from "../../components/molecules/bloggerDetails";
 import BlogTags from "../../components/atoms/blogTags";
@@ -17,7 +18,6 @@ import { getBlog, resetBlogState } from "../../redux/features/blog/blog.slice";
 import { useEffect } from "react";
 import PageNotFound from "../pageNotFound/PageNotFound";
 import { CircularProgress } from "../../components/atoms/progress";
-import Button from "../../components/atoms/button";
 import { ROUTES } from "../../values/routes";
 import { useAuth, useRouting } from "../../helpers";
 import Comments from "../../components/organisms/comments";
@@ -112,9 +112,12 @@ const BlogDetails = () => {
             publishedDate={updatedAt}
           />
           {userId === authorId && (
-            <Button onClick={() => gotoPrivateRoute(editBlogPath)}>
+            <EditBlogBtn
+              sx={{ mb: "auto" }}
+              onClick={() => gotoPrivateRoute(editBlogPath)}
+            >
               Edit Blog
-            </Button>
+            </EditBlogBtn>
           )}
         </BloggerDetailsSection>
         <BlogContent dangerouslySetInnerHTML={{ __html: content }} />
