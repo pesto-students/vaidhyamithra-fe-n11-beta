@@ -125,8 +125,6 @@ const BlogDetails = () => {
         <TagSection>
           <BlogTags tags={tags} />
         </TagSection>
-        {/* <Comments />
-        <RelatedBlogs /> */}
         <Comments
           isLoading={isCommentLoading}
           blogComments={comments}
@@ -137,6 +135,7 @@ const BlogDetails = () => {
           userId={userId}
           deleteComment={handleDeleteComment}
         />
+        {/* <RelatedBlogs /> */}
       </DetailsContainer>
     </Details>
   );

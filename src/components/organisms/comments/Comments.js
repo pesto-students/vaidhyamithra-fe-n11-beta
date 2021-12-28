@@ -31,7 +31,9 @@ const Comments = ({
         fullWidth
       />
       <AddComment>
-        <Button onClick={handleAddComment}>Add Comment</Button>
+        <Button disabled={!value} onClick={handleAddComment}>
+          Add Comment
+        </Button>
       </AddComment>
       <CommentsList
         blogComments={blogComments}
