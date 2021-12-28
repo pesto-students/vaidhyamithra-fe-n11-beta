@@ -4,6 +4,7 @@ import {
   getBlogApi,
   updateBlogApi,
 } from "../../../api/blog/blogApi";
+import { deleteCommentApi, getBlogCommentsApi, postCommentApi } from "../../../api/comment/commentApi";
 import { BLOG_STATUS } from "../../../pages/editBlog/editBlog.constants";
 import { BLOG_SLICE } from "./blog.congif";
 
@@ -21,7 +22,9 @@ const initialState = {
       name: "",
     },
   },
+  comments: [],
   isLoading: false,
+  isCommentLoading: false,
   errorMessage: "",
 };
 
@@ -77,11 +80,50 @@ export const updateBlog = createAsyncThunk(
   }
 );
 
+export const getBlogComments = createAsyncThunk(
+  `${BLOG_SLICE}/getComments`,
+  async ({ blogId }, { rejectWithValue }) => {
+    try {
+      const data = await getBlogCommentsApi({ blogId });
+      return data;
+    } catch (err) {
+      return rejectWithValue([], err);
+    }
+  }
+);
+
+export const postBlogComment = createAsyncThunk(
+  `${BLOG_SLICE}/createComment`,
+  async ({ userId, blogId, comment }, { rejectWithValue }) => {
+    try {
+      const data = await postCommentApi({ userId, blogId, comment });
+      return data;
+    } catch (err) {
+      return rejectWithValue([], err);
+    }
+  }
+);
+
+export const deleteComment = createAsyncThunk(
+  `${BLOG_SLICE}/deleteComment`,
+  async (commentId, { rejectWithValue }) => {
+    try {
+      const data = await deleteCommentApi(commentId);
+      return data;
+    } catch (err) {
+      return rejectWithValue([], err);
+    }
+  }
+);
+
 export const blogSlice = createSlice({
   name: BLOG_SLICE,
   initialState,
   reducers: {
     resetBlogState: () => initialState,
+    updateComments:(state, {payload}) => {
+      state.comments = payload;
+    }
   },
   extraReducers: {
     [getBlog.pending]: (state) => {
@@ -127,9 +169,35 @@ export const blogSlice = createSlice({
       state.errorMessage = meta.response.data.message;
       state.isLoading = false;
     },
+    [getBlogComments.pending]: (state) => {
+      state.isCommentLoading = true;
+      state.errorMessage = "";
+    },
+    [getBlogComments.fulfilled]: (state, { payload }) => {
+      state.comments = payload;
+      state.isCommentLoading = false;
+      state.errorMessage = "";
+    },
+    [getBlogComments.rejected]: (state, { meta }) => {
+      state.errorMessage = meta.response.data.message;
+      state.isCommentLoading = false;
+    },
+    [postBlogComment.pending]: (state) => {
+      state.isCommentLoading = true;
+      state.errorMessage = "";
+    },
+    [postBlogComment.fulfilled]: (state, { payload }) => {
+      state.comments = payload;
+      state.isCommentLoading = false;
+      state.errorMessage = "";
+    },
+    [postBlogComment.rejected]: (state, { meta }) => {
+      state.errorMessage = meta.response.data.message;
+      state.isCommentLoading = false;
+    }
   },
 });
 
-export const { resetBlogState } = blogSlice.actions;
+export const { resetBlogState, updateComments } = blogSlice.actions;
 
 export default blogSlice.reducer;
