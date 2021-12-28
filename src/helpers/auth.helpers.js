@@ -7,12 +7,13 @@ export const useAuth = () => {
   const { openLogin } = useModalHelper();
 
   const isLoggedIn = !!userInfo.id;
+
   const authenticatedFunction = (functionToCall) => {
     if (!userInfo.id) {
       openLogin();
       return;
     }
     functionToCall();
-  }
+  };
   return { isLoggedIn, authenticatedFunction };
 };
