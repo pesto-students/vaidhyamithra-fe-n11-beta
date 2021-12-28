@@ -13,7 +13,14 @@ import BlogTags from "../../components/atoms/blogTags";
 // import RelatedBlogs from "../../components/organisms/relatedBlogs";
 import { generatePath, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getBlog, resetBlogState } from "../../redux/features/blog/blog.slice";
+import {
+  getBlog,
+  resetBlogState,
+  deleteComment,
+  getBlogComments,
+  postBlogComment,
+  updateComments,
+} from "../../redux/features/blog/blog.slice";
 import { useEffect } from "react";
 import PageNotFound from "../pageNotFound/PageNotFound";
 import { CircularProgress } from "../../components/atoms/progress";
@@ -21,12 +28,6 @@ import Button from "../../components/atoms/button";
 import { ROUTES } from "../../values/routes";
 import { useAuth, useRouting } from "../../helpers";
 import Comments from "../../components/organisms/comments";
-import {
-  deleteComment,
-  getBlogComments,
-  postBlogComment,
-  updateComments,
-} from "../../redux/features/comments/comment.slice";
 
 const BlogDetails = () => {
   const { blogId } = useParams();
@@ -36,7 +37,6 @@ const BlogDetails = () => {
     userInfo: { id: userId },
   } = useSelector((state) => state.user);
   const { gotoPrivateRoute } = useRouting();
-  const { comments } = useSelector((state) => state.comment);
   const { authenticatedFunction } = useAuth();
 
   useEffect(() => {
@@ -53,11 +53,11 @@ const BlogDetails = () => {
 
   const {
     isLoading,
+    isCommentLoading,
     errorMessage,
+    comments,
     blogInfo: { title, content, updatedAt, authorDetails, tags, authorId },
   } = useSelector((state) => state.blog);
-
-  const { isCommentsLoading } = useSelector((state) => state.comment.isLoading);
 
   const editBlogPath = generatePath(ROUTES.EDIT_BLOG, { blogId });
 
@@ -74,8 +74,7 @@ const BlogDetails = () => {
   }
 
   const addComment = () => {
-
-    if(commentText.length === 0){
+    if (commentText.length === 0) {
       return;
     }
 
@@ -94,11 +93,13 @@ const BlogDetails = () => {
 
   const handleDeleteComment = (commentId) => {
     dispatch(deleteComment(commentId))
-    .unwrap()
-    .then(() => {
-      let filteredComments = comments.filter(comment => comment._id !== commentId);
-      dispatch(updateComments(filteredComments));
-    })
+      .unwrap()
+      .then(() => {
+        let filteredComments = comments.filter(
+          (comment) => comment._id !== commentId
+        );
+        dispatch(updateComments(filteredComments));
+      });
   };
 
   return (
@@ -124,13 +125,13 @@ const BlogDetails = () => {
         {/* <Comments />
         <RelatedBlogs /> */}
         <Comments
-          isLoading={isCommentsLoading}
+          isLoading={isCommentLoading}
           blogComments={comments}
           value={commentText}
           handleAddComment={authenticatedAddComment}
           handleTextChange={(e) => setCommentText(e.target.value)}
-          canDelete = {userId === authorId}
-          userId = {userId}
+          canDelete={userId === authorId}
+          userId={userId}
           deleteComment={handleDeleteComment}
         />
       </DetailsContainer>
