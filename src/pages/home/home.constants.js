@@ -1,5 +1,5 @@
-import { CardList } from "../../components/organisms/blogCard";
 import LatestBlogs from "./LatestBlogs";
+import RecommendedBlogs from "./RecommendedBlogs";
 
 export const homeMenuItems = [
   {
@@ -10,6 +10,6 @@ export const homeMenuItems = [
   {
     value: 2,
     label: "Recommended for you",
-    component: <CardList />,
+    component: <RecommendedBlogs />,
   },
 ];
