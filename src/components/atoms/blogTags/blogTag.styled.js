@@ -10,9 +10,12 @@ export const Topic = styled.div`
   width: max-content;
   padding: 2px 8px;
   text-transform: uppercase;
-  margin: 0 4px;
   font-weight: 500;
   cursor: pointer;
+
+  & ~ & {
+    margin-left: 4px;
+  }
 `;
 
 export const TagsList = styled.div`
