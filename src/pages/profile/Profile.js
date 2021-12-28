@@ -75,6 +75,8 @@ const Profile = () => {
     };
   }, [dispatch, userId]);
 
+  const toShowTopicsList = isSelfProfile ? isDoctor : true;
+
   return (
     <ProfileContainer>
       <LeftSection>
@@ -91,14 +93,16 @@ const Profile = () => {
         ))}
       </LeftSection>
       <RightSection>
-        <TopicsList
-          tags={tags}
-          title={
-            isSelfProfile
-              ? `Topics you've written blogs for`
-              : `Topics by ${userName}`
-          }
-        />
+        {toShowTopicsList && (
+          <TopicsList
+            tags={tags}
+            title={
+              isSelfProfile
+                ? `Topics you've written blogs for`
+                : `Topics by ${userName}`
+            }
+          />
+        )}
         {isSelfProfile && (
           <>
             <TopicsList
