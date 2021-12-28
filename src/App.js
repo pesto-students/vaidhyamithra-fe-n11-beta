@@ -11,6 +11,7 @@ const Search = lazy(() => import("./pages/searchBlog"));
 const EditBlog = lazy(() => import("./pages/editBlog"));
 const Profile = lazy(() => import("./pages/profile"));
 const BlogDetails = lazy(() => import("./pages/blogDetails"));
+const BlogsByTag = lazy(() => import("./pages/blogsByTag"));
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path={ROUTES.HOME} element={<AppSkeleton />}>
           <Route index element={<Home />} />
           <Route path={ROUTES.SEARCH} element={<Search />} />
+          <Route path={ROUTES.BLOGS_BY_TAG} element={<BlogsByTag />} />
           <Route path={ROUTES.BLOG} element={<BlogDetails />} />
           <Route
             path={ROUTES.CREATE}

@@ -15,13 +15,17 @@ const InterestsModal = () => {
   const { tags } = useSelector((state) => state.tag);
   const { closeModal } = useModalHelper();
   const { id, interests } = useSelector((state) => state.user.userInfo);
-  const [selectedTags, setSelectedTags] = useState(interests);
+  const [selectedTags, setSelectedTags] = useState([]);
   // Use selectedTags to update the userInfo
 
   useEffect(() => {
     setOpen(modalType === MODAL_TYPES.INTERESTS);
     dispatch(getAllTags());
   }, [dispatch, modalType]);
+
+  useEffect(() => {
+    setSelectedTags(interests);
+  }, [interests]);
 
   const getVariant = (tagName) => {
     if (selectedTags.includes(tagName)) {

@@ -7,7 +7,7 @@ export const ProfileContainer = styled.div`
 export const ProfileDataContainer = styled.div`
   display: flex;
   margin-bottom: 20px;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 export const ProfilePic = styled.img`
