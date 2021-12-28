@@ -3,8 +3,21 @@ import Typography from "../../atoms/typography";
 import Button, { BUTTON_VARIANTS } from "../../atoms/button";
 import { TopicsContainer, ButtonsContainer } from "./topicsList.styled";
 import Ficon from "../../atoms/featherIcon";
+import { useRouting } from "../../../helpers";
+import { ROUTES } from "../../../values/routes";
+import { generatePath } from "react-router-dom";
 
 const TopicsList = ({ title, tags, isLoading, handleClick, selected }) => {
+  const { gotoRoute } = useRouting();
+
+  // Default behaviour routing to tag page
+  if (!handleClick) {
+    handleClick = (tag) => {
+      const tagPath = generatePath(ROUTES.BLOGS_BY_TAG, { tagName: tag });
+      gotoRoute(tagPath);
+    };
+  }
+
   return (
     <TopicsContainer>
       {isLoading === true ? (
@@ -51,7 +64,7 @@ TopicsList.defaultProps = {
   selected: false,
   tags: [],
   isLoading: false,
-  handleClick: () => {},
+  handleClick: null,
 };
 
 export default TopicsList;
