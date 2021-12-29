@@ -22,7 +22,6 @@ export const getLatestBlogs = createAsyncThunk(
   `${HOME_SLICE}/getLatestBlogs`,
   async ({ pageNumber, pageSize }, { rejectWithValue }) => {
     try {
-      console.log("Pagenumber, PageSize", { pageNumber, pageSize });
       const data = await getLatestBlogsApi({ pageNumber, pageSize });
       return data;
     } catch (err) {
@@ -75,7 +74,6 @@ export const homeSlice = createSlice({
         payload.paginatedResults
       );
       state.pageNumber = state.pageNumber + 1;
-      console.log("I came here:", state.pageNumber);
       if (payload.totalCount) state.latest.totalCount = payload.totalCount;
       state.isLoading = false;
       state.errorMessage = "";

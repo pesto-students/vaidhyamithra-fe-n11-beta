@@ -1,6 +1,9 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getLatestBlogs, resetLatest } from "../../redux/features/home/home.slice";
+import {
+  getLatestBlogs,
+  resetLatest,
+} from "../../redux/features/home/home.slice";
 import InfiniteScroller from "../../components/organisms/infiniteScroller/InfiniteScroller";
 import { UserFeedbackContainer } from "./home.styled";
 import { CircularProgress } from "@mui/material";
@@ -10,20 +13,13 @@ const pageSize = 5;
 
 const LatestBlogs = () => {
   const dispatch = useDispatch();
-  //const [pageNumber, setPageNumber] = useState(1);
   const {
     pageNumber,
     latest: { totalCount, paginatedResults },
   } = useSelector((state) => state.home);
 
-  console.log("Page number:", pageNumber);
-
   const fetchMoreData = useCallback(
-    (pageNumber) => {
-      console.log("Pagenumber in fetch:", pageNumber);
-      if(!pageNumber)
-        pageNumber = 1;
-
+    (pageNumber = 1) => {
       let pageObj = {
         pageNumber,
         pageSize,
@@ -44,12 +40,10 @@ const LatestBlogs = () => {
   };
 
   const hasMore = pageNumber <= Math.ceil(totalCount / pageSize);
-  console.log("has more:", hasMore);
 
-  return ( 
+  return (
     <>
-      {
-        paginatedResults.length > 0 &&
+      {paginatedResults.length > 0 && (
         <InfiniteScroller
           dataLength={paginatedResults.length}
           hasMore={hasMore}
@@ -64,7 +58,7 @@ const LatestBlogs = () => {
           rowRenderer={rowRenderer}
           children={paginatedResults}
         />
-      }
+      )}
     </>
   );
 };
