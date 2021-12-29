@@ -73,6 +73,8 @@ export const BlogContent = styled.div`
 `;
 
 export const AuthorInfo = styled.div`
+  display: flex;
+  align-items: center;
   margin-top: 24px;
 `;
 

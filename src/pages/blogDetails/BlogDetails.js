@@ -74,7 +74,7 @@ const BlogDetails = () => {
     );
   }
 
-  const addComment = authenticatedFunction(() => {
+  const addComment = () => {
     if (commentText.length === 0) {
       return;
     }
@@ -86,7 +86,7 @@ const BlogDetails = () => {
       .then(() => {
         setCommentText("");
       });
-  });
+  };
 
   const handleDeleteComment = (commentId) => {
     dispatch(deleteComment(commentId))
@@ -127,7 +127,7 @@ const BlogDetails = () => {
           isLoading={isCommentLoading}
           blogComments={comments}
           value={commentText}
-          handleAddComment={addComment}
+          handleAddComment={() => authenticatedFunction(addComment)}
           handleTextChange={(e) => setCommentText(e.target.value)}
           canDelete={userId === authorId}
           userId={userId}
