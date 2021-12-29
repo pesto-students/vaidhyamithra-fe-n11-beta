@@ -28,7 +28,7 @@ export const ProfileDescription = styled.div`
 
 export const EditIconContainer = withTheme(styled("div")`
   cursor: pointer;
-  margin-right: 12px;
+  margin-left: 12px;
 
   svg:hover {
     color: ${({ theme }) => theme.palette.primary.main};
