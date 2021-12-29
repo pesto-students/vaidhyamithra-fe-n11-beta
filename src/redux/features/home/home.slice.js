@@ -8,7 +8,11 @@ import { HOME_SLICE } from "./home.config";
 
 const initialState = {
   recommended: [],
-  latest: [],
+  latest: {
+    paginatedResults: [],
+    totalCount: 9999,
+  },
+  pageNumber: 1,
   latestTopics: [],
   isLoading: false,
   errorMessage: "",
@@ -16,9 +20,9 @@ const initialState = {
 
 export const getLatestBlogs = createAsyncThunk(
   `${HOME_SLICE}/getLatestBlogs`,
-  async (input, { rejectWithValue }) => {
+  async ({ pageNumber, pageSize }, { rejectWithValue }) => {
     try {
-      const data = await getLatestBlogsApi();
+      const data = await getLatestBlogsApi({ pageNumber, pageSize });
       return data;
     } catch (err) {
       return rejectWithValue([], err);
@@ -53,7 +57,12 @@ export const getRecommendedBlogs = createAsyncThunk(
 export const homeSlice = createSlice({
   name: HOME_SLICE,
   initialState,
-  reducers: {},
+  reducers: {
+    resetLatest: (state) => {
+      state.pageNumber = initialState.pageNumber;
+      state.latest = initialState.latest;
+    },
+  },
   extraReducers: {
     // get latest blogs
     [getLatestBlogs.pending]: (state) => {
@@ -61,11 +70,16 @@ export const homeSlice = createSlice({
       state.errorMessage = "";
     },
     [getLatestBlogs.fulfilled]: (state, { payload }) => {
-      state.latest = payload;
+      state.latest.paginatedResults = state.latest.paginatedResults.concat(
+        payload.paginatedResults
+      );
+      state.pageNumber = state.pageNumber + 1;
+      if (payload.totalCount) state.latest.totalCount = payload.totalCount;
       state.isLoading = false;
       state.errorMessage = "";
     },
     [getLatestBlogs.rejected]: (state, { meta }) => {
+      state.pageNumber = initialState.pageNumber;
       state.errorMessage = meta.response.data.message;
       state.isLoading = false;
     },
@@ -99,5 +113,5 @@ export const homeSlice = createSlice({
     },
   },
 });
-
+export const { resetLatest } = homeSlice.actions;
 export default homeSlice.reducer;
