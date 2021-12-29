@@ -24,12 +24,12 @@ const ProfileData = ({ isSelfProfile, handleEdit }) => {
       <ProfilePic src={manImg} />
       <ProfileDescription>
         <NameContainer>
+          <Typography variant={TEXT_TYPE.H1}>{userName}</Typography>
           {isSelfProfile && (
             <EditIconContainer onClick={handleEdit}>
               <Ficon icon="edit-2" />
             </EditIconContainer>
           )}
-          <Typography variant={TEXT_TYPE.H1}>{userName}</Typography>
         </NameContainer>
         <Typography>{about}</Typography>
       </ProfileDescription>
