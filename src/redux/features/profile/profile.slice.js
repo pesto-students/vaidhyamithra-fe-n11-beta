@@ -95,7 +95,7 @@ export const profileSlice = createSlice({
       state.errorMessage = "";
     },
     [getProfileDetails.fulfilled]: (state, { payload }) => {
-      state.userInfo = payload;
+      state.userInfo = { ...payload, tags: state.userInfo.tags };
       state.isLoading = false;
       state.errorMessage = "";
     },
