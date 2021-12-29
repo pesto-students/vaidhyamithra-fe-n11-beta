@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { ProfileContainer } from "./profile.styled";
+import {
+  LogoutContainer,
+  ProfileContainer,
+  UpdateInterestsBtn,
+} from "./profile.styled";
 import {
   LeftSection,
   RightSection,
@@ -18,8 +22,10 @@ import SavedBlogs from "./SavedBlogs";
 import PublishedBlogs from "./PublishedBlogs";
 import DraftBlogs from "./DraftBlogs";
 import Button from "../../components/atoms/button";
-import { useModalHelper } from "../../helpers";
+import { useModalHelper, useRouting } from "../../helpers";
 import EditableProfileData from "./EditableProfileData";
+import { logoutUser } from "../../redux/features/user/user.slice";
+import { ROUTES } from "../../values/routes";
 
 const Profile = () => {
   const [currentTab, setCurrentTab] = useState(1);
@@ -33,6 +39,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const { userId } = useParams();
   const { openInterests } = useModalHelper();
+  const { gotoRoute } = useRouting();
 
   const isSelfProfile = selfUserId === userId;
 
@@ -65,6 +72,11 @@ const Profile = () => {
       component: <PublishedBlogs userId={userId} />,
     });
   }
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    gotoRoute(ROUTES.HOME);
+  };
 
   // init + cleanup
   useEffect(() => {
@@ -119,8 +131,15 @@ const Profile = () => {
               tags={interests}
               title={`Topics you're interested in`}
             />
-            <Button onClick={openInterests}>Update interests</Button>
+            <UpdateInterestsBtn onClick={openInterests}>
+              Update interests
+            </UpdateInterestsBtn>
           </>
+        )}
+        {isSelfProfile && (
+          <LogoutContainer>
+            <Button onClick={handleLogout}>Logout</Button>
+          </LogoutContainer>
         )}
       </RightSection>
     </ProfileContainer>
