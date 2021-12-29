@@ -9,11 +9,14 @@ import {
 } from "../../components/organisms/appSkeleton";
 import { useDispatch, useSelector } from "react-redux";
 import { getLatestTags } from "../../redux/features/home/home.slice";
+import { useAuth } from "../../helpers";
+import LatestBlogs from "./LatestBlogs";
 
 const Home = () => {
   const [currentTab, setCurrentTab] = useState(homeMenuItems[0].value);
   const { latestTopics } = useSelector((state) => state.home);
   const dispatch = useDispatch();
+  const { isLoggedIn } = useAuth();
 
   useEffect(() => {
     dispatch(getLatestTags());
@@ -22,16 +25,22 @@ const Home = () => {
   return (
     <HomepageContainer>
       <LeftSection>
-        <TabMenu
-          value={currentTab}
-          setValue={setCurrentTab}
-          menuItems={homeMenuItems}
-        />
-        {homeMenuItems.map(({ value, component }) => (
-          <TabPanel key={value} value={value} currentValue={currentTab}>
-            {component}
-          </TabPanel>
-        ))}
+        {isLoggedIn ? (
+          <>
+            <TabMenu
+              value={currentTab}
+              setValue={setCurrentTab}
+              menuItems={homeMenuItems}
+            />
+            {homeMenuItems.map(({ value, component }) => (
+              <TabPanel key={value} value={value} currentValue={currentTab}>
+                {component}
+              </TabPanel>
+            ))}
+          </>
+        ) : (
+          <LatestBlogs />
+        )}
       </LeftSection>
       <RightSection>
         <TopicsList tags={latestTopics} title="Latest topics" />
