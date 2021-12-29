@@ -6,7 +6,7 @@ import {
 } from "../../redux/features/home/home.slice";
 import InfiniteScroller from "../../components/organisms/infiniteScroller/InfiniteScroller";
 import { UserFeedbackContainer } from "./home.styled";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress } from "../../components/atoms/progress";
 import BlogCard from "../../components/organisms/blogCard/BlogCard";
 
 const pageSize = 5;
