@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import manImg from "../../images/man_img.png";
 import {
   ProfileDataContainer,
@@ -13,7 +14,7 @@ import { updateUserInfo } from "../../redux/features/user/user.slice";
 import { setAlert } from "../../redux/features/alerts/alerts.slice";
 import { alertTypes } from "../../components/molecules/snackbar";
 
-const EditableProfileData = () => {
+const EditableProfileData = ({ handleEditCompleted }) => {
   const { userInfo, isLoading } = useSelector((state) => state.user);
   const [userName, setUserName] = useState(userInfo.userName);
   const [about, setAbout] = useState(userInfo.about);
@@ -28,9 +29,10 @@ const EditableProfileData = () => {
   const updateProfile = () => {
     dispatch(updateUserInfo({ userId: userInfo.id, name: userName, about }))
       .unwrap()
-      .then(() =>
-        dispatch(setAlert({ text: "Updated!", type: alertTypes.success }))
-      );
+      .then(() => {
+        dispatch(setAlert({ text: "Updated!", type: alertTypes.success }));
+        handleEditCompleted();
+      });
   };
 
   const isUpdateDisabled = !!userNameError;
@@ -67,6 +69,14 @@ const EditableProfileData = () => {
       </ProfileDescription>
     </ProfileDataContainer>
   );
+};
+
+EditableProfileData.propTypes = {
+  handleEditCompleted: PropTypes.func,
+};
+
+EditableProfileData.defaultProps = {
+  handleEdit: () => {},
 };
 
 export default EditableProfileData;

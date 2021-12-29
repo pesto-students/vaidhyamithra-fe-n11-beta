@@ -23,6 +23,7 @@ import EditableProfileData from "./EditableProfileData";
 
 const Profile = () => {
   const [currentTab, setCurrentTab] = useState(1);
+  const [isEditMode, setIsEditMode] = useState(false);
   const {
     id: selfUserId,
     isDoctor,
@@ -80,7 +81,16 @@ const Profile = () => {
   return (
     <ProfileContainer>
       <LeftSection>
-        {isSelfProfile ? <EditableProfileData /> : <ProfileData />}
+        {isEditMode ? (
+          <EditableProfileData
+            handleEditCompleted={() => setIsEditMode(false)}
+          />
+        ) : (
+          <ProfileData
+            isSelfProfile={isSelfProfile}
+            handleEdit={() => setIsEditMode(true)}
+          />
+        )}
         <TabMenu
           value={currentTab}
           setValue={setCurrentTab}

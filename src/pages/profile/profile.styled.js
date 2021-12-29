@@ -1,3 +1,4 @@
+import { withTheme } from "@emotion/react";
 import styled from "styled-components";
 
 export const ProfileContainer = styled.div`
@@ -22,4 +23,18 @@ export const ProfileDescription = styled.div`
   flex-direction: column;
   margin-left: 20px;
   width: 100%;
+`;
+
+export const EditIconContainer = withTheme(styled("div")`
+  cursor: pointer;
+  margin-right: 12px;
+
+  svg:hover {
+    color: ${({ theme }) => theme.palette.primary.main};
+  }
+`);
+
+export const NameContainer = styled.div`
+  display: flex;
+  align-items: center;
 `;
