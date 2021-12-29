@@ -51,5 +51,6 @@ export const UpdateInterestsBtn = styled(Button)`
 `;
 
 export const LogoutContainer = styled.div`
+  padding-top: 20px;
   margin-top: auto;
 `;
