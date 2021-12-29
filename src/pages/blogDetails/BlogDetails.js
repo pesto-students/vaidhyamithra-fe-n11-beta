@@ -28,6 +28,7 @@ import { CircularProgress } from "../../components/atoms/progress";
 import { ROUTES } from "../../values/routes";
 import { useAuth, useRouting } from "../../helpers";
 import Comments from "../../components/organisms/comments";
+import Bookmark from "../../components/molecules/bookmark";
 
 const BlogDetails = () => {
   const { blogId } = useParams();
@@ -73,7 +74,7 @@ const BlogDetails = () => {
     );
   }
 
-  const addComment = () => {
+  const addComment = authenticatedFunction(() => {
     if (commentText.length === 0) {
       return;
     }
@@ -85,11 +86,7 @@ const BlogDetails = () => {
       .then(() => {
         setCommentText("");
       });
-  };
-
-  const authenticatedAddComment = () => {
-    authenticatedFunction(addComment);
-  };
+  });
 
   const handleDeleteComment = (commentId) => {
     dispatch(deleteComment(commentId))
@@ -112,6 +109,7 @@ const BlogDetails = () => {
             authorDetails={authorDetails}
             publishedDate={updatedAt}
           />
+          <Bookmark blogId={blogId} />
           {userId === authorId && (
             <EditBlogBtn
               sx={{ mb: "auto" }}
@@ -129,7 +127,7 @@ const BlogDetails = () => {
           isLoading={isCommentLoading}
           blogComments={comments}
           value={commentText}
-          handleAddComment={authenticatedAddComment}
+          handleAddComment={addComment}
           handleTextChange={(e) => setCommentText(e.target.value)}
           canDelete={userId === authorId}
           userId={userId}

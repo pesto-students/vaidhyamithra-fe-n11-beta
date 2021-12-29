@@ -13,7 +13,7 @@ export const useAuth = () => {
       openLogin();
       return;
     }
-    functionToCall();
+    return functionToCall;
   };
   return { isLoggedIn, authenticatedFunction };
 };
