@@ -38,3 +38,9 @@ export const NameContainer = styled.div`
   display: flex;
   align-items: center;
 `;
+
+export const ButtonActions = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;

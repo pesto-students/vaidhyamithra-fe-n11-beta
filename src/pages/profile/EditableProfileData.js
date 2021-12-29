@@ -4,10 +4,11 @@ import {
   ProfileDataContainer,
   ProfileDescription,
   ProfilePic,
+  ButtonActions,
 } from "./profile.styled";
 import { useDispatch, useSelector } from "react-redux";
 import InputField from "../../components/atoms/input";
-import Button from "../../components/atoms/button";
+import Button, { BUTTON_VARIANTS } from "../../components/atoms/button";
 import { useState } from "react";
 import { editProfileErrorMessages } from "./profile.constants";
 import { updateUserInfo } from "../../redux/features/user/user.slice";
@@ -58,14 +59,18 @@ const EditableProfileData = ({ handleEditCompleted }) => {
           multiline
           fullWidth
         />
-        <Button
-          loading={isLoading}
-          disabled={isUpdateDisabled}
-          sx={{ ml: "auto" }}
-          onClick={updateProfile}
-        >
-          Update
-        </Button>
+        <ButtonActions>
+          <Button variant={BUTTON_VARIANTS.TEXT} onClick={handleEditCompleted}>
+            Cancel
+          </Button>
+          <Button
+            loading={isLoading}
+            disabled={isUpdateDisabled}
+            onClick={updateProfile}
+          >
+            Update
+          </Button>
+        </ButtonActions>
       </ProfileDescription>
     </ProfileDataContainer>
   );
