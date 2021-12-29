@@ -19,3 +19,13 @@ export const updateUserInfoApi = async (userData) => {
   const { data } = await getApiConfig().put("/updateUserInfo", userData);
   return data;
 };
+
+export const getSavedBlogsApi = async ({ userId }) => {
+  const { data } = await getApiConfig().get(`getSavedBlogs/${userId}`);
+  return data;
+};
+
+export const getDraftBlogsApi = async ({ userId }) => {
+  const { data } = await getApiConfig().get(`blogsByAuthor/draft/${userId}`);
+  return data;
+};

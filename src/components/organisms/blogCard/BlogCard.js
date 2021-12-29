@@ -12,6 +12,7 @@ import BlogTags from "../../atoms/blogTags";
 import { generatePath } from "react-router-dom";
 import { ROUTES } from "../../../values/routes";
 import { useRouting } from "../../../helpers";
+import Bookmark from "../../molecules/bookmark";
 
 const BlogCard = ({
   _id,
@@ -39,6 +40,7 @@ const BlogCard = ({
             authorDetails={authorDetails}
             publishedDate={updatedAt}
           />
+          <Bookmark blogId={_id} />
         </AuthorInfo>
       </CardContainer>
       <BlogImg

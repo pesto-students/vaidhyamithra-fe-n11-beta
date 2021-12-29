@@ -18,6 +18,7 @@ export const Card = withTheme(styled("div")`
 export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 65%;
 `;
 
 export const BlogImg = styled.img`
@@ -72,6 +73,8 @@ export const BlogContent = styled.div`
 `;
 
 export const AuthorInfo = styled.div`
+  display: flex;
+  align-items: center;
   margin-top: 24px;
 `;
 

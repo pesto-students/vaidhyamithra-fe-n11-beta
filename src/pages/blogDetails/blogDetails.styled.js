@@ -10,7 +10,8 @@ export const BlogTitle = styled.h1`
 export const BloggerDetailsSection = styled.div`
   margin-bottom: 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
 `;
 
 export const Details = styled.div`
@@ -42,4 +43,5 @@ export const BlogContent = styled.div``;
 
 export const EditBlogBtn = styled(Button)`
   margin-bottom: auto;
+  margin-left: auto;
 `;

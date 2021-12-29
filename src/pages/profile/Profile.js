@@ -23,6 +23,7 @@ import EditableProfileData from "./EditableProfileData";
 
 const Profile = () => {
   const [currentTab, setCurrentTab] = useState(1);
+  const [isEditMode, setIsEditMode] = useState(false);
   const {
     id: selfUserId,
     isDoctor,
@@ -75,10 +76,21 @@ const Profile = () => {
     };
   }, [dispatch, userId]);
 
+  const toShowTopicsList = isSelfProfile ? isDoctor : true;
+
   return (
     <ProfileContainer>
       <LeftSection>
-        {isSelfProfile ? <EditableProfileData /> : <ProfileData />}
+        {isEditMode ? (
+          <EditableProfileData
+            handleEditCompleted={() => setIsEditMode(false)}
+          />
+        ) : (
+          <ProfileData
+            isSelfProfile={isSelfProfile}
+            handleEdit={() => setIsEditMode(true)}
+          />
+        )}
         <TabMenu
           value={currentTab}
           setValue={setCurrentTab}
@@ -91,14 +103,16 @@ const Profile = () => {
         ))}
       </LeftSection>
       <RightSection>
-        <TopicsList
-          tags={tags}
-          title={
-            isSelfProfile
-              ? `Topics you've written blogs for`
-              : `Topics by ${userName}`
-          }
-        />
+        {toShowTopicsList && (
+          <TopicsList
+            tags={tags}
+            title={
+              isSelfProfile
+                ? `Topics you've written blogs for`
+                : `Topics by ${userName}`
+            }
+          />
+        )}
         {isSelfProfile && (
           <>
             <TopicsList
