@@ -1,10 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   createBlogApi,
+  deleteBookmarkApi,
   getBlogApi,
+  saveBookmarkApi,
   updateBlogApi,
 } from "../../../api/blog/blogApi";
-import { deleteCommentApi, getBlogCommentsApi, postCommentApi } from "../../../api/comment/commentApi";
+import {
+  deleteCommentApi,
+  getBlogCommentsApi,
+  postCommentApi,
+} from "../../../api/comment/commentApi";
 import { BLOG_STATUS } from "../../../pages/editBlog/editBlog.constants";
 import { BLOG_SLICE } from "./blog.congif";
 
@@ -116,14 +122,38 @@ export const deleteComment = createAsyncThunk(
   }
 );
 
+export const saveBookmark = createAsyncThunk(
+  `${BLOG_SLICE}/saveBookmark`,
+  async ({ userId, blogId }, { rejectWithValue }) => {
+    try {
+      const data = await saveBookmarkApi({ userId, blogId });
+      return data;
+    } catch (err) {
+      return rejectWithValue([], err);
+    }
+  }
+);
+
+export const deleteBookmark = createAsyncThunk(
+  `${BLOG_SLICE}/deleteBookmark`,
+  async ({ userId, blogId }, { rejectWithValue }) => {
+    try {
+      const data = await deleteBookmarkApi({ userId, blogId });
+      return data;
+    } catch (err) {
+      return rejectWithValue([], err);
+    }
+  }
+);
+
 export const blogSlice = createSlice({
   name: BLOG_SLICE,
   initialState,
   reducers: {
     resetBlogState: () => initialState,
-    updateComments:(state, {payload}) => {
+    updateComments: (state, { payload }) => {
       state.comments = payload;
-    }
+    },
   },
   extraReducers: {
     [getBlog.pending]: (state) => {
@@ -194,7 +224,7 @@ export const blogSlice = createSlice({
     [postBlogComment.rejected]: (state, { meta }) => {
       state.errorMessage = meta.response.data.message;
       state.isCommentLoading = false;
-    }
+    },
   },
 });
 

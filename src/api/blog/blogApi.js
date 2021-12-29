@@ -49,3 +49,19 @@ export const getBlogsByTagsApi = async ({ tags }) => {
   const { data } = await getApiConfig().post(`/blogsByTags`, { tags });
   return data;
 };
+
+export const saveBookmarkApi = async ({ userId, blogId }) => {
+  const { data } = await getApiConfig().post(`/saveBookMark`, {
+    userId,
+    blogId,
+  });
+  return data;
+};
+
+export const deleteBookmarkApi = async ({ userId, blogId }) => {
+  const { data } = await getApiConfig().post(`/deleteBookMark`, {
+    userId,
+    blogId,
+  });
+  return data;
+};

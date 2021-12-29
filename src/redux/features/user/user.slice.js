@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
+  getDraftBlogsApi,
+  getSavedBlogsApi,
   loginApi,
   signupApi,
   updateUserInfoApi,
@@ -16,6 +18,8 @@ const initialState = {
     interests: [],
     accessToken: null,
   },
+  bookmarks: [],
+  drafts: [],
   isLoading: false,
   errorMessage: "",
   isLoginModalOpen: false,
@@ -57,11 +61,36 @@ export const updateUserInfo = createAsyncThunk(
   }
 );
 
+export const getSavedBlogs = createAsyncThunk(
+  `${USER_SLICE}/getSavedBlogs`,
+  async ({ userId }, { rejectWithValue }) => {
+    try {
+      const data = await getSavedBlogsApi({ userId });
+      return data;
+    } catch (err) {
+      return rejectWithValue([], err);
+    }
+  }
+);
+
+export const getDraftBlogs = createAsyncThunk(
+  `${USER_SLICE}/getDraftBlogs`,
+  async ({ userId }, { rejectWithValue }) => {
+    try {
+      const data = await getDraftBlogsApi({ userId });
+      return data;
+    } catch (err) {
+      return rejectWithValue([], err);
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: USER_SLICE,
   initialState,
   reducers: {},
   extraReducers: {
+    // login user
     [loginUser.pending]: (state) => {
       state.isLoading = true;
       state.errorMessage = "";
@@ -75,7 +104,7 @@ export const userSlice = createSlice({
       state.errorMessage = meta.response.data.message;
       state.isLoading = false;
     },
-
+    // sign up user
     [signupUser.pending]: (state) => {
       state.isLoading = true;
       state.errorMessage = "";
@@ -89,6 +118,7 @@ export const userSlice = createSlice({
       state.errorMessage = meta.response.data.message;
       state.isLoading = false;
     },
+    // update user info
     [updateUserInfo.pending]: (state) => {
       state.isLoading = true;
       state.errorMessage = "";
@@ -99,6 +129,34 @@ export const userSlice = createSlice({
       state.errorMessage = "";
     },
     [updateUserInfo.rejected]: (state, { meta }) => {
+      state.errorMessage = meta.response.data.message;
+      state.isLoading = false;
+    },
+    // bookmarked blogs
+    [getSavedBlogs.pending]: (state) => {
+      state.isLoading = true;
+      state.errorMessage = "";
+    },
+    [getSavedBlogs.fulfilled]: (state, { payload }) => {
+      state.bookmarks = payload.map(({ blogDetails }) => blogDetails);
+      state.isLoading = false;
+      state.errorMessage = "";
+    },
+    [getSavedBlogs.rejected]: (state, { meta }) => {
+      state.errorMessage = meta.response.data.message;
+      state.isLoading = false;
+    },
+    // Draft blogs
+    [getDraftBlogs.pending]: (state) => {
+      state.isLoading = true;
+      state.errorMessage = "";
+    },
+    [getDraftBlogs.fulfilled]: (state, { payload }) => {
+      state.drafts = payload;
+      state.isLoading = false;
+      state.errorMessage = "";
+    },
+    [getDraftBlogs.rejected]: (state, { meta }) => {
       state.errorMessage = meta.response.data.message;
       state.isLoading = false;
     },
