@@ -1,5 +1,6 @@
 import { withTheme } from "@emotion/react";
 import styled from "styled-components";
+import Button from "../../components/atoms/button";
 
 export const ProfileContainer = styled.div`
   display: flex;
@@ -43,4 +44,12 @@ export const ButtonActions = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+`;
+
+export const UpdateInterestsBtn = styled(Button)`
+  margin-right: auto;
+`;
+
+export const LogoutContainer = styled.div`
+  margin-top: auto;
 `;

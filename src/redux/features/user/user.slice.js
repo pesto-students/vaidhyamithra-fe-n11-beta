@@ -88,7 +88,9 @@ export const getDraftBlogs = createAsyncThunk(
 export const userSlice = createSlice({
   name: USER_SLICE,
   initialState,
-  reducers: {},
+  reducers: {
+    logoutUser: () => initialState,
+  },
   extraReducers: {
     // login user
     [loginUser.pending]: (state) => {
@@ -162,5 +164,7 @@ export const userSlice = createSlice({
     },
   },
 });
+
+export const { logoutUser } = userSlice.actions;
 
 export default userSlice.reducer;

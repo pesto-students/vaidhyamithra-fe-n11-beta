@@ -15,4 +15,6 @@ export const RightSection = withTheme(styled("div")`
   padding: 40px;
   border-left: 1px solid ${({ theme }) => theme.palette.divider};
   overflow: auto;
+  display: flex;
+  flex-direction: column;
 `);
