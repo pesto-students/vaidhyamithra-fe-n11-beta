@@ -1,4 +1,4 @@
-# Vaidhya Mitra
+# Vaidhya Mitra [![Netlify Status](https://api.netlify.com/api/v1/badges/42b22848-db74-422c-b514-3acda3b11fd8/deploy-status)](https://app.netlify.com/sites/vaidhyamitra/deploys)
 
 # Getting Started with Create React App
 
