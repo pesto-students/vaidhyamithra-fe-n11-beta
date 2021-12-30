@@ -44,3 +44,8 @@ export const BlogContent = styled.div``;
 export const EditBlogBtn = styled(Button)`
   margin-bottom: auto;
 `;
+
+export const BlogDescription = styled.p`
+  margin-top: -12px;
+  font-size: 14px;
+`;

@@ -6,6 +6,7 @@ export const createBlogApi = async ({
   tags,
   authorId,
   status,
+  description
 }) => {
   const { data } = await getApiConfig().post("/blog", {
     title,
@@ -13,6 +14,7 @@ export const createBlogApi = async ({
     tags,
     authorId,
     status,
+    description
   });
   return data;
 };
@@ -24,6 +26,7 @@ export const updateBlogApi = async ({
   tags,
   authorId,
   status,
+  description
 }) => {
   const { data } = await getApiConfig().put(`/blog/${blogId}`, {
     title,
@@ -31,6 +34,7 @@ export const updateBlogApi = async ({
     tags,
     authorId,
     status,
+    description
   });
   return data;
 };

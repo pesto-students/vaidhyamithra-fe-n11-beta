@@ -13,6 +13,7 @@ import {
   SaveButton,
   SaveSection,
   TitleInput,
+  DescriptionSection
 } from "./editBlog.styled";
 import validator from "validator";
 import AddTags from "./AddTags";
@@ -32,12 +33,14 @@ import { useRouting } from "../../helpers";
 import PageNotFound from "../pageNotFound";
 import { CircularProgress } from "../../components/atoms/progress";
 import { BLOG_STATUS } from "./editBlog.constants";
+import InputField from "../../components/atoms/input/InputField";
 
 const EditBlog = ({ isCreateMode }) => {
   const { blogId } = useParams();
   const dispatch = useDispatch();
   const [blogTitle, setBlogTitle] = useState("");
   const [blogContent, setBlogContent] = useState("");
+  const [description, setDescription] = useState("");
   const [blogTags, setBlogTags] = useState([]);
   const [isSaveDisabled, setIsSaveDisabled] = useState(false);
   const { gotoRoute } = useRouting();
@@ -57,10 +60,11 @@ const EditBlog = ({ isCreateMode }) => {
     if (blogId) {
       dispatch(getBlog({ blogId }))
         .unwrap()
-        .then(([{ content, title, tags }]) => {
+        .then(([{ content, title, tags, description }]) => {
           setBlogTitle(title);
           setBlogContent(content);
           setBlogTags(tags);
+          setDescription(description);
         })
         .catch((err) => console.log(err));
     }
@@ -71,10 +75,12 @@ const EditBlog = ({ isCreateMode }) => {
     const validTitle = !validator.isEmpty(blogTitle);
     const validBlogContent =
       !validator.isEmpty(blogContent) && blogContent !== "<p><br></p>";
+    const validDescription = !validator.isEmpty(description);
 
-    const validFields = validTitle && validBlogContent && blogTags.length;
+    const validFields =
+      validTitle && validBlogContent && blogTags.length && validDescription;
     setIsSaveDisabled(!validFields);
-  }, [blogContent, blogTags, blogTitle]);
+  }, [blogContent, blogTags, blogTitle, description]);
 
   const saveBlog = ({ status }) => {
     const saveFn = isCreateMode ? createBlog : updateBlog;
@@ -84,6 +90,7 @@ const EditBlog = ({ isCreateMode }) => {
         content: blogContent,
         tags: blogTags,
         authorId: userId,
+        description: description,
         status,
         ...(isCreateMode ? {} : { blogId }),
       })
@@ -109,6 +116,7 @@ const EditBlog = ({ isCreateMode }) => {
     dispatch(resetBlogState());
     setBlogTitle("");
     setBlogContent("");
+    setDescription("");
     setBlogTags([]);
 
     return () => {
@@ -162,6 +170,16 @@ const EditBlog = ({ isCreateMode }) => {
             </SaveButton>
           )}
         </SaveSection>
+        <DescriptionSection>
+          <InputField
+            label="Description of Blog"
+            value={description}
+            handleChange={(e) => setDescription(e.target.value)}
+            placeholder="Write short description for blog"
+            multiline
+            fullWidth
+          />
+        </DescriptionSection>
         <AddTags topics={blogTags} setTopics={setBlogTags} />
       </RightSection>
     </EditBlogPage>

@@ -50,3 +50,8 @@ export const LoaderContainer = styled.div`
   justify-content: center;
   margin-top: 40px;
 `;
+
+export const DescriptionSection = styled.div`
+  margin-top: 20px;
+  margin-bottom: 16px;
+`;
