@@ -13,6 +13,7 @@ import {
   SaveButton,
   SaveSection,
   TitleInput,
+  DescriptionSection
 } from "./editBlog.styled";
 import validator from "validator";
 import AddTags from "./AddTags";
@@ -76,7 +77,8 @@ const EditBlog = ({ isCreateMode }) => {
       !validator.isEmpty(blogContent) && blogContent !== "<p><br></p>";
     const validDescription = !validator.isEmpty(description);
 
-    const validFields = validTitle && validBlogContent && blogTags.length && validDescription;
+    const validFields =
+      validTitle && validBlogContent && blogTags.length && validDescription;
     setIsSaveDisabled(!validFields);
   }, [blogContent, blogTags, blogTitle, description]);
 
@@ -144,14 +146,6 @@ const EditBlog = ({ isCreateMode }) => {
           placeholder="Blog title here"
           multiline
         />
-        <InputField 
-          label="Description of Blog"
-          value={description}
-          handleChange={(e) => setDescription(e.target.value)}
-          placeholder="Write short description for blog"
-          multiline
-          fullWidth
-        />
         <EditorContainer>
           <Editor initialContent={content} handleChange={setBlogContent} />
         </EditorContainer>
@@ -176,6 +170,16 @@ const EditBlog = ({ isCreateMode }) => {
             </SaveButton>
           )}
         </SaveSection>
+        <DescriptionSection>
+          <InputField
+            label="Description of Blog"
+            value={description}
+            handleChange={(e) => setDescription(e.target.value)}
+            placeholder="Write short description for blog"
+            multiline
+            fullWidth
+          />
+        </DescriptionSection>
         <AddTags topics={blogTags} setTopics={setBlogTags} />
       </RightSection>
     </EditBlogPage>

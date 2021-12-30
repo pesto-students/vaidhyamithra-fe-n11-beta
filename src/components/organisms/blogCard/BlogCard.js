@@ -18,7 +18,7 @@ const BlogCard = ({
   _id,
   tags,
   title,
-  content,
+  description,
   style,
   authorDetails,
   updatedAt,
@@ -32,9 +32,10 @@ const BlogCard = ({
         <BlogTags tags={tags} />
         <BlogTitle onClick={() => gotoRoute(blogRoute)}>{title}</BlogTitle>
         <BlogContent
-          dangerouslySetInnerHTML={{ __html: content }}
           onClick={() => gotoRoute(blogRoute)}
-        />
+        >
+          {description}
+        </BlogContent>
         <AuthorInfo>
           <BloggerDetails
             authorDetails={authorDetails}
