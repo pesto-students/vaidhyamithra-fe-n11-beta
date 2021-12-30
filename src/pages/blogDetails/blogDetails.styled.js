@@ -43,7 +43,6 @@ export const BlogContent = styled.div``;
 
 export const EditBlogBtn = styled(Button)`
   margin-bottom: auto;
-  margin-left: auto;
 `;
 
 export const BlogDescription = styled.p`

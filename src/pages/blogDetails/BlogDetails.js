@@ -113,10 +113,7 @@ const BlogDetails = () => {
           />
           <Bookmark blogId={blogId} />
           {userId === authorId && (
-            <EditBlogBtn
-              sx={{ mb: "auto" }}
-              onClick={() => gotoPrivateRoute(editBlogPath)}
-            >
+            <EditBlogBtn onClick={() => gotoPrivateRoute(editBlogPath)}>
               Edit Blog
             </EditBlogBtn>
           )}

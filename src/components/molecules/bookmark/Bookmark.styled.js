@@ -2,7 +2,8 @@ import { withTheme } from "@emotion/react";
 import styled from "styled-components";
 
 export const IconContainer = withTheme(styled("div")`
-  margin-left: 20px;
+  margin-left: auto;
+  margin-right: 12px;
   cursor: pointer;
 
   svg:hover {

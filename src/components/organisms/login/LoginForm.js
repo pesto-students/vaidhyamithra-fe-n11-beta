@@ -19,12 +19,17 @@ const initialFormFields = {
   password: "",
 };
 
+const initialValues = {
+  email: "dharmitdosani@gmail.com",
+  password: "dharmit@123",
+};
+
 const LoginForm = () => {
   const { isLoading, errorMessage, userInfo } = useSelector(
     (state) => state.user
   );
   const dispatch = useDispatch();
-  const [loginFields, setLoginFields] = useState(initialFormFields);
+  const [loginFields, setLoginFields] = useState(initialValues);
   const [errorMsgs, setErrorMsgs] = useState(initialFormFields);
   const { closeModal, openSignup } = useModalHelper();
 
