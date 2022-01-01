@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import manImg from "../../images/man_img.png";
 import {
   EditIconContainer,
   NameContainer,
@@ -13,15 +12,16 @@ import { useSelector } from "react-redux";
 import Ficon from "../../components/atoms/featherIcon";
 import { USER_SLICE } from "../../redux/features/user/user.config";
 import { PROFILE_SLICE } from "../../redux/features/profile/profile.config";
+import defaultImg from "../../images/user.png";
 
 const ProfileData = ({ isSelfProfile, handleEdit }) => {
-  const { userName, about } = useSelector(
+  const { userName, about, imgUrl } = useSelector(
     (state) => state[isSelfProfile ? USER_SLICE : PROFILE_SLICE].userInfo
   );
 
   return (
     <ProfileDataContainer>
-      <ProfilePic src={manImg} />
+      <ProfilePic src={imgUrl ? imgUrl : defaultImg} />
       <ProfileDescription>
         <NameContainer>
           <Typography variant={TEXT_TYPE.H1}>{userName}</Typography>

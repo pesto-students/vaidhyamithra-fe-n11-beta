@@ -24,9 +24,11 @@ const initialState = {
     status: BLOG_STATUS.DRAFT,
     updatedAt: "",
     description: "",
+    imgUrl: "",
     authorDetails: {
       _id: "",
       name: "",
+      imgUrl: "",
     },
   },
   comments: [],
@@ -49,7 +51,10 @@ export const getBlog = createAsyncThunk(
 
 export const createBlog = createAsyncThunk(
   `${BLOG_SLICE}/createBlog`,
-  async ({ title, content, tags, authorId, status, description }, { rejectWithValue }) => {
+  async (
+    { title, content, tags, authorId, status, description, imgUrl },
+    { rejectWithValue }
+  ) => {
     try {
       const data = await createBlogApi({
         title,
@@ -57,7 +62,8 @@ export const createBlog = createAsyncThunk(
         tags,
         authorId,
         status,
-        description
+        description,
+        imgUrl,
       });
       return data;
     } catch (err) {
@@ -69,7 +75,7 @@ export const createBlog = createAsyncThunk(
 export const updateBlog = createAsyncThunk(
   `${BLOG_SLICE}/updateBlog`,
   async (
-    { blogId, title, content, tags, authorId, status, description },
+    { blogId, title, content, tags, authorId, status, description, imgUrl },
     { rejectWithValue }
   ) => {
     try {
@@ -80,7 +86,8 @@ export const updateBlog = createAsyncThunk(
         tags,
         authorId,
         status,
-        description
+        description,
+        imgUrl,
       });
       return data;
     } catch (err) {

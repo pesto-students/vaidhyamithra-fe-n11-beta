@@ -49,3 +49,9 @@ export const BlogDescription = styled.p`
   margin-top: -12px;
   font-size: 14px;
 `;
+
+export const BlogImage = styled.img`
+  object-fit: cover;
+  width: 850px;
+  max-height: 250px;
+`;

@@ -22,6 +22,7 @@ const BlogCard = ({
   style,
   authorDetails,
   updatedAt,
+  imgUrl,
 }) => {
   const blogRoute = generatePath(ROUTES.BLOG, { blogId: _id });
   const { gotoRoute } = useRouting();
@@ -31,9 +32,7 @@ const BlogCard = ({
       <CardContainer>
         <BlogTags tags={tags} />
         <BlogTitle onClick={() => gotoRoute(blogRoute)}>{title}</BlogTitle>
-        <BlogContent
-          onClick={() => gotoRoute(blogRoute)}
-        >
+        <BlogContent onClick={() => gotoRoute(blogRoute)}>
           {description}
         </BlogContent>
         <AuthorInfo>
@@ -46,7 +45,7 @@ const BlogCard = ({
       </CardContainer>
       <BlogImg
         onClick={() => gotoRoute(blogRoute)}
-        src={manImg}
+        src={imgUrl}
         alt="blog-preview"
       />
     </Card>

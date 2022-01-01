@@ -13,7 +13,9 @@ import {
   SaveButton,
   SaveSection,
   TitleInput,
-  DescriptionSection
+  SelectedImage,
+  DescriptionSection,
+  ImagePreviewContainer,
 } from "./editBlog.styled";
 import validator from "validator";
 import AddTags from "./AddTags";
@@ -34,6 +36,9 @@ import PageNotFound from "../pageNotFound";
 import { CircularProgress } from "../../components/atoms/progress";
 import { BLOG_STATUS } from "./editBlog.constants";
 import InputField from "../../components/atoms/input/InputField";
+import axios from "axios";
+import Ficon from "../../components/atoms/featherIcon/FeatherIcon";
+import { uploadImage } from "../../redux/features/imageHandler/imageHandler.slice";
 
 const EditBlog = ({ isCreateMode }) => {
   const { blogId } = useParams();
@@ -54,16 +59,20 @@ const EditBlog = ({ isCreateMode }) => {
     userInfo: { id: userId, isDoctor },
   } = useSelector((state) => state.user);
 
+  const [selectedImage, setSelectedImage] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [cloudinaryUrl, setCloudinaryUrl] = useState("");
   // fetching blog if blogId is set
   useEffect(() => {
     dispatch(resetBlogState());
     if (blogId) {
       dispatch(getBlog({ blogId }))
         .unwrap()
-        .then(([{ content, title, tags, description }]) => {
+        .then(([{ content, title, tags, description, imgUrl }]) => {
           setBlogTitle(title);
           setBlogContent(content);
           setBlogTags(tags);
+          setImageUrl(imgUrl);
           setDescription(description);
         })
         .catch((err) => console.log(err));
@@ -76,39 +85,77 @@ const EditBlog = ({ isCreateMode }) => {
     const validBlogContent =
       !validator.isEmpty(blogContent) && blogContent !== "<p><br></p>";
     const validDescription = !validator.isEmpty(description);
+    const validImage = !validator.isEmpty(imageUrl);
 
     const validFields =
-      validTitle && validBlogContent && blogTags.length && validDescription;
+      validTitle &&
+      validBlogContent &&
+      blogTags.length &&
+      validDescription &&
+      validImage;
     setIsSaveDisabled(!validFields);
-  }, [blogContent, blogTags, blogTitle, description]);
+  }, [blogContent, blogTags, blogTitle, description, imageUrl]);
 
   const saveBlog = ({ status }) => {
     const saveFn = isCreateMode ? createBlog : updateBlog;
-    dispatch(
-      saveFn({
-        title: blogTitle,
-        content: blogContent,
-        tags: blogTags,
-        authorId: userId,
-        description: description,
-        status,
-        ...(isCreateMode ? {} : { blogId }),
-      })
-    )
-      .unwrap()
-      .then(({ _id }) => {
-        if (_id) {
-          dispatch(setAlert({ text: "Success!", type: alertTypes.success }));
-          const blogPath = generatePath(
-            status === BLOG_STATUS.DRAFT ? ROUTES.EDIT_BLOG : ROUTES.BLOG,
-            { blogId: _id }
-          );
-          gotoRoute(blogPath);
-        }
-      })
-      .catch(() => {
-        dispatch(setAlert({ text: errorMessage, type: alertTypes.error }));
-      });
+    const formData = new FormData();
+    formData.append("file", selectedImage);
+    formData.append("upload_preset", "eeduaqeu");
+    dispatch(uploadImage(formData))
+    .then((res) => {
+      console.log("Image response:", res);
+      dispatch(
+        saveFn({
+          title: blogTitle,
+          content: blogContent,
+          tags: blogTags,
+          authorId: userId,
+          description: description,
+          imgUrl: res.payload.secure_url,
+          status,
+          ...(isCreateMode ? {} : { blogId }),
+        })
+      )
+        .unwrap()
+        .then(({ _id }) => {
+          if (_id) {
+            dispatch(setAlert({ text: "Success!", type: alertTypes.success }));
+            const blogPath = generatePath(
+              status === BLOG_STATUS.DRAFT ? ROUTES.EDIT_BLOG : ROUTES.BLOG,
+              { blogId: _id }
+            );
+            gotoRoute(blogPath);
+          }
+        })
+        .catch(() => {
+          dispatch(setAlert({ text: errorMessage, type: alertTypes.error }));
+        });
+    });
+  };
+
+  // const uploadImage = () => {
+  //   if(imageUrl.length === 0)
+  //   {
+  //     return;
+  //   }
+  //   const formData = new FormData();
+  //   formData.append("file", selectedImage);
+  //   formData.append("upload_preset", "eeduaqeu");
+  //   axios
+  //     .post("https://api.Cloudinary.com/v1_1/dnotnf02j/image/upload", formData)
+  //     .then((res) => {
+  //       dispatch(setAlert({ text: "Uploaded Successfully!", type: alertTypes.success }));
+  //       setCloudinaryUrl(res.data.secure_url);
+  //     });
+  // };
+
+  const previewImg = (event) => {
+    console.log("Image in preview:", event.target.files);
+    if (event.target.files.length > 0) {
+      var src = URL.createObjectURL(event.target.files[0]);
+      setSelectedImage(event.target.files[0]);
+      setImageUrl(src);
+    }
   };
 
   // cleaning up redux state!
@@ -117,6 +164,9 @@ const EditBlog = ({ isCreateMode }) => {
     setBlogTitle("");
     setBlogContent("");
     setDescription("");
+    setImageUrl("");
+    setSelectedImage("");
+    setCloudinaryUrl("");
     setBlogTags([]);
 
     return () => {
@@ -146,6 +196,28 @@ const EditBlog = ({ isCreateMode }) => {
           placeholder="Blog title here"
           multiline
         />
+        <label htmlFor="upload-photo">
+          <input
+            style={{ display: "none" }}
+            id="upload-photo"
+            name="upload-photo"
+            type="file"
+            onChange={(e) => previewImg(e)}
+          />
+          <Button color="secondary" variant="contained" component="span">
+            <Ficon icon="plus"></Ficon> Add Image
+          </Button>
+        </label>
+        <ImagePreviewContainer>
+          {imageUrl.length > 0 ? (
+            <SelectedImage src={imageUrl} alt="Selected image preview" />
+          ) : (
+            <>No image selected</>
+          )}
+        </ImagePreviewContainer>
+        {/* <Button variant={BUTTON_VARIANTS.CONTAINED} onClick={uploadImage}>
+          Upload image
+        </Button> */}
         <EditorContainer>
           <Editor initialContent={content} handleChange={setBlogContent} />
         </EditorContainer>
