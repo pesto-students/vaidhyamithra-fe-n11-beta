@@ -28,7 +28,7 @@ const BlogCard = ({
 
   return (
     <Card style={{ ...style }}>
-      <CardContainer>
+      <CardContainer fullWidth={!imgUrl}>
         <BlogTags tags={tags} />
         <BlogTitle onClick={() => gotoRoute(blogRoute)}>{title}</BlogTitle>
         <BlogContent onClick={() => gotoRoute(blogRoute)}>
