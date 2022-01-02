@@ -46,7 +46,6 @@ const SearchResultsList = () => {
 
   const rowRenderer = ({ key, index, style }) => {
     let blog = paginatedResults[index];
-    blog = { ...blog, imgUrl: "" };
     return <BlogCard key={key} i={index} style={style} {...blog} />;
   };
 
