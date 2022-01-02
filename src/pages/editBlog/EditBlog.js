@@ -181,10 +181,11 @@ const EditBlog = ({ isCreateMode }) => {
     <EditBlogPage>
       <LeftSection>
         <TitleInput
+          required
           value={blogTitle}
           handleChange={(e) => setBlogTitle(e.target.value)}
           variant={INPUT_VARIANTS.STANDARD}
-          placeholder="Blog title here"
+          placeholder="Blog title *"
           multiline
         />
         <label htmlFor="upload-photo">
@@ -236,6 +237,7 @@ const EditBlog = ({ isCreateMode }) => {
         </SaveSection>
         <DescriptionSection>
           <InputField
+            required
             label="Description of Blog"
             value={description}
             handleChange={(e) => setDescription(e.target.value)}
