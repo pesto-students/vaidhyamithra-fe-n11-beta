@@ -15,7 +15,7 @@ import { updateUserInfo } from "../../redux/features/user/user.slice";
 import { setAlert } from "../../redux/features/alerts/alerts.slice";
 import { alertTypes } from "../../components/molecules/snackbar";
 import { uploadImage } from "../../redux/features/imageHandler/imageHandler.slice";
-import defaultImage from "../../images/user.png";
+import defaultImg from "../../assets/icons/user.svg";
 
 const EditableProfileData = ({ handleEditCompleted }) => {
   const { userInfo, isLoading } = useSelector((state) => state.user);
@@ -51,8 +51,7 @@ const EditableProfileData = ({ handleEditCompleted }) => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "eeduaqeu");
-    dispatch(uploadImage(formData))
-    .then((res) => {
+    dispatch(uploadImage(formData)).then((res) => {
       setCloudinaryUrl(res.payload.secure_url);
     });
   };
@@ -62,7 +61,7 @@ const EditableProfileData = ({ handleEditCompleted }) => {
   return (
     <ProfileDataContainer>
       <ProfilePicContainer>
-        <ProfilePic src={cloudinaryUrl ? cloudinaryUrl : defaultImage} />
+        <ProfilePic src={cloudinaryUrl ? cloudinaryUrl : defaultImg} />
         <label htmlFor="upload-photo">
           <input
             style={{ display: "none" }}

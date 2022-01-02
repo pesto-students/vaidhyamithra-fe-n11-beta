@@ -7,6 +7,7 @@ import {
 import { generatePath } from "react-router-dom";
 import { ROUTES } from "../../../values/routes";
 import { useRouting } from "../../../helpers";
+import defaultImg from "../../../assets/icons/user.svg";
 
 const BloggerDetails = ({
   authorDetails: { _id, name, imgUrl },
@@ -25,7 +26,11 @@ const BloggerDetails = ({
 
   return (
     <AuthorDetails>
-      <BlogPreviewImg src={imgUrl} alt="avatar-img" onClick={gotoProfile} />
+      <BlogPreviewImg
+        src={imgUrl ? imgUrl : defaultImg}
+        alt="avatar-img"
+        onClick={gotoProfile}
+      />
       <AuthorDiv>
         <Paragraph
           fontSize="16px"
@@ -48,6 +53,7 @@ BloggerDetails.defaultProps = {
   authorDetails: {
     _id: "",
     name: "",
+    imgUrl: "",
   },
 };
 

@@ -36,7 +36,6 @@ import PageNotFound from "../pageNotFound";
 import { CircularProgress } from "../../components/atoms/progress";
 import { BLOG_STATUS } from "./editBlog.constants";
 import InputField from "../../components/atoms/input/InputField";
-import axios from "axios";
 import Ficon from "../../components/atoms/featherIcon/FeatherIcon";
 import { uploadImage } from "../../redux/features/imageHandler/imageHandler.slice";
 
@@ -61,7 +60,6 @@ const EditBlog = ({ isCreateMode }) => {
 
   const [selectedImage, setSelectedImage] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [cloudinaryUrl, setCloudinaryUrl] = useState("");
   // fetching blog if blogId is set
   useEffect(() => {
     dispatch(resetBlogState());
@@ -101,9 +99,8 @@ const EditBlog = ({ isCreateMode }) => {
     const formData = new FormData();
     formData.append("file", selectedImage);
     formData.append("upload_preset", "eeduaqeu");
-    dispatch(uploadImage(formData))
-    .then((res) => {
-      console.log("Image response:", res);
+    dispatch(uploadImage(formData)).then((res) => {
+      // console.log("Image response:", res);
       dispatch(
         saveFn({
           title: blogTitle,
@@ -166,7 +163,6 @@ const EditBlog = ({ isCreateMode }) => {
     setDescription("");
     setImageUrl("");
     setSelectedImage("");
-    setCloudinaryUrl("");
     setBlogTags([]);
 
     return () => {

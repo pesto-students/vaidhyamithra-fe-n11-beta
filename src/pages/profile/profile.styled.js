@@ -18,6 +18,7 @@ export const ProfilePic = styled.img`
   object-fit: cover;
   border-radius: 50%;
   border: 1px solid;
+  padding: 2px;
 `;
 
 export const ProfileDescription = styled.div`
@@ -56,6 +57,6 @@ export const LogoutContainer = styled.div`
   margin-top: auto;
 `;
 
-export const ProfilePicContainer = styled.div `
+export const ProfilePicContainer = styled.div`
   text-align: center;
 `;

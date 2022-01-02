@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import Ficon from "../../components/atoms/featherIcon";
 import { USER_SLICE } from "../../redux/features/user/user.config";
 import { PROFILE_SLICE } from "../../redux/features/profile/profile.config";
-import defaultImg from "../../images/user.png";
+import defaultImg from "../../assets/icons/user.svg";
 
 const ProfileData = ({ isSelfProfile, handleEdit }) => {
   const { userName, about, imgUrl } = useSelector(
