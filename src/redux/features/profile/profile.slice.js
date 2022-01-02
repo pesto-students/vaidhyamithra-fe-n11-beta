@@ -12,6 +12,7 @@ const initialState = {
     userName: "Author",
     about: "Short description about the author",
     tags: [],
+    imgUrl: ""
   },
   published: [],
   isLoading: false,

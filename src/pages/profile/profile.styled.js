@@ -17,6 +17,8 @@ export const ProfilePic = styled.img`
   height: 200px;
   object-fit: cover;
   border-radius: 50%;
+  border: 1px solid;
+  padding: 2px;
 `;
 
 export const ProfileDescription = styled.div`
@@ -53,4 +55,8 @@ export const UpdateInterestsBtn = styled(Button)`
 export const LogoutContainer = styled.div`
   padding-top: 20px;
   margin-top: auto;
+`;
+
+export const ProfilePicContainer = styled.div`
+  text-align: center;
 `;

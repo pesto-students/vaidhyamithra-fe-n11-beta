@@ -6,7 +6,8 @@ export const createBlogApi = async ({
   tags,
   authorId,
   status,
-  description
+  description,
+  imgUrl,
 }) => {
   const { data } = await getApiConfig().post("/blog", {
     title,
@@ -14,7 +15,8 @@ export const createBlogApi = async ({
     tags,
     authorId,
     status,
-    description
+    description,
+    imgUrl,
   });
   return data;
 };
@@ -26,7 +28,8 @@ export const updateBlogApi = async ({
   tags,
   authorId,
   status,
-  description
+  description,
+  imgUrl,
 }) => {
   const { data } = await getApiConfig().put(`/blog/${blogId}`, {
     title,
@@ -34,7 +37,8 @@ export const updateBlogApi = async ({
     tags,
     authorId,
     status,
-    description
+    description,
+    imgUrl,
   });
   return data;
 };
@@ -44,8 +48,11 @@ export const getBlogApi = async ({ blogId }) => {
   return data;
 };
 
-export const getLatestBlogsApi = async ({pageNumber, pageSize}) => {
-  const { data } = await getApiConfig().post('/getLatestBlogs', {pageNumber, pageSize});
+export const getLatestBlogsApi = async ({ pageNumber, pageSize }) => {
+  const { data } = await getApiConfig().post("/getLatestBlogs", {
+    pageNumber,
+    pageSize,
+  });
   return data;
 };
 

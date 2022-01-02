@@ -71,7 +71,7 @@ const AddTags = ({ topics, setTopics }) => {
           value={searchTopicStr}
           handleChange={(e) => handleTextChange(e.target.value)}
           variant={INPUT_VARIANTS.STANDARD}
-          placeholder="Add upto 3 categories"
+          placeholder="Add upto 3 categories *"
           margin={INPUT_MARGINS.NONE}
           endAdornment={
             <InputAdornment position="end">

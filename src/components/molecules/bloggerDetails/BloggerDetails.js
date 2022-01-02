@@ -4,12 +4,15 @@ import {
   Paragraph,
   BlogPreviewImg,
 } from "./bloggerDetails.styled";
-import manImg from "../../../images/man_img.png";
 import { generatePath } from "react-router-dom";
 import { ROUTES } from "../../../values/routes";
 import { useRouting } from "../../../helpers";
+import defaultImg from "../../../assets/icons/user.svg";
 
-const BloggerDetails = ({ authorDetails: { _id, name }, publishedDate }) => {
+const BloggerDetails = ({
+  authorDetails: { _id, name, imgUrl },
+  publishedDate,
+}) => {
   const { gotoRoute } = useRouting();
 
   const formattedDate = new Date(publishedDate).toLocaleDateString(
@@ -23,7 +26,11 @@ const BloggerDetails = ({ authorDetails: { _id, name }, publishedDate }) => {
 
   return (
     <AuthorDetails>
-      <BlogPreviewImg src={manImg} alt="avatar-img" onClick={gotoProfile} />
+      <BlogPreviewImg
+        src={imgUrl ? imgUrl : defaultImg}
+        alt="avatar-img"
+        onClick={gotoProfile}
+      />
       <AuthorDiv>
         <Paragraph
           fontSize="16px"
@@ -46,6 +53,7 @@ BloggerDetails.defaultProps = {
   authorDetails: {
     _id: "",
     name: "",
+    imgUrl: "",
   },
 };
 

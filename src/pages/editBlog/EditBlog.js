@@ -13,7 +13,9 @@ import {
   SaveButton,
   SaveSection,
   TitleInput,
-  DescriptionSection
+  SelectedImage,
+  DescriptionSection,
+  ImagePreviewContainer,
 } from "./editBlog.styled";
 import validator from "validator";
 import AddTags from "./AddTags";
@@ -34,6 +36,8 @@ import PageNotFound from "../pageNotFound";
 import { CircularProgress } from "../../components/atoms/progress";
 import { BLOG_STATUS } from "./editBlog.constants";
 import InputField from "../../components/atoms/input/InputField";
+import Ficon from "../../components/atoms/featherIcon/FeatherIcon";
+import { uploadImage } from "../../redux/features/imageHandler/imageHandler.slice";
 
 const EditBlog = ({ isCreateMode }) => {
   const { blogId } = useParams();
@@ -54,16 +58,19 @@ const EditBlog = ({ isCreateMode }) => {
     userInfo: { id: userId, isDoctor },
   } = useSelector((state) => state.user);
 
+  const [selectedImage, setSelectedImage] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   // fetching blog if blogId is set
   useEffect(() => {
     dispatch(resetBlogState());
     if (blogId) {
       dispatch(getBlog({ blogId }))
         .unwrap()
-        .then(([{ content, title, tags, description }]) => {
+        .then(([{ content, title, tags, description, imgUrl }]) => {
           setBlogTitle(title);
           setBlogContent(content);
           setBlogTags(tags);
+          setImageUrl(imgUrl);
           setDescription(description);
         })
         .catch((err) => console.log(err));
@@ -80,35 +87,51 @@ const EditBlog = ({ isCreateMode }) => {
     const validFields =
       validTitle && validBlogContent && blogTags.length && validDescription;
     setIsSaveDisabled(!validFields);
-  }, [blogContent, blogTags, blogTitle, description]);
+  }, [blogContent, blogTags, blogTitle, description, imageUrl]);
 
   const saveBlog = ({ status }) => {
     const saveFn = isCreateMode ? createBlog : updateBlog;
-    dispatch(
-      saveFn({
-        title: blogTitle,
-        content: blogContent,
-        tags: blogTags,
-        authorId: userId,
-        description: description,
-        status,
-        ...(isCreateMode ? {} : { blogId }),
-      })
-    )
-      .unwrap()
-      .then(({ _id }) => {
-        if (_id) {
-          dispatch(setAlert({ text: "Success!", type: alertTypes.success }));
-          const blogPath = generatePath(
-            status === BLOG_STATUS.DRAFT ? ROUTES.EDIT_BLOG : ROUTES.BLOG,
-            { blogId: _id }
-          );
-          gotoRoute(blogPath);
-        }
-      })
-      .catch(() => {
-        dispatch(setAlert({ text: errorMessage, type: alertTypes.error }));
-      });
+    const formData = new FormData();
+    formData.append("file", selectedImage);
+    formData.append("upload_preset", "eeduaqeu");
+    dispatch(uploadImage(formData)).then((res) => {
+      // console.log("Image response:", res);
+      dispatch(
+        saveFn({
+          title: blogTitle,
+          content: blogContent,
+          tags: blogTags,
+          authorId: userId,
+          description: description,
+          imgUrl: res.payload.secure_url,
+          status,
+          ...(isCreateMode ? {} : { blogId }),
+        })
+      )
+        .unwrap()
+        .then(({ _id }) => {
+          if (_id) {
+            dispatch(setAlert({ text: "Success!", type: alertTypes.success }));
+            const blogPath = generatePath(
+              status === BLOG_STATUS.DRAFT ? ROUTES.EDIT_BLOG : ROUTES.BLOG,
+              { blogId: _id }
+            );
+            gotoRoute(blogPath);
+          }
+        })
+        .catch(() => {
+          dispatch(setAlert({ text: errorMessage, type: alertTypes.error }));
+        });
+    });
+  };
+
+  const previewImg = (event) => {
+    console.log("Image in preview:", event.target.files);
+    if (event.target.files.length > 0) {
+      var src = URL.createObjectURL(event.target.files[0]);
+      setSelectedImage(event.target.files[0]);
+      setImageUrl(src);
+    }
   };
 
   // cleaning up redux state!
@@ -117,6 +140,8 @@ const EditBlog = ({ isCreateMode }) => {
     setBlogTitle("");
     setBlogContent("");
     setDescription("");
+    setImageUrl("");
+    setSelectedImage("");
     setBlogTags([]);
 
     return () => {
@@ -140,12 +165,33 @@ const EditBlog = ({ isCreateMode }) => {
     <EditBlogPage>
       <LeftSection>
         <TitleInput
+          required
           value={blogTitle}
           handleChange={(e) => setBlogTitle(e.target.value)}
           variant={INPUT_VARIANTS.STANDARD}
-          placeholder="Blog title here"
+          placeholder="Blog title *"
           multiline
         />
+        <label htmlFor="upload-photo">
+          <input
+            style={{ display: "none" }}
+            id="upload-photo"
+            name="upload-photo"
+            type="file"
+            onChange={(e) => previewImg(e)}
+          />
+          <Button color="secondary" variant="contained" component="span">
+            <Ficon icon="plus"></Ficon>{" "}
+            {`${isCreateMode ? "Add" : "Update"} Preview Image`}
+          </Button>
+        </label>
+        <ImagePreviewContainer>
+          {imageUrl.length > 0 ? (
+            <SelectedImage src={imageUrl} alt="Selected image preview" />
+          ) : (
+            <>No image selected</>
+          )}
+        </ImagePreviewContainer>
         <EditorContainer>
           <Editor initialContent={content} handleChange={setBlogContent} />
         </EditorContainer>
@@ -172,6 +218,7 @@ const EditBlog = ({ isCreateMode }) => {
         </SaveSection>
         <DescriptionSection>
           <InputField
+            required
             label="Description of Blog"
             value={description}
             handleChange={(e) => setDescription(e.target.value)}

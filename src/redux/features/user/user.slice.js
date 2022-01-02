@@ -14,6 +14,7 @@ const initialState = {
     userName: "",
     email: "",
     about: "",
+    imgUrl: "",
     isDoctor: false,
     interests: [],
     accessToken: null,

@@ -17,6 +17,7 @@ const InputField = ({
   handleChange,
   error,
   disabled,
+  required,
 }) => {
   return (
     <TextField
@@ -35,6 +36,7 @@ const InputField = ({
       onChange={handleChange}
       error={error}
       disabled={disabled}
+      required={required}
     />
   );
 };
@@ -53,6 +55,7 @@ InputField.defaultProps = {
   handleChange: () => {},
   error: false,
   disabled: false,
+  required: false,
 };
 
 export default InputField;

@@ -55,3 +55,13 @@ export const DescriptionSection = styled.div`
   margin-top: 20px;
   margin-bottom: 16px;
 `;
+
+export const ImagePreviewContainer = styled.div`
+  margin-top: 12px;
+  margin-bottom: 12px;
+`;
+
+export const SelectedImage = styled.img`
+  height: 250px;
+  width: 100%;
+`;

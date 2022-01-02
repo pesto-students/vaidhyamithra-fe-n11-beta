@@ -1,4 +1,3 @@
-import manImg from "../../../images/man_img.png";
 import {
   Card,
   CardContainer,
@@ -22,18 +21,17 @@ const BlogCard = ({
   style,
   authorDetails,
   updatedAt,
+  imgUrl,
 }) => {
   const blogRoute = generatePath(ROUTES.BLOG, { blogId: _id });
   const { gotoRoute } = useRouting();
 
   return (
     <Card style={{ ...style }}>
-      <CardContainer>
+      <CardContainer fullWidth={!imgUrl}>
         <BlogTags tags={tags} />
         <BlogTitle onClick={() => gotoRoute(blogRoute)}>{title}</BlogTitle>
-        <BlogContent
-          onClick={() => gotoRoute(blogRoute)}
-        >
+        <BlogContent onClick={() => gotoRoute(blogRoute)}>
           {description}
         </BlogContent>
         <AuthorInfo>
@@ -44,11 +42,13 @@ const BlogCard = ({
           <Bookmark blogId={_id} />
         </AuthorInfo>
       </CardContainer>
-      <BlogImg
-        onClick={() => gotoRoute(blogRoute)}
-        src={manImg}
-        alt="blog-preview"
-      />
+      {imgUrl && (
+        <BlogImg
+          onClick={() => gotoRoute(blogRoute)}
+          src={imgUrl}
+          alt="blog-preview"
+        />
+      )}
     </Card>
   );
 };
@@ -59,9 +59,11 @@ BlogCard.defaultProps = {
   title: "We need to index the haptic GB card",
   content:
     "If we navigate the port, we can get to the AGP microchip through the bluetooth SDD alarm of the name of the universe. And if we navigate the port, we can get to the AGP microchip through the bluetooth SDD alarm. I were you and you were me then what would this world be like",
+  imgUrl: "",
   authorDetails: {
     _id: "",
     name: "Darlene Robertson",
+    imgUrl: "",
   },
   updatedAt: new Date(),
 };

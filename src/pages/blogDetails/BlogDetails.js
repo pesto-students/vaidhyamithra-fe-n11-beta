@@ -8,7 +8,8 @@ import {
   BloggerDetailsSection,
   BlogContent,
   EditBlogBtn,
-  BlogDescription
+  BlogDescription,
+  BlogImage,
 } from "./blogDetails.styled";
 import BloggerDetails from "../../components/molecules/bloggerDetails";
 import BlogTags from "../../components/atoms/blogTags";
@@ -58,7 +59,16 @@ const BlogDetails = () => {
     isCommentLoading,
     errorMessage,
     comments,
-    blogInfo: { title, content, updatedAt, authorDetails, tags, authorId, description },
+    blogInfo: {
+      title,
+      content,
+      updatedAt,
+      authorDetails,
+      tags,
+      authorId,
+      description,
+      imgUrl,
+    },
   } = useSelector((state) => state.blog);
 
   const editBlogPath = generatePath(ROUTES.EDIT_BLOG, { blogId });
@@ -103,7 +113,7 @@ const BlogDetails = () => {
   return (
     <Details>
       <DetailsContainer>
-        {/* <img src={bpImg} alt="blog-display" /> */}
+        {imgUrl && <BlogImage src={imgUrl} alt="blog-display" />}
         <BlogTitle>{title}</BlogTitle>
         <BlogDescription>{description}</BlogDescription>
         <BloggerDetailsSection>
