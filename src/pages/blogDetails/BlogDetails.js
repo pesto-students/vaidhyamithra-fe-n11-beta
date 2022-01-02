@@ -113,7 +113,7 @@ const BlogDetails = () => {
   return (
     <Details>
       <DetailsContainer>
-        <BlogImage src={imgUrl} alt="blog-display" />
+        {imgUrl && <BlogImage src={imgUrl} alt="blog-display" />}
         <BlogTitle>{title}</BlogTitle>
         <BlogDescription>{description}</BlogDescription>
         <BloggerDetailsSection>

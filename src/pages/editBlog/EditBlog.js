@@ -83,14 +83,9 @@ const EditBlog = ({ isCreateMode }) => {
     const validBlogContent =
       !validator.isEmpty(blogContent) && blogContent !== "<p><br></p>";
     const validDescription = !validator.isEmpty(description);
-    const validImage = !validator.isEmpty(imageUrl);
 
     const validFields =
-      validTitle &&
-      validBlogContent &&
-      blogTags.length &&
-      validDescription &&
-      validImage;
+      validTitle && validBlogContent && blogTags.length && validDescription;
     setIsSaveDisabled(!validFields);
   }, [blogContent, blogTags, blogTitle, description, imageUrl]);
 
@@ -201,7 +196,8 @@ const EditBlog = ({ isCreateMode }) => {
             onChange={(e) => previewImg(e)}
           />
           <Button color="secondary" variant="contained" component="span">
-            <Ficon icon="plus"></Ficon> Add Image
+            <Ficon icon="plus"></Ficon>{" "}
+            {`${isCreateMode ? "Add" : "Update"} Preview Image`}
           </Button>
         </label>
         <ImagePreviewContainer>

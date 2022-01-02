@@ -63,5 +63,5 @@ export const ImagePreviewContainer = styled.div`
 
 export const SelectedImage = styled.img`
   height: 250px;
-  width: 50%;
+  width: 100%;
 `;
