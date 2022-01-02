@@ -125,22 +125,6 @@ const EditBlog = ({ isCreateMode }) => {
     });
   };
 
-  // const uploadImage = () => {
-  //   if(imageUrl.length === 0)
-  //   {
-  //     return;
-  //   }
-  //   const formData = new FormData();
-  //   formData.append("file", selectedImage);
-  //   formData.append("upload_preset", "eeduaqeu");
-  //   axios
-  //     .post("https://api.Cloudinary.com/v1_1/dnotnf02j/image/upload", formData)
-  //     .then((res) => {
-  //       dispatch(setAlert({ text: "Uploaded Successfully!", type: alertTypes.success }));
-  //       setCloudinaryUrl(res.data.secure_url);
-  //     });
-  // };
-
   const previewImg = (event) => {
     console.log("Image in preview:", event.target.files);
     if (event.target.files.length > 0) {
