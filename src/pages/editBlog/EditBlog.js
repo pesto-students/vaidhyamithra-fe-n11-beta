@@ -192,9 +192,6 @@ const EditBlog = ({ isCreateMode }) => {
             <>No image selected</>
           )}
         </ImagePreviewContainer>
-        {/* <Button variant={BUTTON_VARIANTS.CONTAINED} onClick={uploadImage}>
-          Upload image
-        </Button> */}
         <EditorContainer>
           <Editor initialContent={content} handleChange={setBlogContent} />
         </EditorContainer>
