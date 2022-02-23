@@ -1,3 +1,5 @@
+<img width="261" alt="Screenshot 2022-02-24 at 12 19 44 AM" src="https://user-images.githubusercontent.com/25800571/155387200-0d6489fb-4035-4cc4-9f8d-2eef34953aad.png">
+
 # Vaidhya Mitra [![Netlify Status](https://api.netlify.com/api/v1/badges/42b22848-db74-422c-b514-3acda3b11fd8/deploy-status)](https://app.netlify.com/sites/vaidhyamitra/deploys)
 
 Vaidhya Mitra is a platform focused on healthcare blogs posted by certified Doctors. Readers can read, save and comment on blogs related to healthcare. Readers can discover blogs based on their interests related to various topics in healthcare.
