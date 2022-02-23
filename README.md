@@ -7,8 +7,8 @@ Vaidhya Mitra is a platform focused on healthcare blogs posted by certified Doct
 1. [Demo](#demo)
 2. [Installation](#installation)
 3. [Technology Stack](#technology-stack)
-4. [Project Artefacts](#project-artefacts)
-5. [Authors](#authors)
+4. [Authors](#authors)
+5. [License](#license)
 
 # Demo
 
@@ -35,14 +35,12 @@ Please Note:
 - [Styled Components](https://styled-components.com/)
 - [Validator (for form values validation)](https://www.npmjs.com/package/validator)
 
-# Project Artefacts
-
-- [PRD](https://manirathnamchiliveru-1763.slite.com/api/s/note/XPHGrEWYtyFuhbaKCd6EFJ/Vaidhya-Mitra)
-- [HLD](https://miro.com/app/board/uXjVOf8hRH8=/)
-- [Wireframes](https://www.figma.com/file/OuYcaj7M1hyzRQ8pugW8Vz/Pesto-Blog-Project?node-id=17%3A5)
-- [Backend Repository](https://github.com/pesto-students/vaidhyamithra-be-n11-beta/)
-
 # Authors
 
 - [Manirathnam Chiliveru](https://github.com/Mchiliveru)
 - [Dharmit Dosani](https://github.com/dharmitdosani)
+
+# License
+
+[MIT](https://opensource.org/licenses/MIT)
+
