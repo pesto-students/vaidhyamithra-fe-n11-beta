@@ -1,3 +1,5 @@
+<img width="261" alt="Screenshot 2022-02-24 at 12 19 44 AM" src="https://user-images.githubusercontent.com/25800571/155387200-0d6489fb-4035-4cc4-9f8d-2eef34953aad.png">
+
 # Vaidhya Mitra [![Netlify Status](https://api.netlify.com/api/v1/badges/42b22848-db74-422c-b514-3acda3b11fd8/deploy-status)](https://app.netlify.com/sites/vaidhyamitra/deploys)
 
 Vaidhya Mitra is a platform focused on healthcare blogs posted by certified Doctors. Readers can read, save and comment on blogs related to healthcare. Readers can discover blogs based on their interests related to various topics in healthcare.
@@ -7,8 +9,8 @@ Vaidhya Mitra is a platform focused on healthcare blogs posted by certified Doct
 1. [Demo](#demo)
 2. [Installation](#installation)
 3. [Technology Stack](#technology-stack)
-4. [Project Artefacts](#project-artefacts)
-5. [Authors](#authors)
+4. [Authors](#authors)
+5. [License](#license)
 
 # Demo
 
@@ -35,14 +37,12 @@ Please Note:
 - [Styled Components](https://styled-components.com/)
 - [Validator (for form values validation)](https://www.npmjs.com/package/validator)
 
-# Project Artefacts
-
-- [PRD](https://manirathnamchiliveru-1763.slite.com/api/s/note/XPHGrEWYtyFuhbaKCd6EFJ/Vaidhya-Mitra)
-- [HLD](https://miro.com/app/board/uXjVOf8hRH8=/)
-- [Wireframes](https://www.figma.com/file/OuYcaj7M1hyzRQ8pugW8Vz/Pesto-Blog-Project?node-id=17%3A5)
-- [Backend Repository](https://github.com/pesto-students/vaidhyamithra-be-n11-beta/)
-
 # Authors
 
 - [Manirathnam Chiliveru](https://github.com/Mchiliveru)
 - [Dharmit Dosani](https://github.com/dharmitdosani)
+
+# License
+
+[MIT](https://opensource.org/licenses/MIT)
+
