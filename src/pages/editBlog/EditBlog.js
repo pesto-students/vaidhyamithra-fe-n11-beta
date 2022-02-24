@@ -186,7 +186,7 @@ const EditBlog = ({ isCreateMode }) => {
           </Button>
         </label>
         <ImagePreviewContainer>
-          {imageUrl.length > 0 ? (
+          {imageUrl?.length > 0 ? (
             <SelectedImage src={imageUrl} alt="Selected image preview" />
           ) : (
             <>No image selected</>
